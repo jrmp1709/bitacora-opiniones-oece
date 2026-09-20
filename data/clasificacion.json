@@ -1,0 +1,3201 @@
+{
+ "2023-OSCE-001": [
+  {
+   "c": "Bienes y Servicios",
+   "t": "Pago anticipado"
+  },
+  {
+   "c": "Bienes y Servicios",
+   "t": "Modificaciones Contractuales"
+  }
+ ],
+ "2023-OSCE-002": [
+  {
+   "c": "Proced_Selección",
+   "t": "Contratación Directa"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Contratación Directa"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Contratación Directa"
+  }
+ ],
+ "2023-OSCE-003": [
+  {
+   "c": "Proced_Selección",
+   "t": "Impedimentos"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Impedimentos"
+  }
+ ],
+ "2023-OSCE-004": [
+  {
+   "c": "Proced_Selección",
+   "t": "Formulación de consultas"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Formulación de consultas"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Integrac._Bases"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Declarat_Nulidad"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Formulación de consultas"
+  }
+ ],
+ "2023-OSCE-005": [
+  {
+   "c": "Solo construcción",
+   "t": "Penalidades/Multas"
+  }
+ ],
+ "2023-OSCE-006": [
+  {
+   "c": "Proced_Selección",
+   "t": "Impedimentos"
+  }
+ ],
+ "2023-OSCE-007": [
+  {
+   "c": "Supervis._Inspect.",
+   "t": "Liquidaciones"
+  }
+ ],
+ "2023-OSCE-008": [
+  {
+   "c": "Bienes y Servicios",
+   "t": "Nulidad Contractual"
+  },
+  {
+   "c": "Bienes y Servicios",
+   "t": "Nulidad Contractual"
+  },
+  {
+   "c": "Bienes y Servicios",
+   "t": "Nulidad Contractual"
+  }
+ ],
+ "2023-OSCE-009": [
+  {
+   "c": "Solo construcción",
+   "t": "Liquidaciones"
+  },
+  {
+   "c": "Supervis._Inspect.",
+   "t": "Liquidaciones"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Liquidaciones"
+  }
+ ],
+ "2023-OSCE-010": [
+  {
+   "c": "Solo construcción",
+   "t": "Liquidaciones"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Liquidaciones"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Liquidaciones"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Controversias"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Liquidaciones"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Liquidaciones"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Liquidaciones"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Liquidaciones"
+  }
+ ],
+ "2023-OSCE-011": [
+  {
+   "c": "Solo construcción",
+   "t": "Ampliación Excepcional de Plazo"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Ampliación Excepcional de Plazo"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Ampliación Excepcional de Plazo"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Residente de Obra"
+  }
+ ],
+ "2023-OSCE-012": [
+  {
+   "c": "Proced_Selección",
+   "t": "Evaluac.Propuest."
+  }
+ ],
+ "2023-OSCE-013": [
+  {
+   "c": "Solo construcción",
+   "t": "Gastos Generales"
+  }
+ ],
+ "2023-OSCE-014": [
+  {
+   "c": "Proced_Selección",
+   "t": "Garantías"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Garantías"
+  }
+ ],
+ "2023-OSCE-015": [
+  {
+   "c": "Actos_Prepar.",
+   "t": "Actos preparatorios"
+  },
+  {
+   "c": "Actos_Prepar.",
+   "t": "Actos preparatorios"
+  }
+ ],
+ "2023-OSCE-016": [
+  {
+   "c": "Proced_Selección",
+   "t": "Impedimentos"
+  }
+ ],
+ "2023-OSCE-017": [
+  {
+   "c": "Proced_Selección",
+   "t": "Evaluac.Propuest."
+  }
+ ],
+ "2023-OSCE-018": [
+  {
+   "c": "Proced_Selección",
+   "t": "Impedimentos"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Impedimentos"
+  }
+ ],
+ "2023-OSCE-019": [
+  {
+   "c": "Bienes y Servicios",
+   "t": "Modificaciones Contractuales"
+  },
+  {
+   "c": "Bienes y Servicios",
+   "t": "Ejecución contractual bienes y servicios"
+  }
+ ],
+ "2023-OSCE-020": [
+  {
+   "c": "Solo construcción",
+   "t": "Adicionales-Deductivos"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Adicionales-Deductivos"
+  }
+ ],
+ "2023-OSCE-021": [
+  {
+   "c": "Actos_Prepar.",
+   "t": "Actos preparatorios"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Declarat_Nulidad"
+  }
+ ],
+ "2023-OSCE-022": [
+  {
+   "c": "Actos_Prepar.",
+   "t": "Actos preparatorios"
+  },
+  {
+   "c": "Actos_Prepar.",
+   "t": "Actos preparatorios"
+  },
+  {
+   "c": "Actos_Prepar.",
+   "t": "Declarat_Desierto"
+  }
+ ],
+ "2023-OSCE-023": [
+  {
+   "c": "Proced_Selección",
+   "t": "Evaluac.Propuest."
+  }
+ ],
+ "2023-OSCE-024": [
+  {
+   "c": "Solo construcción",
+   "t": "Ampliación de Plazo"
+  }
+ ],
+ "2023-OSCE-025": [
+  {
+   "c": "Solo construcción",
+   "t": "JRD _JPRD"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "JRD _JPRD"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "JRD _JPRD"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "JRD _JPRD"
+  }
+ ],
+ "2023-OSCE-026": [
+  {
+   "c": "Proced_Selección",
+   "t": "Impedimentos"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Impedimentos"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Impedimentos"
+  }
+ ],
+ "2023-OSCE-027": [
+  {
+   "c": "Proced_Selección",
+   "t": "Impedimentos"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Impedimentos"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Impedimentos"
+  }
+ ],
+ "2023-OSCE-028": [
+  {
+   "c": "Supervis._Inspect.",
+   "t": "Liquidaciones",
+   "m": "1017"
+  },
+  {
+   "c": "Supervis._Inspect.",
+   "t": "Liquidaciones",
+   "m": "30225"
+  },
+  {
+   "c": "Supervis._Inspect.",
+   "t": "Liquidaciones",
+   "m": "30225"
+  }
+ ],
+ "2023-OSCE-029": [
+  {
+   "c": "Solo construcción",
+   "t": "Intervención Económica"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Intervención Económica"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Intervención Económica"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Intervención Económica"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Intervención Económica"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Resolución Contractual"
+  }
+ ],
+ "2023-OSCE-030": [
+  {
+   "c": "Proced_Selección",
+   "t": "Perfeccionamiento de contrato"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Otorgam-_Buena Pro"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Perfeccionamiento de contrato"
+  }
+ ],
+ "2023-OSCE-031": [
+  {
+   "c": "Proced_Selección",
+   "t": "Impedimentos"
+  }
+ ],
+ "2023-OSCE-032": [
+  {
+   "c": "Actos_Prepar.",
+   "t": "Otros Procedim_selección"
+  },
+  {
+   "c": "Actos_Prepar.",
+   "t": "Otros Procedim_selección"
+  },
+  {
+   "c": "Actos_Prepar.",
+   "t": "Otros Procedim_selección"
+  }
+ ],
+ "2023-OSCE-033": [
+  {
+   "c": "Proced_Selección",
+   "t": "Evaluac.Propuest."
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Evaluac.Propuest."
+  }
+ ],
+ "2023-OSCE-034": [
+  {
+   "c": "Solo construcción",
+   "t": "Ampliación de Plazo"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Retrasos"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Adicionales-Deductivos"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Ampliación de Plazo"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Ampliación de Plazo"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Ampliación de Plazo"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Ampliación de Plazo"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Retrasos"
+  }
+ ],
+ "2023-OSCE-035": [
+  {
+   "c": "Bienes y Servicios",
+   "t": "Conformidad"
+  },
+  {
+   "c": "Compras Corporativas",
+   "t": "Resolución Contractual"
+  },
+  {
+   "c": "Compras Corporativas",
+   "t": "Resolución Contractual"
+  },
+  {
+   "c": "Compras Corporativas",
+   "t": "Resolución Contractual"
+  },
+  {
+   "c": "Compras Corporativas",
+   "t": "Compra Corporativa"
+  },
+  {
+   "c": "Compras Corporativas",
+   "t": "Compra Corporativa"
+  }
+ ],
+ "2023-OSCE-036": [
+  {
+   "c": "Solo construcción",
+   "t": "Adelantos"
+  }
+ ],
+ "2023-OSCE-037": [
+  {
+   "c": "Proced_Selección",
+   "t": "Comité de selección"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Comité de selección"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Comité de selección"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Comité de selección"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Comité de selección"
+  }
+ ],
+ "2023-OSCE-038": [
+  {
+   "c": "Supervis._Inspect.",
+   "t": "Supervisor - Inspector"
+  },
+  {
+   "c": "Supervis._Inspect.",
+   "t": "Supervisor - Inspector"
+  },
+  {
+   "c": "Supervis._Inspect.",
+   "t": "Supervisor - Inspector"
+  }
+ ],
+ "2023-OSCE-039": [
+  {
+   "c": "Solo construcción",
+   "t": "Sustitución de personal técnico"
+  }
+ ],
+ "2023-OSCE-040": [
+  {
+   "c": "Solo construcción",
+   "t": "Adelantos"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Adelantos"
+  }
+ ],
+ "2023-OSCE-041": [
+  {
+   "c": "Proced_Selección",
+   "t": "Perfeccionamiento de contrato"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Perfeccionamiento de contrato"
+  }
+ ],
+ "2023-OSCE-042": [
+  {
+   "c": "Supervis._Inspect.",
+   "t": "Supervisor - Inspector"
+  }
+ ],
+ "2023-OSCE-043": [
+  {
+   "c": "Bienes y Servicios",
+   "t": "Penalidades/Multas"
+  }
+ ],
+ "2023-OSCE-044": [
+  {
+   "c": "Actos_Prepar.",
+   "t": "Otros Procedim_selección"
+  }
+ ],
+ "2023-OSCE-045": [
+  {
+   "c": "Proced_Selección",
+   "t": "Otros Procedim_selección"
+  }
+ ],
+ "2023-OSCE-046": [
+  {
+   "c": "Solo construcción",
+   "t": "Penalidades/Multas"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Penalidades/Multas"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Recepción de Obras"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Penalidades/Multas"
+  }
+ ],
+ "2023-OSCE-047": [
+  {
+   "c": "Bienes y Servicios",
+   "t": "Ejecución contractual bienes y servicios"
+  },
+  {
+   "c": "Bienes y Servicios",
+   "t": "Ejecución contractual bienes y servicios"
+  },
+  {
+   "c": "Bienes y Servicios",
+   "t": "Modificaciones Contractuales"
+  }
+ ],
+ "2023-OSCE-048": [
+  {
+   "c": "Actos_Prepar.",
+   "t": "Otros Procedim_selección"
+  },
+  {
+   "c": "Actos_Prepar.",
+   "t": "Otros Procedim_selección"
+  }
+ ],
+ "2023-OSCE-049": [
+  {
+   "c": "Solo construcción",
+   "t": "Controversias"
+  }
+ ],
+ "2023-OSCE-050": [
+  {
+   "c": "Solo construcción",
+   "t": "Mayores Metrados"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Mayores Metrados"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Mayores Metrados"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Mayores Metrados"
+  }
+ ],
+ "2023-OSCE-051": [
+  {
+   "c": "Bienes y Servicios",
+   "t": "Garantías"
+  }
+ ],
+ "2023-OSCE-052": [
+  {
+   "c": "Bienes y Servicios",
+   "t": "Modificaciones Contractuales"
+  }
+ ],
+ "2023-OSCE-053": [
+  {
+   "c": "Supervis._Inspect.",
+   "t": "Supervisor - Inspector"
+  },
+  {
+   "c": "Supervis._Inspect.",
+   "t": "Supervisor - Inspector"
+  },
+  {
+   "c": "Supervis._Inspect.",
+   "t": "Supervisor - Inspector"
+  },
+  {
+   "c": "Supervis._Inspect.",
+   "t": "Supervisor - Inspector"
+  },
+  {
+   "c": "Supervis._Inspect.",
+   "t": "Supervisor - Inspector"
+  }
+ ],
+ "2023-OSCE-054": [
+  {
+   "c": "Bienes y Servicios",
+   "t": "Modificaciones Contractuales"
+  },
+  {
+   "c": "Bienes y Servicios",
+   "t": "Ejecución contractual bienes y servicios"
+  },
+  {
+   "c": "Bienes y Servicios",
+   "t": "Modificaciones Contractuales"
+  }
+ ],
+ "2023-OSCE-055": [
+  {
+   "c": "Proced_Selección",
+   "t": "Impedimentos"
+  }
+ ],
+ "2023-OSCE-056": [
+  {
+   "c": "Proced_Selección",
+   "t": "Garantías"
+  }
+ ],
+ "2023-OSCE-057": [
+  {
+   "c": "Solo construcción",
+   "t": "Adelantos"
+  }
+ ],
+ "2023-OSCE-058": [
+  {
+   "c": "Solo construcción",
+   "t": "Resolución Contractual"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Resolución Contractual"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Resolución Contractual"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Resolución Contractual"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Liquidaciones"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Resolución Contractual"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Recepción de Obras"
+  }
+ ],
+ "2023-OSCE-059": [
+  {
+   "c": "Bienes y Servicios",
+   "t": "Resolución Contractual"
+  }
+ ],
+ "2023-OSCE-060": [
+  {
+   "c": "Bienes y Servicios",
+   "t": "Resolución Contractual"
+  }
+ ],
+ "2023-OSCE-061": [
+  {
+   "c": "Bienes y Servicios",
+   "t": "Conformidad"
+  },
+  {
+   "c": "Bienes y Servicios",
+   "t": "Conformidad"
+  },
+  {
+   "c": "Bienes y Servicios",
+   "t": "Conformidad"
+  },
+  {
+   "c": "Bienes y Servicios",
+   "t": "Conformidad"
+  }
+ ],
+ "2023-OSCE-062": [
+  {
+   "c": "Actos Admin_Entidad",
+   "t": "Impedimentos"
+  },
+  {
+   "c": "Actos Admin_Entidad",
+   "t": "Controversias"
+  }
+ ],
+ "2023-OSCE-063": [
+  {
+   "c": "Solo construcción",
+   "t": "Ampliación de Plazo"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Ampliación de Plazo"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Ampliación de Plazo"
+  }
+ ],
+ "2023-OSCE-064": [
+  {
+   "c": "Bienes y Servicios",
+   "t": "Nulidad Contractual"
+  },
+  {
+   "c": "Bienes y Servicios",
+   "t": "Nulidad Contractual"
+  },
+  {
+   "c": "Bienes y Servicios",
+   "t": "Garantías"
+  },
+  {
+   "c": "Bienes y Servicios",
+   "t": "Nulidad Contractual"
+  }
+ ],
+ "2023-OSCE-065": [
+  {
+   "c": "Proced_Selección",
+   "t": "Evaluac.Propuest."
+  }
+ ],
+ "2023-OSCE-066": [
+  {
+   "c": "Diseño Costrucción",
+   "t": "Penalidades/Multas"
+  },
+  {
+   "c": "Diseño Costrucción",
+   "t": "Supervisor - Inspector"
+  },
+  {
+   "c": "Diseño Costrucción",
+   "t": "Ampliación de Plazo"
+  },
+  {
+   "c": "Diseño Costrucción",
+   "t": "Inicio de obra"
+  },
+  {
+   "c": "Diseño Costrucción",
+   "t": "Adicionales-Deductivos"
+  },
+  {
+   "c": "Diseño Costrucción",
+   "t": "Deducrivos/reducciones"
+  }
+ ],
+ "2023-OSCE-067": [
+  {
+   "c": "Solo construcción",
+   "t": "Inicio de obra"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Inicio de obra"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Inicio de obra"
+  }
+ ],
+ "2023-OSCE-068": [
+  {
+   "c": "Solo construcción",
+   "t": "Ampliación de Plazo"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Ampliación de Plazo"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Ampliación de Plazo"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Ampliación de Plazo"
+  }
+ ],
+ "2023-OSCE-069": [
+  {
+   "c": "Proced_Selección",
+   "t": "Actores en el P_S"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Actores en el P_S"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Actores en el P_S"
+  },
+  {
+   "c": "Actos_Prepar.",
+   "t": "Actos preparatorios"
+  }
+ ],
+ "2023-OSCE-070": [
+  {
+   "c": "Solo construcción",
+   "t": "Suspensiones de plazo contractual"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Suspensiones de plazo contractual"
+  }
+ ],
+ "2023-OSCE-071": [
+  {
+   "c": "Supervis._Inspect.",
+   "t": "Supervisor - Inspector"
+  }
+ ],
+ "2023-OSCE-072": [
+  {
+   "c": "Solo construcción",
+   "t": "Penalidades/Multas"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Controversias"
+  }
+ ],
+ "2023-OSCE-073": [
+  {
+   "c": "Solo construcción",
+   "t": "Suspensiones de plazo contractual"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Valorizac_metrados"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Valorizac_metrados"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Suspensiones de plazo contractual"
+  }
+ ],
+ "2023-OSCE-074": [
+  {
+   "c": "Solo construcción",
+   "t": "Cronogr_Programa de Obra"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Cronogr_Programa de Obra"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Cronogr_Programa de Obra"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Cronogr_Programa de Obra"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Adelantos"
+  }
+ ],
+ "2023-OSCE-075": [
+  {
+   "c": "Proced_Selección",
+   "t": "Impedimentos"
+  }
+ ],
+ "2023-OSCE-076": [
+  {
+   "c": "Actos_Prepar.",
+   "t": "Otros Procedim_selección"
+  },
+  {
+   "c": "Actos_Prepar.",
+   "t": "Otros Procedim_selección"
+  },
+  {
+   "c": "Actos_Prepar.",
+   "t": "Otros Procedim_selección"
+  }
+ ],
+ "2023-OSCE-077": [
+  {
+   "c": "Bienes y Servicios",
+   "t": "Penalidades/Multas"
+  },
+  {
+   "c": "Bienes y Servicios",
+   "t": "Penalidades/Multas"
+  }
+ ],
+ "2023-OSCE-078": [
+  {
+   "c": "Proced_Selección",
+   "t": "Impedimentos"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Impedimentos"
+  }
+ ],
+ "2023-OSCE-079": [
+  {
+   "c": "Proced_Selección",
+   "t": "Contratación Directa"
+  }
+ ],
+ "2023-OSCE-080": [
+  {
+   "c": "Actos_Prepar.",
+   "t": "Controversias"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Controversias"
+  }
+ ],
+ "2023-OSCE-081": [
+  {
+   "c": "Actos_Prepar.",
+   "t": "Actos preparatorios"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Evaluac.Propuest."
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Convocatoria"
+  }
+ ],
+ "2023-OSCE-082": [
+  {
+   "c": "Solo construcción",
+   "t": "Deducrivos/reducciones"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Liquidaciones"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Liquidaciones"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Gastos Generales"
+  }
+ ],
+ "2023-OSCE-083": [
+  {
+   "c": "Actos_Prepar.",
+   "t": "Actos preparatorios"
+  },
+  {
+   "c": "Actos_Prepar.",
+   "t": "Actos preparatorios"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Supervisor - Inspector"
+  }
+ ],
+ "2023-OSCE-084": [
+  {
+   "c": "Bienes y Servicios",
+   "t": "Nulidad Contractual"
+  },
+  {
+   "c": "Bienes y Servicios",
+   "t": "Nulidad Contractual"
+  }
+ ],
+ "2023-OSCE-085": [
+  {
+   "c": "Proced_Selección",
+   "t": "Contratación Directa"
+  }
+ ],
+ "2023-OSCE-086": [
+  {
+   "c": "Proced_Selección",
+   "t": "Otros Procedim_selección"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Otros Procedim_selección"
+  }
+ ],
+ "2023-OSCE-087": [
+  {
+   "c": "Compras Corporativas",
+   "t": "Otorgam-_Buena Pro"
+  },
+  {
+   "c": "Compras Corporativas",
+   "t": "Declarat_Desierto"
+  },
+  {
+   "c": "Compras Corporativas",
+   "t": "Perfeccionamiento de contrato"
+  },
+  {
+   "c": "Compras Corporativas",
+   "t": "Perfeccionamiento de contrato"
+  },
+  {
+   "c": "Compras Corporativas",
+   "t": "Perfeccionamiento de contrato"
+  },
+  {
+   "c": "Compras Corporativas",
+   "t": "Fiscalización Posterior"
+  },
+  {
+   "c": "Compras Corporativas",
+   "t": "Declarat_Nulidad"
+  }
+ ],
+ "2023-OSCE-088": [
+  {
+   "c": "Proced_Selección",
+   "t": "Saldos de Obras"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Saldos de Obras"
+  }
+ ],
+ "2023-OSCE-089": [
+  {
+   "c": "Proced_Selección",
+   "t": "Present.-Propuest."
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Present.-Propuest."
+  }
+ ],
+ "2023-OSCE-090": [
+  {
+   "c": "Solo construcción",
+   "t": "Liquidaciones"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Liquidaciones"
+  }
+ ],
+ "2023-OSCE-091": [
+  {
+   "c": "Proced_Selección",
+   "t": "Present.-Propuest."
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Present.-Propuest."
+  }
+ ],
+ "2023-OSCE-092": [
+  {
+   "c": "Actos_Prepar.",
+   "t": "Otros Procedim_selección"
+  },
+  {
+   "c": "Actos_Prepar.",
+   "t": "Otros Procedim_selección"
+  },
+  {
+   "c": "Actos_Prepar.",
+   "t": "Otros Procedim_selección"
+  },
+  {
+   "c": "Actos_Prepar.",
+   "t": "Otros Procedim_selección"
+  }
+ ],
+ "2023-OSCE-093": [
+  {
+   "c": "Actos_Prepar.",
+   "t": "Actos preparatorios"
+  },
+  {
+   "c": "Actos_Prepar.",
+   "t": "Actos preparatorios"
+  },
+  {
+   "c": "Actos_Prepar.",
+   "t": "Actos preparatorios"
+  }
+ ],
+ "2023-OSCE-094": [
+  {
+   "c": "Proced_Selección",
+   "t": "Contratación Directa"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Contratación Directa"
+  }
+ ],
+ "2023-OSCE-095": [
+  {
+   "c": "Proced_Selección",
+   "t": "Impedimentos"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Impedimentos"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Impedimentos"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Impedimentos"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Impedimentos"
+  }
+ ],
+ "2023-OSCE-096": [
+  {
+   "c": "Solo construcción",
+   "t": "Liquidaciones"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Controversias"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Controversias"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Controversias"
+  }
+ ],
+ "2023-OSCE-097": [
+  {
+   "c": "Bienes y Servicios",
+   "t": "Garantías"
+  }
+ ],
+ "2023-OSCE-098": [
+  {
+   "c": "Solo construcción",
+   "t": "Ampliación de Plazo"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Ampliación de Plazo"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Ampliación de Plazo"
+  }
+ ],
+ "2023-OSCE-099": [
+  {
+   "c": "Diseño Costrucción",
+   "t": "Supervisor - Inspector"
+  },
+  {
+   "c": "Diseño Costrucción",
+   "t": "Supervisor - Inspector"
+  },
+  {
+   "c": "Diseño Costrucción",
+   "t": "Supervisor - Inspector"
+  }
+ ],
+ "2023-OSCE-100": [
+  {
+   "c": "Proced_Selección",
+   "t": "Impedimentos"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Impedimentos"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Impedimentos"
+  },
+  {
+   "c": "Bienes y Servicios",
+   "t": "Nulidad Contractual"
+  }
+ ],
+ "2023-OSCE-101": [
+  {
+   "c": "Proced_Selección",
+   "t": "Evaluac.Propuest."
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Evaluac.Propuest."
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Evaluac.Propuest."
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Evaluac.Propuest."
+  }
+ ],
+ "2023-OSCE-102": [
+  {
+   "c": "Solo construcción",
+   "t": "Adicionales-Deductivos"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Adicionales-Deductivos"
+  }
+ ],
+ "2023-OSCE-103": [
+  {
+   "c": "Solo construcción",
+   "t": "Otros obras"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Otros obras"
+  }
+ ],
+ "2023-OSCE-104": [
+  {
+   "c": "Proced_Selección",
+   "t": "Declarat_Nulidad"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Declarat_Nulidad"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Declarat_Nulidad"
+  }
+ ],
+ "2023-OSCE-105": [
+  {
+   "c": "Proced_Selección",
+   "t": "Evaluac.Propuest."
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Evaluac.Propuest."
+  }
+ ],
+ "2023-OSCE-106": [
+  {
+   "c": "Solo construcción",
+   "t": "Sustitución de personal técnico"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Sustitución de personal técnico"
+  }
+ ],
+ "2023-OSCE-107": [
+  {
+   "c": "Proced_Selección",
+   "t": "Impedimentos"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Impedimentos"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Impedimentos"
+  }
+ ],
+ "2023-OSCE-108": [
+  {
+   "c": "Proced_Selección",
+   "t": "Evaluac.Propuest."
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Evaluac.Propuest."
+  }
+ ],
+ "2023-OSCE-109": [
+  {
+   "c": "Proced_Selección",
+   "t": "Emergencia"
+  }
+ ],
+ "2023-OSCE-110": [
+  {
+   "c": "Compras Corporativas",
+   "t": "Compra Corporativa"
+  },
+  {
+   "c": "Compras Corporativas",
+   "t": "Compra Corporativa"
+  }
+ ],
+ "2023-OSCE-111": [
+  {
+   "c": "Proced_Selección",
+   "t": "Evaluac.Propuest."
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Perfeccionamiento de contrato"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Evaluac.Propuest."
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Evaluac.Propuest."
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Evaluac.Propuest."
+  }
+ ],
+ "2023-OSCE-112": [
+  {
+   "c": "Compras Corporativas",
+   "t": "Compra Corporativa"
+  },
+  {
+   "c": "Actos_Prepar.",
+   "t": "Actos preparatorios"
+  },
+  {
+   "c": "Actos_Prepar.",
+   "t": "Actos preparatorios"
+  }
+ ],
+ "2023-OSCE-113": [
+  {
+   "c": "Bienes y Servicios",
+   "t": "Garantías"
+  },
+  {
+   "c": "Bienes y Servicios",
+   "t": "Garantías"
+  },
+  {
+   "c": "Bienes y Servicios",
+   "t": "Garantías"
+  }
+ ],
+ "2023-OSCE-114": [
+  {
+   "c": "Proced_Selección",
+   "t": "Present.-Propuest."
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Present.-Propuest."
+  }
+ ],
+ "2023-OSCE-115": [
+  {
+   "c": "Actos Admin_Entidad",
+   "t": "Controversias"
+  },
+  {
+   "c": "Actos Admin_Entidad",
+   "t": "Controversias"
+  }
+ ],
+ "2023-OSCE-116": [
+  {
+   "c": "Solo construcción",
+   "t": "Liquidaciones"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Liquidaciones"
+  }
+ ],
+ "2023-OSCE-117": [
+  {
+   "c": "Proced_Selección",
+   "t": "Emergencia"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Emergencia"
+  }
+ ],
+ "2023-OSCE-118": [
+  {
+   "c": "Solo construcción",
+   "t": "Recepción de Obras"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Recepción de Obras"
+  }
+ ],
+ "2023-OSCE-119": [
+  {
+   "c": "Bienes y Servicios",
+   "t": "Penalidades/Multas"
+  },
+  {
+   "c": "Bienes y Servicios",
+   "t": "Penalidades/Multas"
+  },
+  {
+   "c": "Bienes y Servicios",
+   "t": "Conformidad"
+  },
+  {
+   "c": "Bienes y Servicios",
+   "t": "Conformidad"
+  }
+ ],
+ "2023-OSCE-120": [
+  {
+   "c": "Actos Admin_Entidad",
+   "t": "Otros Procedim_selección"
+  }
+ ],
+ "2023-OSCE-121": [
+  {
+   "c": "Bienes y Servicios",
+   "t": "Garantías"
+  },
+  {
+   "c": "Bienes y Servicios",
+   "t": "Garantías"
+  },
+  {
+   "c": "Bienes y Servicios",
+   "t": "Garantías"
+  },
+  {
+   "c": "Bienes y Servicios",
+   "t": "Garantías"
+  },
+  {
+   "c": "Bienes y Servicios",
+   "t": "Garantías"
+  }
+ ],
+ "2023-OSCE-122": [
+  {
+   "c": "Supervis._Inspect.",
+   "t": "Supervisor - Inspector"
+  },
+  {
+   "c": "Supervis._Inspect.",
+   "t": "Supervisor - Inspector"
+  }
+ ],
+ "2023-OSCE-123": [
+  {
+   "c": "Actos_Prepar.",
+   "t": "Actos preparatorios"
+  },
+  {
+   "c": "Actos_Prepar.",
+   "t": "Actos preparatorios"
+  },
+  {
+   "c": "Actos_Prepar.",
+   "t": "Actos preparatorios"
+  },
+  {
+   "c": "Actos_Prepar.",
+   "t": "Actos preparatorios"
+  },
+  {
+   "c": "Actos_Prepar.",
+   "t": "Actos preparatorios"
+  }
+ ],
+ "2023-OSCE-124": [
+  {
+   "c": "Actos_Prepar.",
+   "t": "Actos preparatorios"
+  },
+  {
+   "c": "Actos_Prepar.",
+   "t": "Actos preparatorios"
+  },
+  {
+   "c": "Actos_Prepar.",
+   "t": "Actos preparatorios"
+  },
+  {
+   "c": "Actos_Prepar.",
+   "t": "Actos preparatorios"
+  },
+  {
+   "c": "Actos_Prepar.",
+   "t": "Actos preparatorios"
+  }
+ ],
+ "2023-OSCE-125": [
+  {
+   "c": "Proced_Selección",
+   "t": "Impedimentos"
+  }
+ ],
+ "2023-OSCE-126": [
+  {
+   "c": "Diseño Costrucción",
+   "t": "Inicio de obra"
+  },
+  {
+   "c": "Diseño Costrucción",
+   "t": "JRD _JPRD"
+  },
+  {
+   "c": "Diseño Costrucción",
+   "t": "Ampliación de Plazo"
+  },
+  {
+   "c": "Diseño Costrucción",
+   "t": "Retrasos"
+  },
+  {
+   "c": "Diseño Costrucción",
+   "t": "Gastos Generales"
+  },
+  {
+   "c": "Diseño Costrucción",
+   "t": "Supervisor - Inspector"
+  },
+  {
+   "c": "Diseño Costrucción",
+   "t": "Supervisor - Inspector"
+  }
+ ],
+ "2023-OSCE-127": [
+  {
+   "c": "Proced_Selección",
+   "t": "Impedimentos"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Impedimentos"
+  }
+ ],
+ "2023-OSCE-128": [
+  {
+   "c": "Bienes y Servicios",
+   "t": "Garantías"
+  }
+ ],
+ "2024-OSCE-001": [
+  {
+   "c": "Compras Corporativas",
+   "t": "Conformidad"
+  },
+  {
+   "c": "Compras Corporativas",
+   "t": "Conformidad"
+  },
+  {
+   "c": "Compras Corporativas",
+   "t": "Conformidad"
+  }
+ ],
+ "2024-OSCE-002": [
+  {
+   "c": "Proced_Selección",
+   "t": "Impedimentos"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Impedimentos"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Impedimentos"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Impedimentos"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Impedimentos"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Impedimentos"
+  }
+ ],
+ "2024-OSCE-003": [
+  {
+   "c": "Bienes y Servicios",
+   "t": "Penalidades/Multas"
+  },
+  {
+   "c": "Bienes y Servicios",
+   "t": "Penalidades/Multas"
+  }
+ ],
+ "2024-OSCE-004": {
+  "asunto": {
+   "c": "Solo construcción",
+   "t": "Recepción de Obras"
+  }
+ },
+ "2024-OSCE-005": {
+  "asunto": {
+   "c": "Solo construcción",
+   "t": "Formul_Polinóm, y Reajustes"
+  }
+ },
+ "2024-OSCE-006": [
+  {
+   "c": "Solo construcción",
+   "t": "Retrasos"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Retrasos"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Retrasos"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Retrasos"
+  }
+ ],
+ "2024-OSCE-007": [
+  {
+   "c": "Solo construcción",
+   "t": "Formul_Polinóm, y Reajustes"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Formul_Polinóm, y Reajustes"
+  }
+ ],
+ "2024-OSCE-008": [
+  {
+   "c": "Proced_Selección",
+   "t": "Otros Procedim_selección"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Otros Procedim_selección"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Otros Procedim_selección"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Otros Procedim_selección"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Otros Procedim_selección"
+  }
+ ],
+ "2024-OSCE-009": [
+  {
+   "c": "Solo construcción",
+   "t": "Adicionales-Deductivos"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Adicionales-Deductivos"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Adicionales-Deductivos"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Adicionales-Deductivos"
+  }
+ ],
+ "2024-OSCE-010": [
+  {
+   "c": "Solo construcción",
+   "t": "Resolución Contractual"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Recepción de Obras"
+  }
+ ],
+ "2024-OSCE-011": [
+  {
+   "c": "Bienes y Servicios",
+   "t": "Conformidad"
+  }
+ ],
+ "2024-OSCE-012": [
+  {
+   "c": "Bienes y Servicios",
+   "t": "Perfeccionamiento de contrato"
+  }
+ ],
+ "2024-OSCE-013": [
+  {
+   "c": "Proced_Selección",
+   "t": "Evaluac.Propuest."
+  }
+ ],
+ "2024-OSCE-014": [
+  {
+   "c": "Solo construcción",
+   "t": "Ampliación de Plazo"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Ampliación de Plazo"
+  }
+ ],
+ "2024-OSCE-015": [
+  {
+   "omitir": true
+  },
+  {
+   "c": "Bienes y Servicios",
+   "t": "Penalidades/Multas"
+  },
+  {
+   "c": "Bienes y Servicios",
+   "t": "Penalidades/Multas"
+  },
+  {
+   "c": "Bienes y Servicios",
+   "t": "Penalidades/Multas"
+  }
+ ],
+ "2024-OSCE-016": [
+  {
+   "c": "Solo construcción",
+   "t": "Adelantos"
+  },
+  {
+   "omitir": true
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Adelantos"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Adelantos"
+  }
+ ],
+ "2024-OSCE-017": {
+  "asunto": {
+   "c": "Solo construcción",
+   "t": "Adicionales-Deductivos"
+  }
+ },
+ "2024-OSCE-018": [
+  {
+   "c": "Solo construcción",
+   "t": "Obligaciones Esenciales"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Obligaciones Esenciales"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Obligaciones Esenciales"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Obligaciones Esenciales"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Obligaciones Esenciales"
+  }
+ ],
+ "2024-OSCE-019": [
+  {
+   "c": "Proced_Selección",
+   "t": "Evaluac.Propuest."
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Comité de selección"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Perfeccionamiento de contrato"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Comité de selección"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Evaluac.Propuest."
+  }
+ ],
+ "2024-OSCE-020": [
+  {
+   "c": "Solo construcción",
+   "t": "Saldos de Obras"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Saldos de Obras"
+  }
+ ],
+ "2024-OSCE-021": [
+  {
+   "c": "Diseño Costrucción",
+   "t": "Otros obras"
+  }
+ ],
+ "2024-OSCE-022": [
+  {
+   "c": "Bienes y Servicios",
+   "t": "Nulidad Contractual"
+  }
+ ],
+ "2024-OSCE-023": [
+  {
+   "c": "Solo construcción",
+   "t": "Adicionales-Deductivos"
+  },
+  {
+   "omitir": true
+  }
+ ],
+ "2024-OSCE-024": [
+  {
+   "c": "Bienes y Servicios",
+   "t": "Modificaciones Contractuales"
+  }
+ ],
+ "2024-OSCE-025": [
+  {
+   "c": "Solo construcción",
+   "t": "Ampliación de Plazo"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "JRD _JPRD"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Gastos Generales"
+  },
+  {
+   "omitir": true
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Gastos Generales"
+  }
+ ],
+ "2024-OSCE-026": [
+  {
+   "c": "Bienes y Servicios",
+   "t": "Ejecución contractual bienes y servicios"
+  },
+  {
+   "c": "Bienes y Servicios",
+   "t": "Ejecución contractual bienes y servicios"
+  }
+ ],
+ "2024-OSCE-027": [
+  {
+   "c": "Solo construcción",
+   "t": "Adicionales-Deductivos"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Ampliación de Plazo"
+  }
+ ],
+ "2024-OSCE-028": [
+  {
+   "c": "Solo construcción",
+   "t": "Adicionales-Deductivos"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Adicionales-Deductivos"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Adicionales-Deductivos"
+  }
+ ],
+ "2024-OSCE-029": [
+  {
+   "c": "Bienes y Servicios",
+   "t": "Conformidad"
+  },
+  {
+   "c": "Bienes y Servicios",
+   "t": "Conformidad"
+  },
+  {
+   "c": "Bienes y Servicios",
+   "t": "Conformidad"
+  },
+  {
+   "c": "Bienes y Servicios",
+   "t": "Conformidad"
+  }
+ ],
+ "2024-OSCE-030": [
+  {
+   "c": "Diseño Costrucción",
+   "t": "Penalidades/Multas"
+  },
+  {
+   "c": "Diseño Costrucción",
+   "t": "Penalidades/Multas"
+  },
+  {
+   "c": "Diseño Costrucción",
+   "t": "Penalidades/Multas"
+  },
+  {
+   "omitir": true
+  }
+ ],
+ "2024-OSCE-031": [
+  {
+   "c": "Bienes y Servicios",
+   "t": "Controversias"
+  },
+  {
+   "c": "Bienes y Servicios",
+   "t": "Penalidades/Multas"
+  }
+ ],
+ "2024-OSCE-032": [
+  {
+   "c": "Bienes y Servicios",
+   "t": "Ampliación de Plazo"
+  },
+  {
+   "c": "Bienes y Servicios",
+   "t": "Ampliación de Plazo"
+  }
+ ],
+ "2024-OSCE-033": [
+  {
+   "c": "Proced_Selección",
+   "t": "Impedimentos"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Impedimentos"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Impedimentos"
+  }
+ ],
+ "2024-OSCE-034": [
+  {
+   "c": "Bienes y Servicios",
+   "t": "Garantías"
+  }
+ ],
+ "2024-OSCE-035": [
+  {
+   "c": "Solo construcción",
+   "t": "Valorizac_metrados"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Valorizac_metrados"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Paralizaciones"
+  }
+ ],
+ "2024-OSCE-036": [
+  {
+   "c": "Solo construcción",
+   "t": "Garantías"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Garantías"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Garantías"
+  }
+ ],
+ "2024-OSCE-037": [
+  {
+   "c": "Solo construcción",
+   "t": "Ampliación de Plazo"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Controversias"
+  }
+ ],
+ "2024-OSCE-038": [
+  {
+   "c": "Proced_Selección",
+   "t": "Perfeccionamiento de contrato"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Otorgam-_Buena Pro"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Otorgam-_Buena Pro"
+  }
+ ],
+ "2024-OSCE-039": [
+  {
+   "c": "Bienes y Servicios",
+   "t": "Penalidades/Multas"
+  }
+ ],
+ "2024-OSCE-040": [
+  {
+   "c": "Proced_Selección",
+   "t": "Present.-Propuest."
+  }
+ ],
+ "2024-OSCE-041": [
+  {
+   "c": "Proced_Selección",
+   "t": "Impedimentos"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Ampliación de Plazo"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Ampliación de Plazo"
+  }
+ ],
+ "2024-OSCE-042": [
+  {
+   "c": "Compras Corporativas",
+   "t": "Compra Corporativa"
+  },
+  {
+   "c": "Compras Corporativas",
+   "t": "Compra Corporativa"
+  }
+ ],
+ "2024-OSCE-043": [
+  {
+   "c": "Bienes y Servicios",
+   "t": "Penalidades/Multas"
+  },
+  {
+   "c": "Bienes y Servicios",
+   "t": "Penalidades/Multas"
+  },
+  {
+   "c": "Bienes y Servicios",
+   "t": "Penalidades/Multas"
+  },
+  {
+   "c": "Bienes y Servicios",
+   "t": "Penalidades/Multas"
+  }
+ ],
+ "2024-OSCE-044": [
+  {
+   "c": "Solo construcción",
+   "t": "JRD _JPRD"
+  }
+ ],
+ "2024-OSCE-045": [
+  {
+   "c": "Bienes y Servicios",
+   "t": "Penalidades/Multas"
+  },
+  {
+   "c": "Bienes y Servicios",
+   "t": "Penalidades/Multas"
+  },
+  {
+   "c": "Bienes y Servicios",
+   "t": "Penalidades/Multas"
+  }
+ ],
+ "2024-OSCE-046": [
+  {
+   "c": "Bienes y Servicios",
+   "t": "Ampliación de Plazo"
+  },
+  {
+   "c": "Bienes y Servicios",
+   "t": "Ampliación de Plazo"
+  }
+ ],
+ "2024-OSCE-047": [
+  {
+   "c": "Solo construcción",
+   "t": "Valorizac_metrados"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Formul_Polinóm, y Reajustes"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Formul_Polinóm, y Reajustes"
+  }
+ ],
+ "2024-OSCE-048": [
+  {
+   "c": "Solo construcción",
+   "t": "Retrasos"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Retrasos"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Retrasos"
+  }
+ ],
+ "2024-OSCE-049": [
+  {
+   "c": "Solo construcción",
+   "t": "Valorizac_metrados"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Valorizac_metrados"
+  }
+ ],
+ "2024-OSCE-050": [
+  {
+   "c": "Actos_Prepar.",
+   "t": "Otros Procedim_selección"
+  }
+ ],
+ "2024-OSCE-051": [
+  {
+   "c": "Solo construcción",
+   "t": "Mayores Metrados"
+  }
+ ],
+ "2024-OSCE-052": [
+  {
+   "c": "Proced_Selección",
+   "t": "Comité de selección"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Comité de selección"
+  }
+ ],
+ "2024-OSCE-053": [
+  {
+   "c": "Proced_Selección",
+   "t": "Evaluac.Propuest."
+  }
+ ],
+ "2024-OSCE-054": [
+  {
+   "c": "Solo construcción",
+   "t": "Liquidaciones"
+  }
+ ],
+ "2024-OSCE-055": [
+  {
+   "c": "Solo construcción",
+   "t": "Suspensiones de plazo contractual"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Suspensiones de plazo contractual"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Suspensiones de plazo contractual"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Suspensiones de plazo contractual"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Suspensiones de plazo contractual"
+  }
+ ],
+ "2024-OSCE-056": [
+  {
+   "c": "Proced_Selección",
+   "t": "Evaluac.Propuest.",
+   "m": "1017"
+  }
+ ],
+ "2024-OSCE-057": [
+  {
+   "c": "Solo construcción",
+   "t": "Suspensiones de plazo contractual"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Suspensiones de plazo contractual"
+  }
+ ],
+ "2024-OSCE-058": [
+  {
+   "c": "Proced_Selección",
+   "t": "Fiscalización Posterior"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Fiscalización Posterior"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Fiscalización Posterior"
+  }
+ ],
+ "2024-OSCE-059": [
+  {
+   "c": "Solo construcción",
+   "t": "Intervención Económica"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Intervención Económica"
+  }
+ ],
+ "2024-OSCE-060": [
+  {
+   "c": "Proced_Selección",
+   "t": "Comité de selección",
+   "m": "1017"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Comité de selección",
+   "m": "1017"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Comité de selección",
+   "m": "1017"
+  }
+ ],
+ "2024-OSCE-061": [
+  {
+   "c": "Solo construcción",
+   "t": "Garantías"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Garantías"
+  }
+ ],
+ "2025-OECE-D001": [
+  {
+   "c": "Compras Corporativas",
+   "t": "Compra Corporativa"
+  },
+  {
+   "c": "Compras Corporativas",
+   "t": "Compra Corporativa"
+  },
+  {
+   "c": "Compras Corporativas",
+   "t": "Compra Corporativa"
+  },
+  {
+   "c": "Compras Corporativas",
+   "t": "Compra Corporativa"
+  }
+ ],
+ "2025-OECE-D002": [
+  {
+   "c": "Supervis._Inspect.",
+   "t": "Supervisor - Inspector",
+   "m": "30225"
+  }
+ ],
+ "2025-OECE-D003": [
+  {
+   "c": "Solo construcción",
+   "t": "Ampliación de Plazo"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Ampliación de Plazo"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Ampliación de Plazo"
+  }
+ ],
+ "2025-OECE-D004": [
+  {
+   "c": "Proced_Selección",
+   "t": "Contratación Directa",
+   "m": "32069"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Contratación Directa",
+   "m": "32069"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "No competitivo",
+   "m": "32069"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "No competitivo",
+   "m": "32069"
+  }
+ ],
+ "2025-OECE-D005": [
+  {
+   "c": "Proced_Selección",
+   "t": "Evaluac.Propuest."
+  }
+ ],
+ "2025-OECE-D006": [
+  {
+   "c": "Bienes y Servicios",
+   "t": "Conformidad"
+  },
+  {
+   "c": "Bienes y Servicios",
+   "t": "Conformidad"
+  },
+  {
+   "c": "Bienes y Servicios",
+   "t": "Conformidad"
+  }
+ ],
+ "2025-OECE-D007": [
+  {
+   "c": "Bienes y Servicios",
+   "t": "Ampliación de Plazo"
+  }
+ ],
+ "2025-OECE-D008": [
+  {
+   "c": "Solo construcción",
+   "t": "Intervención Económica",
+   "m": "30225"
+  }
+ ],
+ "2025-OECE-D009": [
+  {
+   "c": "Proced_Selección",
+   "t": "Present.-Propuest.",
+   "m": "32069"
+  }
+ ],
+ "2025-OECE-D010": [
+  {
+   "c": "Proced_Selección",
+   "t": "Impedimentos",
+   "m": "30225"
+  }
+ ],
+ "2025-OECE-D011": [
+  {
+   "c": "Proced_Selección",
+   "t": "Impedimentos",
+   "m": "32069"
+  }
+ ],
+ "2025-OECE-D012": [
+  {
+   "c": "Solo construcción",
+   "t": "Penalidades/Multas",
+   "m": "30225"
+  }
+ ],
+ "2025-OECE-D013": [
+  {
+   "c": "Actos_Prepar.",
+   "t": "Otros Procedim_selección",
+   "m": "32069"
+  }
+ ],
+ "2025-OECE-D014": [
+  {
+   "c": "Proced_Selección",
+   "t": "Present.-Propuest.",
+   "m": "32069"
+  }
+ ],
+ "2025-OECE-D015": [
+  {
+   "c": "Proced_Selección",
+   "t": "Comité de selección"
+  }
+ ],
+ "2025-OECE-D016": [
+  {
+   "c": "Proced_Selección",
+   "t": "Impedimentos",
+   "m": "32069"
+  }
+ ],
+ "2025-OECE-D017": [
+  {
+   "c": "Actos_Prepar.",
+   "t": "Actos preparatorios",
+   "m": "32069"
+  }
+ ],
+ "2025-OECE-D018": [
+  {
+   "c": "Supervis._Inspect.",
+   "t": "Sustitución de personal técnico",
+   "m": "30225"
+  }
+ ],
+ "2025-OECE-D019": [
+  {
+   "c": "Solo construcción",
+   "t": "Gastos Generales"
+  }
+ ],
+ "2025-OECE-D020": [
+  {
+   "c": "Proced_Selección",
+   "t": "Actores en el P_S",
+   "m": "32069"
+  }
+ ],
+ "2025-OECE-D021": [
+  {
+   "c": "Actos Admin_Entidad",
+   "t": "Controversias",
+   "m": "32069"
+  }
+ ],
+ "2025-OECE-D022": [
+  {
+   "c": "Supervis._Inspect.",
+   "t": "Supervisor - Inspector"
+  }
+ ],
+ "2025-OECE-D023": [
+  {
+   "c": "Proced_Selección",
+   "t": "Actores en el P_S",
+   "m": "32069"
+  }
+ ],
+ "2025-OECE-D024": [
+  {
+   "c": "Proced_Selección",
+   "t": "No competitivo"
+  }
+ ],
+ "2025-OECE-D025": [
+  {
+   "c": "Actos Admin_Entidad",
+   "t": "Controversias",
+   "m": "32069"
+  }
+ ],
+ "2025-OECE-D026": [
+  {
+   "c": "Proced_Selección",
+   "t": "Evaluac.Propuest.",
+   "m": "32069"
+  }
+ ],
+ "2025-OECE-D027": [
+  {
+   "c": "Solo construcción",
+   "t": "Deducrivos/reducciones",
+   "m": "30225"
+  }
+ ],
+ "2025-OECE-D028": [
+  {
+   "c": "Proced_Selección",
+   "t": "Perfeccionamiento de contrato",
+   "m": "30225"
+  }
+ ],
+ "2025-OECE-D029": [
+  {
+   "c": "Actos_Prepar.",
+   "t": "Otros Procedim_selección",
+   "m": "32069"
+  }
+ ],
+ "2025-OECE-D030": [
+  {
+   "c": "Proced_Selección",
+   "t": "Comité de selección",
+   "m": "1017"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Comité de selección",
+   "m": "1017"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Registro de participantes",
+   "m": "1017"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Comité de selección",
+   "m": "1017"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Convocatoria",
+   "m": "1017"
+  }
+ ],
+ "2025-OECE-D031": [
+  {
+   "c": "Solo Constr/Diseño Constr.",
+   "t": "Fast Track",
+   "m": "32069"
+  }
+ ],
+ "2025-OECE-D032": [
+  {
+   "c": "Proced_Selección",
+   "t": "Contratación Directa",
+   "m": "32069"
+  }
+ ],
+ "2025-OECE-D033": [
+  {
+   "c": "Supervis._Inspect.",
+   "t": "Penalidades/Multas",
+   "m": "30225"
+  }
+ ],
+ "2025-OECE-D034": [
+  {
+   "c": "Actos Admin_Entidad",
+   "t": "Actores en el P_S",
+   "m": "32069"
+  },
+  {
+   "c": "Actos Admin_Entidad",
+   "t": "No competitivo",
+   "m": "32069"
+  }
+ ],
+ "2025-OECE-D035": [
+  {
+   "c": "Estudios de Pre Inversión",
+   "t": "Penalidades/Multas",
+   "m": "30225"
+  }
+ ],
+ "2025-OECE-D036": [
+  {
+   "c": "Proced_Selección",
+   "t": "Fiscalización Posterior",
+   "m": "32069"
+  }
+ ],
+ "2025-OECE-D037": [
+  {
+   "c": "Proced_Selección",
+   "t": "Perfeccionamiento de contrato"
+  }
+ ],
+ "2025-OECE-D038": [
+  {
+   "c": "Proced_Selección",
+   "t": "Perfeccionamiento de contrato",
+   "m": "1017"
+  }
+ ],
+ "2025-OECE-D039": [
+  {
+   "c": "Actos_Prepar.",
+   "t": "Actos preparatorios",
+   "m": "30225"
+  }
+ ],
+ "2025-OECE-D040": [
+  {
+   "c": "Exped._Técnico",
+   "t": "Otros Procedim_selección"
+  },
+  {
+   "c": "Exped._Técnico",
+   "t": "Otros Procedim_selección"
+  }
+ ],
+ "2025-OECE-D041": [
+  {
+   "c": "Proced_Selección",
+   "t": "Actores en el P_S",
+   "m": "32069"
+  }
+ ],
+ "2025-OECE-D042": [
+  {
+   "c": "Proced_Selección",
+   "t": "No competitivo",
+   "m": "32069"
+  }
+ ],
+ "2025-OECE-D043": [
+  {
+   "c": "Proced_Selección",
+   "t": "Otros Procedim_selección",
+   "m": "32069"
+  }
+ ],
+ "2025-OECE-D044": [
+  {
+   "c": "Solo Constr/Diseño Constr.",
+   "t": "Suspensiones de plazo contractual",
+   "m": "32069"
+  }
+ ],
+ "2025-OECE-D045": [
+  {
+   "c": "Actos Admin_Entidad",
+   "t": "Controversias",
+   "m": "32069"
+  },
+  {
+   "c": "Actos Admin_Entidad",
+   "t": "Controversias",
+   "m": "32069"
+  },
+  {
+   "c": "Actos Admin_Entidad",
+   "t": "Controversias",
+   "m": "32069"
+  },
+  {
+   "c": "Actos Admin_Entidad",
+   "t": "Controversias",
+   "m": "32069"
+  },
+  {
+   "c": "Actos Admin_Entidad",
+   "t": "Controversias",
+   "m": "32069"
+  }
+ ],
+ "2025-OECE-D046": [
+  {
+   "c": "Proced_Selección",
+   "t": "Evaluac.Propuest.",
+   "m": "32069"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Evaluac.Propuest.",
+   "m": "32069"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Evaluac.Propuest.",
+   "m": "32069"
+  }
+ ],
+ "2025-OECE-D047": [
+  {
+   "c": "Proced_Selección",
+   "t": "Impedimentos",
+   "m": "32069"
+  }
+ ],
+ "2025-OECE-D048": [
+  {
+   "c": "Bienes y Servicios",
+   "t": "Otros Procedim_selección"
+  }
+ ],
+ "2025-OECE-D049": [
+  {
+   "c": "Proced_Selección",
+   "t": "Present.-Propuest.",
+   "m": "32069"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Present.-Propuest.",
+   "m": "32069"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Present.-Propuest.",
+   "m": "32069"
+  }
+ ],
+ "2025-OECE-D050": [
+  {
+   "c": "Solo construcción",
+   "t": "Mayores Metrados",
+   "m": "30225"
+  }
+ ],
+ "2025-OECE-D051": [
+  {
+   "c": "Bienes y Servicios",
+   "t": "Adicionales-Deductivos",
+   "m": "32069"
+  }
+ ],
+ "2025-OECE-D052": [
+  {
+   "c": "Bienes y Servicios",
+   "t": "Contratos Menores",
+   "m": "32069"
+  }
+ ],
+ "2025-OECE-D053": [
+  {
+   "c": "Actos_Prepar.",
+   "t": "Otros Procedim_selección",
+   "m": "32069"
+  }
+ ],
+ "2025-OECE-D054": [
+  {
+   "c": "Proced_Selección",
+   "t": "Impedimentos",
+   "m": "30225"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Impedimentos",
+   "m": "30225"
+  }
+ ],
+ "2025-OECE-D055": [
+  {
+   "c": "Supervis._Inspect.",
+   "t": "Supervisor - Inspector",
+   "m": "30225"
+  },
+  {
+   "c": "Supervis._Inspect.",
+   "t": "Supervisor - Inspector",
+   "m": "30225"
+  }
+ ],
+ "2025-OECE-D056": [
+  {
+   "c": "Proced_Selección",
+   "t": "Evaluac.Propuest.",
+   "m": "32069"
+  }
+ ],
+ "2025-OECE-D057": [
+  {
+   "c": "Proced_Selección",
+   "t": "Impedimentos",
+   "m": "32069"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Impedimentos",
+   "m": "32069"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Impedimentos",
+   "m": "32069"
+  }
+ ],
+ "2025-OECE-D058": [
+  {
+   "c": "Solo Constr/Diseño Constr.",
+   "t": "JRD _JPRD",
+   "m": "32069"
+  }
+ ],
+ "2025-OECE-D059": [
+  {
+   "c": "Actos_Prepar.",
+   "t": "Actos preparatorios",
+   "m": "32069"
+  },
+  {
+   "c": "Actos_Prepar.",
+   "t": "Actos preparatorios",
+   "m": "32069"
+  },
+  {
+   "c": "Actos_Prepar.",
+   "t": "Actos preparatorios",
+   "m": "32069"
+  }
+ ],
+ "2025-OECE-D060": {
+  "asunto": {
+   "c": "Actos Admin_Entidad",
+   "t": "Controversias",
+   "m": "32069"
+  }
+ },
+ "2025-OECE-D061": [
+  {
+   "c": "Solo construcción",
+   "t": "Mayores Metrados",
+   "m": "30225"
+  }
+ ],
+ "2025-OECE-D062": [
+  {
+   "c": "Actos Admin_Entidad",
+   "t": "No competitivo",
+   "m": "32069"
+  }
+ ],
+ "2025-OECE-D063": [
+  {
+   "c": "Bienes y Servicios",
+   "t": "Otros Procedim_selección",
+   "m": "32069"
+  }
+ ],
+ "2025-OECE-D064": [
+  {
+   "c": "Bienes y Servicios",
+   "t": "Nulidad Contractual",
+   "m": "30225"
+  }
+ ],
+ "2025-OECE-D065": [
+  {
+   "c": "Proced_Selección",
+   "t": "No competitivo",
+   "m": "32069"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "No competitivo",
+   "m": "32069"
+  }
+ ],
+ "2025-OECE-D066": [
+  {
+   "c": "Bienes y Servicios",
+   "t": "Resolución Contractual",
+   "m": "30225"
+  }
+ ],
+ "2025-OECE-D067": [
+  {
+   "c": "Proced_Selección",
+   "t": "Otros Procedim_selección",
+   "m": "32069"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Otros Procedim_selección",
+   "m": "32069"
+  }
+ ],
+ "2025-OECE-D068": [
+  {
+   "c": "Bienes y Servicios",
+   "t": "Impedimentos",
+   "m": "32069"
+  }
+ ],
+ "2025-OSCE-D001": [
+  {
+   "c": "Solo construcción",
+   "t": "Valorizac_metrados"
+  }
+ ],
+ "2025-OSCE-D002": [
+  {
+   "c": "Proced_Selección",
+   "t": "Present.-Propuest."
+  }
+ ],
+ "2025-OSCE-D003": [
+  {
+   "c": "Solo construcción",
+   "t": "Liquidaciones"
+  }
+ ],
+ "2025-OSCE-D004": [
+  {
+   "c": "Bienes y Servicios",
+   "t": "Modificaciones Contractuales"
+  },
+  {
+   "c": "Bienes y Servicios",
+   "t": "Modificaciones Contractuales"
+  }
+ ],
+ "2025-OSCE-D005": [
+  {
+   "c": "Proced_Selección",
+   "t": "Perfeccionamiento de contrato"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Perfeccionamiento de contrato"
+  }
+ ],
+ "2025-OSCE-D006": [
+  {
+   "c": "Solo construcción",
+   "t": "Mayores Metrados"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Mayores Metrados"
+  }
+ ],
+ "2025-OSCE-D007": [
+  {
+   "c": "Proced_Selección",
+   "t": "Impedimentos"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Impedimentos"
+  }
+ ],
+ "2025-OSCE-D008": [
+  {
+   "c": "Bienes y Servicios",
+   "t": "Resolución Contractual"
+  },
+  {
+   "c": "Bienes y Servicios",
+   "t": "Resolución Contractual"
+  },
+  {
+   "c": "Bienes y Servicios",
+   "t": "Resolución Contractual"
+  }
+ ],
+ "2025-OSCE-D009": [
+  {
+   "c": "Proced_Selección",
+   "t": "Impedimentos"
+  }
+ ],
+ "2025-OSCE-D010": [
+  {
+   "c": "Proced_Selección",
+   "t": "Emergencia"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Emergencia"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Emergencia"
+  }
+ ],
+ "2025-OSCE-D011": [
+  {
+   "c": "Proced_Selección",
+   "t": "Comité de selección"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Fiscalización Posterior"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Comité de selección"
+  }
+ ],
+ "2025-OSCE-D012": [
+  {
+   "c": "Supervis._Inspect.",
+   "t": "Sustitución de personal técnico"
+  },
+  {
+   "c": "Supervis._Inspect.",
+   "t": "Penalidades/Multas"
+  },
+  {
+   "c": "Supervis._Inspect.",
+   "t": "Penalidades/Multas"
+  }
+ ],
+ "2025-OSCE-D013": [
+  {
+   "c": "Solo construcción",
+   "t": "Ampliación de Plazo"
+  }
+ ],
+ "2025-OSCE-D014": [
+  {
+   "c": "Solo Constr/Diseño Constr.",
+   "t": "Cronogr_Programa de Obra",
+   "m": "32069"
+  }
+ ],
+ "2025-OSCE-D015": [
+  {
+   "c": "Bienes y Servicios",
+   "t": "Otros Procedim_selección"
+  }
+ ],
+ "2025-OSCE-D016": [
+  {
+   "c": "Proced_Selección",
+   "t": "Otros Procedim_selección"
+  },
+  {
+   "c": "Actos_Prepar.",
+   "t": "Actos preparatorios"
+  }
+ ],
+ "2025-OSCE-D017": [
+  {
+   "c": "Proced_Selección",
+   "t": "Present.-Propuest."
+  }
+ ],
+ "2025-OSCE-D018": [
+  {
+   "c": "Proced_Selección",
+   "t": "Impedimentos"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Impedimentos"
+  }
+ ],
+ "2025-OSCE-D019": [
+  {
+   "c": "Proced_Selección",
+   "t": "Emergencia"
+  },
+  {
+   "c": "Proced_Selección",
+   "t": "Emergencia"
+  }
+ ],
+ "2025-OSCE-D020": [
+  {
+   "c": "Solo construcción",
+   "t": "JRD _JPRD"
+  }
+ ],
+ "2025-OSCE-D021": [
+  {
+   "c": "Solo construcción",
+   "t": "Mayores Metrados"
+  }
+ ],
+ "2025-OSCE-D022": [
+  {
+   "c": "Proced_Selección",
+   "t": "Fiscalización Posterior"
+  }
+ ],
+ "2025-OSCE-D023": [
+  {
+   "c": "Solo construcción",
+   "t": "Gastos Generales"
+  }
+ ],
+ "2025-OSCE-D024": [
+  {
+   "c": "Bienes y Servicios",
+   "t": "Penalidades/Multas"
+  },
+  {
+   "c": "Compras Corporativas",
+   "t": "Penalidades/Multas"
+  }
+ ],
+ "2025-OSCE-D025": [
+  {
+   "c": "Compras Corporativas",
+   "t": "Ampliación de Plazo"
+  },
+  {
+   "c": "Compras Corporativas",
+   "t": "Ampliación de Plazo"
+  }
+ ],
+ "2025-OSCE-D026": [
+  {
+   "c": "Exped._Técnico",
+   "t": "Consult_al Exp_Técnico"
+  },
+  {
+   "c": "Exped._Técnico",
+   "t": "Consult_al Exp_Técnico"
+  }
+ ],
+ "2025-OSCE-D027": [
+  {
+   "c": "Bienes y Servicios",
+   "t": "Ampliación de Plazo"
+  },
+  {
+   "c": "Bienes y Servicios",
+   "t": "Ampliación de Plazo"
+  }
+ ]
+}

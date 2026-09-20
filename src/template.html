@@ -1,0 +1,1189 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Buscador de las opiniones de la Dirección Técnico Normativa del OSCE y del OECE, clasificadas por etapa, tema y marco normativo. Elaborado por J. Rodolfo Mercado Pajares.">
+<meta name="author" content="J. Rodolfo Mercado Pajares">
+<style>
+html{-webkit-text-size-adjust:100%}
+body{margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
+</style>
+<title>Bitácora de Opiniones OECE</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2048%2048%22%3E%3Crect%20width%3D%2248%22%20height%3D%2248%22%20rx%3D%2210%22%20fill%3D%22%230F1C2E%22%2F%3E%3Cg%20transform%3D%22translate%2824%2024%29%20scale%28.76%29%20translate%28-24%20-24%29%22%3E%3Ccircle%20cx%3D%2224%22%20cy%3D%2224%22%20r%3D%2220.4%22%20fill%3D%22none%22%20stroke%3D%22%23F4F1EA%22%20stroke-width%3D%223.6%22%20stroke-dasharray%3D%2293.8%2034.4%22%20stroke-linecap%3D%22round%22%20transform%3D%22rotate%2850%2024%2024%29%22%2F%3E%3Crect%20x%3D%2214.6%22%20y%3D%2215.4%22%20width%3D%2216%22%20height%3D%223.6%22%20rx%3D%221.8%22%20fill%3D%22%23F4F1EA%22%20opacity%3D%22.55%22%2F%3E%3Crect%20x%3D%2214.6%22%20y%3D%2222.2%22%20width%3D%2229.5%22%20height%3D%223.6%22%20rx%3D%221.8%22%20fill%3D%22%23CDAB68%22%2F%3E%3Crect%20x%3D%2214.6%22%20y%3D%2229%22%20width%3D%2211%22%20height%3D%223.6%22%20rx%3D%221.8%22%20fill%3D%22%23F4F1EA%22%20opacity%3D%22.55%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300..800&family=Geist+Mono:wght@400..600&display=swap">
+<style>
+:root{
+  --bg:#F4F4F1; --surface:#FFFFFF; --surface-2:#F1F1ED; --ink:#151A21; --ink-2:#3B424D; --muted:#6A707A;
+  --line:#DCDDD8; --line-2:#EAEBE6;
+  --primary:#0F1C2E; --on-primary:#F6F3EC;
+  --brass:#8C6A2C; --brass-soft:#E8DDC6;
+  --band:#0F1C2E; --band-ink:#F4F1EA; --band-2:#AEB5C0; --band-line:rgba(255,255,255,.13); --band-accent:#CDAB68; --band-bar:rgba(244,241,234,.2);
+  --m32069:#2C4A7C; --m30225:#8C6A2C; --m1017:#7C2D3B;
+  --mark:#F0E1B9; --warn:#86470C; --warn-soft:#F6ECDB;
+  --shadow:0 1px 2px rgba(15,28,46,.05),0 18px 40px -24px rgba(15,28,46,.28);
+  --sans:"Geist",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --display:"Geist",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --mono:"Geist Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0E131A; --surface:#141A23; --surface-2:#19202A; --ink:#E9E6DF; --ink-2:#C2BFB7; --muted:#8F8D86;
+    --line:#27303B; --line-2:#1E2530;
+    --primary:#EAE5DA; --on-primary:#0E131A;
+    --brass:#D3B373; --brass-soft:#3A3120;
+    --band:#0A0E14; --band-ink:#F1EEE7; --band-2:#A3AAB4; --band-line:rgba(255,255,255,.10); --band-accent:#D3B373; --band-bar:rgba(241,238,231,.16);
+    --m32069:#93ACDB; --m30225:#D3B373; --m1017:#DB8F9B;
+    --mark:#4B3E1D; --warn:#EAB76D; --warn-soft:#33260F;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 18px 40px -24px rgba(0,0,0,.6);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0E131A; --surface:#141A23; --surface-2:#19202A; --ink:#E9E6DF; --ink-2:#C2BFB7; --muted:#8F8D86;
+  --line:#27303B; --line-2:#1E2530;
+  --primary:#EAE5DA; --on-primary:#0E131A;
+  --brass:#D3B373; --brass-soft:#3A3120;
+  --band:#0A0E14; --band-ink:#F1EEE7; --band-2:#A3AAB4; --band-line:rgba(255,255,255,.10); --band-accent:#D3B373; --band-bar:rgba(241,238,231,.16);
+  --m32069:#93ACDB; --m30225:#D3B373; --m1017:#DB8F9B;
+  --mark:#4B3E1D; --warn:#EAB76D; --warn-soft:#33260F;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 18px 40px -24px rgba(0,0,0,.6);
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:15px/1.6 var(--sans);letter-spacing:-.011em;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+a{color:inherit}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+.wrap{max-width:1220px;margin-inline:auto;padding-inline:clamp(16px,4.5vw,40px)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.caps{font:600 10.5px/1.3 var(--sans);letter-spacing:.16em;text-transform:uppercase}
+
+/* ---------- Masthead band ---------- */
+.mast{background:var(--band);color:var(--band-ink);border-bottom:1px solid var(--band-accent)}
+.topline{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px 24px;padding-block:18px;border-bottom:1px solid var(--band-line)}
+.topline .caps{color:var(--band-accent)}
+.byline{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;font-size:13px;color:var(--band-2)}
+.byline strong{font-weight:500;color:var(--band-ink)}
+.byline a{color:var(--band-accent);text-decoration:none;font:600 10.5px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;border-bottom:1px solid transparent;padding-bottom:2px}
+.byline a:hover{border-bottom-color:currentColor}
+.brand{display:inline-flex;align-items:center;gap:13px}
+.mark{flex:0 0 auto;width:42px;height:42px;color:var(--band-ink)}
+.brand-copy{display:flex;flex-direction:column;gap:3px}
+.brand-copy strong{font:780 19px/1 var(--display);letter-spacing:-.035em;color:var(--band-ink)}
+.brand-copy small{font:650 9px/1.25 var(--sans);letter-spacing:.09em;text-transform:uppercase;color:var(--band-2)}
+.mhero{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:32px 64px;align-items:end;padding-block:44px 38px}
+h1{margin:0;font:780 clamp(2.4rem,5.4vw,3.7rem)/1.02 var(--display);letter-spacing:-.035em;text-wrap:balance}
+h1 em{font-style:normal;font-weight:780;color:var(--band-accent)}
+.lede{margin:18px 0 0;max-width:56ch;color:var(--band-2);font:400 16.5px/1.6 var(--sans)}
+.hero-ask{display:inline-flex;align-items:center;gap:12px;margin:24px 0 0;padding:8px 18px 8px 8px;border:1px solid var(--band-line);
+  border-radius:3px;background:rgba(255,255,255,.05);color:var(--band-ink);cursor:pointer;text-align:left;transition:background .2s,border-color .2s}
+.hero-ask:hover{background:rgba(255,255,255,.09);border-color:var(--band-accent)}
+.hero-ask .av{width:38px;height:38px}
+.hero-ask b{display:block;font:700 14.5px/1.2 var(--display);letter-spacing:-.025em}
+.hero-ask small{display:block;margin-top:2px;font:500 11.5px/1.3 var(--sans);color:var(--band-2)}
+.facts{display:flex;flex-wrap:wrap;gap:16px 0;margin:30px 0 0;padding:0}
+.facts div{display:flex;flex-direction:column;gap:6px;padding-inline:0 26px;margin-right:26px;border-right:1px solid var(--band-line)}
+.facts div:last-child{border-right:0;margin-right:0}
+.facts dt{order:2;color:var(--band-2)}
+.facts dd{order:1;margin:0;font:700 32px/1 var(--display);letter-spacing:-.04em;font-variant-numeric:lining-nums tabular-nums;color:var(--band-ink)}
+
+.months{margin:0}
+.months figcaption{display:flex;justify-content:space-between;gap:12px;align-items:baseline;margin-bottom:14px}
+.months figcaption .caps{color:var(--band-ink)}
+.months figcaption span:last-child,.months figcaption button{font:500 12.5px var(--sans);color:var(--band-2)}
+.months figcaption button{border:0;background:none;padding:0;cursor:pointer;color:var(--band-accent);border-bottom:1px solid transparent}
+.months figcaption button:hover{border-bottom-color:currentColor}
+.mbars{display:grid;grid-template-columns:repeat(var(--n,9),minmax(0,1fr));gap:8px;align-items:end;border-bottom:1px solid var(--band-line)}
+.mbar{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:6px;height:96px;padding:0;border:0;background:none;cursor:pointer;color:var(--band-2)}
+.mbar .v{font:600 12px/1 var(--mono);font-variant-numeric:lining-nums tabular-nums}
+.mbar .c{display:block;width:100%;max-width:26px;height:calc(var(--h) * 64px);min-height:3px;background:var(--band-bar);transition:background .2s}
+.mbar:hover .c{background:var(--band-accent)}
+.mbar:hover .v,.mbar[aria-pressed="true"] .v{color:var(--band-accent)}
+.mbar[aria-pressed="true"] .c{background:var(--band-accent)}
+.mbar.dim .c{opacity:.4}
+.mlabs{display:grid;grid-template-columns:repeat(var(--n,9),minmax(0,1fr));gap:8px;margin-top:8px}
+.mlabs span{text-align:center;font:500 11px/1 var(--sans);letter-spacing:.08em;color:var(--band-2)}
+
+/* ---------- Sticky toolbar ---------- */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;flex-wrap:wrap;gap:10px 28px;align-items:center;padding-block:14px}
+.search{flex:1 1 340px;display:flex;align-items:center;gap:12px;min-width:0;background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:0 14px;height:48px;transition:border-color .2s,box-shadow .2s}
+.search:focus-within{border-color:var(--primary);box-shadow:0 0 0 3px var(--brass-soft)}
+.search svg{flex:none;color:var(--muted)}
+.search input{flex:1;min-width:0;border:0;background:none;outline:none;font-size:15.5px;height:100%}
+.search input::placeholder{color:var(--muted);font:400 15px var(--sans)}
+.search input::-webkit-search-cancel-button{display:none}
+.search kbd{font:500 11px/1 var(--sans);color:var(--muted);border:1px solid var(--line);border-radius:2px;padding:3px 7px}
+.xq{border:0;background:none;padding:4px;cursor:pointer;color:var(--muted);display:flex}
+.ctrls{display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center}
+.tabs{display:inline-flex;gap:22px}
+.tabs button{border:0;background:none;padding:6px 0;cursor:pointer;color:var(--muted);border-bottom:1.5px solid transparent;font:600 11px/1.3 var(--sans);letter-spacing:.14em;text-transform:uppercase;white-space:nowrap}
+.tabs button:hover{color:var(--ink)}
+.tabs button[aria-pressed="true"]{color:var(--ink);border-bottom-color:var(--brass)}
+.btn-filters{display:none;border:1px solid var(--line);background:var(--surface);border-radius:2px;padding:7px 12px;cursor:pointer;gap:8px;align-items:center;font:600 11px/1.3 var(--sans);letter-spacing:.14em;text-transform:uppercase}
+.btn-filters .n{background:var(--primary);color:var(--on-primary);border-radius:999px;min-width:18px;padding:0 5px;font-size:10.5px;line-height:18px;letter-spacing:0;text-align:center}
+
+/* ---------- Layout ---------- */
+.layout{display:grid;grid-template-columns:260px minmax(0,1fr);gap:48px;padding-block:36px 72px;align-items:start}
+.filters{position:sticky;top:calc(env(safe-area-inset-top,0px) + 92px);max-height:calc(100vh - 112px);overflow:auto;padding-right:8px;display:flex;flex-direction:column;gap:30px;scrollbar-width:thin}
+.facet h3{margin:0 0 10px;padding-bottom:9px;border-bottom:1px solid var(--line);color:var(--ink);display:flex;justify-content:space-between;align-items:baseline}
+.facet h3 button{border:0;background:none;padding:0;font:600 12px var(--sans);letter-spacing:0;text-transform:none;color:var(--brass);cursor:pointer}
+.opts{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.opt{display:grid;grid-template-columns:14px minmax(0,1fr) auto;gap:11px;align-items:start;width:100%;text-align:left;border:0;background:none;padding:6px 2px;cursor:pointer;font-size:14px;line-height:1.35;color:var(--ink-2)}
+.opt:hover{color:var(--ink)}
+.opt:hover .box{border-color:var(--primary)}
+.opt .box{width:14px;height:14px;margin-top:2px;border:1px solid var(--muted);border-radius:1px;background:var(--surface);display:grid;place-items:center;transition:border-color .15s,background .15s}
+.opt.radio .box{border-radius:50%}
+.opt[aria-pressed="true"]{color:var(--ink);font-weight:500}
+.opt[aria-pressed="true"] .box{background:var(--primary);border-color:var(--primary)}
+.opt[aria-pressed="true"] .box::after{content:"";width:7px;height:4px;border:1.5px solid var(--on-primary);border-top:0;border-right:0;transform:translateY(-1px) rotate(-45deg)}
+.opt.radio[aria-pressed="true"] .box{background:var(--surface)}
+.opt.radio[aria-pressed="true"] .box::after{width:6px;height:6px;border:0;border-radius:50%;background:var(--primary);transform:none}
+.opt .cnt{font:500 12.5px/1.3 var(--mono);color:var(--muted);font-variant-numeric:lining-nums tabular-nums}
+.opt.zero{color:var(--muted);opacity:.7}
+.opt .lab{display:flex;flex-direction:column;gap:6px}
+.opt .dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:8px;vertical-align:1px}
+.meter{display:block;height:2px;background:var(--line-2)}
+.meter i{display:block;height:100%;background:var(--brass);opacity:.55}
+.opt[aria-pressed="true"] .meter i{opacity:1}
+.tgroup{margin:16px 0 6px;font:600 12.5px/1.3 var(--sans);color:var(--muted)}
+.tsearch{width:100%;border:0;border-bottom:1px solid var(--line);background:none;padding:6px 0;font-size:14px;margin-bottom:2px;outline:none}
+.tsearch:focus{border-bottom-color:var(--primary)}
+.tsearch::placeholder{color:var(--muted);font:400 14px var(--sans)}
+.close-filters{display:none}
+
+/* ---------- Results ---------- */
+.chip{border:1px solid var(--line);background:var(--surface);border-radius:2px;padding:5px 10px;font:500 12.5px var(--sans);color:var(--ink-2);cursor:pointer;text-align:left}
+.chip:hover{border-color:var(--brass);color:var(--ink)}
+.lnk{border:0;background:none;padding:0;cursor:pointer;color:var(--brass);font:600 12.5px var(--sans);border-bottom:1px solid transparent}
+.lnk:hover{border-bottom-color:currentColor}
+.ai{margin-top:14px}
+.ai-out{margin-top:12px;padding:14px 16px;background:var(--surface-2);border-radius:3px;font-size:14.5px;line-height:1.62;color:var(--ink-2);white-space:pre-wrap;overflow-wrap:break-word}
+.ai-out strong{font-weight:600}
+.ai-note{display:block;margin-top:10px;font-size:11.5px;line-height:1.5;color:var(--muted)}
+/* --- consultor: chat flotante --- */
+.av{flex:none;display:block}
+.chat-open{position:fixed;right:clamp(14px,3vw,28px);bottom:clamp(14px,3vw,28px);z-index:60;display:inline-flex;align-items:center;gap:11px;
+  background:var(--band);color:var(--band-ink);border:1px solid var(--band-accent);border-radius:3px;padding:8px 17px 8px 9px;cursor:pointer;
+  box-shadow:var(--shadow);text-align:left}
+.chat-open .av{width:44px;height:44px;transition:transform .25s}
+.chat-open b{display:block;font:700 14.5px/1.15 var(--display);letter-spacing:-.025em}
+.chat-open small{display:block;margin-top:2px;font:500 11px/1.3 var(--sans);color:var(--band-2)}
+.chat-open:hover{background:#17253a;border-color:var(--band-ink)}
+.chat-open:hover .av{transform:scale(1.07) rotate(-3deg)}
+:root[data-theme="dark"] .chat-open:hover,:root:not([data-theme="light"]) .chat-open:hover{background:#151d27}
+body.chat-on .chat-open{display:none}
+.chat-tip{position:fixed;z-index:59;right:clamp(14px,3vw,28px);bottom:calc(clamp(14px,3vw,28px) + 74px);width:min(272px,calc(100vw - 32px));
+  background:var(--surface);color:var(--ink-2);border:1px solid var(--line);border-left:2px solid var(--brass);border-radius:3px;
+  box-shadow:var(--shadow);padding:13px 32px 13px 14px;font-size:13.5px;line-height:1.5;text-align:left;cursor:pointer;animation:tipIn .4s ease-out}
+.chat-tip[hidden]{display:none}
+.chat-tip strong{color:var(--ink);font-weight:600}
+.chat-tip-x{position:absolute;top:4px;right:4px;border:0;background:none;color:var(--muted);cursor:pointer;padding:6px;line-height:0}
+.chat-tip-x:hover{color:var(--ink)}
+@keyframes tipIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.chat{position:fixed;right:clamp(14px,3vw,28px);bottom:clamp(14px,3vw,28px);z-index:61;width:min(420px,calc(100vw - 28px));
+  max-height:min(660px,calc(100vh - 36px));display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);
+  border-radius:4px;box-shadow:var(--shadow);overflow:hidden}
+.chat[hidden]{display:none}
+.chat-h{display:flex;align-items:center;gap:11px;padding:12px 12px 12px 14px;background:var(--band);color:var(--band-ink)}
+.chat-h .av{width:36px;height:36px}
+.chat-t{display:flex;flex-direction:column;gap:2px;flex:1;min-width:0}
+.chat-t strong{font:700 15px/1.2 var(--display);letter-spacing:-.025em}
+.chat-t small{font:500 10.5px/1.35 var(--sans);color:var(--band-2)}
+.chat-x{border:0;background:none;color:var(--band-2);cursor:pointer;padding:7px;line-height:0;border-radius:2px}
+.chat-x:hover{color:var(--band-ink)}
+.chat-log{flex:1;overflow-y:auto;overscroll-behavior:contain;padding:16px 14px;display:flex;flex-direction:column;gap:15px;background:var(--bg)}
+.cb{max-width:100%;font-size:14.5px;line-height:1.6}
+.cb p{margin:0}
+.cb p+p{margin-top:5px}
+.cb.u{align-self:flex-end;max-width:85%;background:var(--band);color:var(--band-ink);border-radius:3px;padding:9px 13px;font-size:14px}
+.cb.a{display:grid;grid-template-columns:30px minmax(0,1fr);gap:10px;align-items:start;color:var(--ink-2)}
+.cb.a .cav{width:30px;height:30px;border-radius:50%;background:var(--band);margin-top:-2px}
+.cb.a>div{min-width:0}
+.cb.w{text-align:center;color:var(--ink-2);padding:2px 4px 0}
+.cb.w img{width:min(190px,62%);height:auto;margin:0 auto 8px;display:block}
+.cb.w .cacts{justify-content:center}
+.cej{margin-top:12px!important;font:600 10.5px/1.3 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.typing{display:inline-flex;gap:5px;align-items:center;height:22px}
+.typing i{width:6px;height:6px;border-radius:50%;background:var(--muted);animation:dot 1.1s infinite ease-in-out}
+.typing i:nth-child(2){animation-delay:.16s}
+.typing i:nth-child(3){animation-delay:.32s}
+@keyframes dot{0%,65%,100%{opacity:.3;transform:translateY(0)}32%{opacity:1;transform:translateY(-3px)}}
+.cb.a strong{color:var(--ink);font-weight:600;font-variant-numeric:lining-nums}
+.cb.a .ai-out{margin-top:11px}
+.chits{list-style:none;margin:11px 0 0;padding:0;display:flex;flex-direction:column;gap:8px}
+.chit{display:block;background:var(--surface);border:1px solid var(--line);border-left:2px solid var(--brass);border-radius:3px;padding:10px 12px;text-decoration:none;color:inherit}
+.chit:hover{border-color:var(--primary);border-left-color:var(--brass)}
+.ch1{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap}
+.ccode{font:600 15px/1 var(--mono);letter-spacing:-.03em;color:var(--ink)}
+.cmeta{font:400 11.5px var(--sans);color:var(--muted)}
+.cq{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;margin-top:5px;font-size:13.5px;line-height:1.5;color:var(--ink-2)}
+.cacts{display:flex;flex-wrap:wrap;gap:7px;margin-top:11px}
+.has-ai [data-ia]{display:none}
+.chat-f{display:flex;gap:8px;padding:11px;border-top:1px solid var(--line);background:var(--surface)}
+.chat-f input{flex:1;min-width:0;border:1px solid var(--line);border-radius:2px;padding:10px 12px;background:var(--bg);font-size:14.5px;outline:none}
+.chat-f input:focus{border-color:var(--primary);box-shadow:0 0 0 3px var(--brass-soft)}
+.chat-s{border:1px solid var(--primary);background:var(--primary);color:var(--on-primary);border-radius:2px;padding:0 15px;cursor:pointer;font:600 10.5px var(--sans);letter-spacing:.14em;text-transform:uppercase}
+.chat-s:hover{opacity:.88}
+.chat-n{padding:0 14px 11px;font-size:10.5px;line-height:1.5;color:var(--muted);background:var(--surface)}
+.rhead{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:10px 16px;margin-bottom:18px}
+.rcount{margin:0;font:400 15px/1.3 var(--sans);color:var(--ink-2)}
+.rcount strong{font:700 23px/1 var(--display);letter-spacing:-.04em;color:var(--ink);font-variant-numeric:lining-nums tabular-nums;margin-right:3px}
+.sortl{display:inline-flex;align-items:baseline;gap:10px;color:var(--muted)}
+select{appearance:none;border:0;border-bottom:1px solid var(--line);background:transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='9' height='5'%3E%3Cpath d='M.5.5l4 4 4-4' fill='none' stroke='%238C6A2C' stroke-width='1.2'/%3E%3C/svg%3E") no-repeat right 2px center;border-radius:0;padding:4px 18px 4px 0;font:500 14px var(--sans);letter-spacing:0;text-transform:none;color:var(--ink);cursor:pointer}
+select option{background:var(--surface);color:var(--ink)}
+.active{flex-basis:100%;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.active:empty{display:none}
+.achip{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--surface);border-radius:2px;padding:4px 8px 4px 11px;font-size:13px;cursor:pointer;color:var(--ink-2)}
+.achip:hover{border-color:var(--primary);color:var(--ink)}
+.achip svg{color:var(--muted)}
+.clear{border:0;background:none;color:var(--brass);font:600 12.5px var(--sans);cursor:pointer;padding:4px}
+
+.list{background:var(--surface);border:1px solid var(--line);border-radius:3px;box-shadow:var(--shadow)}
+.item{display:grid;grid-template-columns:104px minmax(0,1fr) auto;gap:10px 32px;padding:26px 30px;border-top:1px solid var(--line-2)}
+.item:first-child{border-top:0}
+.num{display:flex;flex-direction:column;gap:4px}
+.num .caps{color:var(--muted);font-size:9.5px}
+.num a{font:600 22px/1 var(--mono);text-decoration:none;font-variant-numeric:lining-nums;color:var(--ink);letter-spacing:-.03em}
+.num a:hover{color:var(--brass)}
+.num time{font:400 12.5px/1.3 var(--sans);color:var(--muted);margin-top:3px}
+.kicker{margin:0 0 8px;display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 10px;color:var(--muted)}
+.tlink{border:0;background:none;padding:0;cursor:pointer;color:var(--brass);font:inherit;letter-spacing:inherit;text-transform:inherit;border-bottom:1px solid transparent}
+.tlink:hover{border-bottom-color:currentColor}
+.kicker .sep{color:var(--line)}
+.q{margin:0;font:400 17px/1.6 var(--sans);letter-spacing:-.012em;max-width:68ch;text-wrap:pretty;overflow-wrap:break-word;color:var(--ink)}
+.foot{display:flex;flex-wrap:wrap;gap:4px 18px;align-items:center;margin:12px 0 0;font-size:13px;color:var(--muted)}
+.ofi{color:var(--ink-2);font:500 12.5px var(--mono);font-variant-numeric:lining-nums tabular-nums;letter-spacing:-.02em}
+.concl{font:500 13px var(--sans);color:var(--ink-2)}
+.marco{display:inline-flex;align-items:center;gap:7px}
+.marco::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--mc)}
+.warn{display:inline-flex;flex-wrap:wrap;gap:4px 8px;align-items:baseline;margin-top:12px;background:var(--warn-soft);color:var(--warn);border-left:2px solid var(--warn);padding:5px 10px;font-size:13px;line-height:1.4}
+.warn a{font-weight:600;text-underline-offset:3px}
+.acts{display:flex;flex-direction:column;align-items:flex-end;gap:10px;padding-top:4px}
+.btn{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--primary);color:var(--primary);background:transparent;text-decoration:none;font:600 10.5px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;padding:10px 14px;border-radius:2px;white-space:nowrap;transition:background .2s,color .2s}
+.btn:hover{background:var(--primary);color:var(--on-primary)}
+.norms{display:flex;gap:6px;align-items:baseline;font:500 13px var(--sans);color:var(--muted)}
+.norms a{color:var(--ink-2);text-decoration:none;border-bottom:1px solid var(--line)}
+.norms a:hover{color:var(--brass);border-bottom-color:currentColor}
+.plink{font:500 13px var(--sans);color:var(--ink-2);text-decoration:none;border-bottom:1px solid var(--line);white-space:nowrap}
+.plink:hover{color:var(--brass);border-bottom-color:currentColor}
+.auto{font:400 12.5px var(--sans);color:var(--muted);border-bottom:1px dotted var(--line);cursor:help}
+.gasunto{margin:8px 0 0;max-width:64ch;font:400 15px/1.5 var(--sans);color:var(--ink-2)}
+.more{display:flex;justify-content:center;padding-top:22px}
+.more:empty{display:none}
+.more button{border:1px solid var(--primary);background:none;border-radius:2px;padding:11px 18px;cursor:pointer;font:600 10.5px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--primary)}
+.more button:hover{background:var(--primary);color:var(--on-primary)}
+.more span{margin-left:8px;font:500 12.5px var(--sans);letter-spacing:0;text-transform:none;opacity:.85}
+mark{background:var(--mark);color:inherit;padding:0 1px}
+
+/* grouped view */
+.group{border-top:1px solid var(--line)}
+.group:first-child{border-top:0}
+.ghead{display:flex;flex-wrap:wrap;align-items:flex-end;gap:10px 22px;padding:26px 30px 14px}
+.gtitle{display:flex;flex-direction:column;gap:4px;flex:1 1 auto;min-width:0}
+.gtitle .caps{color:var(--muted);font-size:9.5px}
+.gcode{font:600 25px/1 var(--mono);letter-spacing:-.04em;font-variant-numeric:lining-nums}
+.gcode span{font:500 15px var(--mono);color:var(--muted);margin-left:2px}
+.ginfo{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 18px;margin-top:6px;font-size:13px;color:var(--muted)}
+.ginfo time{font:400 13px var(--sans)}
+.ghead .acts{flex-direction:row;align-items:center;gap:16px;padding:0}
+.gitems{list-style:none;margin:0 30px;padding:0 0 12px;border-top:1px solid var(--line-2)}
+.gitems li{padding:16px 0;border-top:1px solid var(--line-2);display:grid;grid-template-columns:30px minmax(0,1fr);gap:4px 12px}
+.gitems li:first-child{border-top:0}
+.gitems .ix{font:600 13px/1.7 var(--mono);color:var(--brass);font-variant-numeric:lining-nums}
+.gitems .q{font-size:16.5px}
+.gitems .kicker{margin:8px 0 0}
+
+.empty{padding:64px 24px;text-align:center;color:var(--ink-2)}
+.empty p{margin:0 0 16px;font:500 19px/1.4 var(--sans);letter-spacing:-.02em}
+.empty button{border:1px solid var(--primary);background:none;border-radius:2px;padding:10px 16px;cursor:pointer;font:600 10.5px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--primary)}
+
+/* ---------- Footer ---------- */
+footer{background:var(--band);color:var(--band-2);border-top:1px solid var(--band-accent)}
+footer .wrap{display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr;gap:32px 44px;padding-block:48px 56px;font-size:13.5px;line-height:1.6}
+footer h4{margin:0 0 12px;color:var(--band-accent)}
+footer p{margin:0 0 10px}
+footer ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:12px}
+footer li strong,footer p strong{color:var(--band-ink);font-weight:500}
+footer a{color:var(--band-ink);text-decoration:none;border-bottom:1px solid var(--band-line)}
+footer a:hover{color:var(--band-accent);border-bottom-color:currentColor}
+.sig{font:700 21px/1.2 var(--display);letter-spacing:-.03em;color:var(--band-ink);margin:0 0 16px}
+
+.sig-link{display:inline-flex;gap:8px;align-items:center;font:600 10.5px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--band-accent)!important;border:1px solid var(--band-accent)!important;padding:10px 14px;border-radius:2px}
+.sig-link:hover{background:var(--band-accent);color:var(--band)!important}
+
+/* ---------- Responsive ---------- */
+@media (max-width:1020px){
+  .mhero{grid-template-columns:1fr;gap:34px;padding-block:34px 30px}
+  .layout{grid-template-columns:1fr;gap:0;padding-block:22px 56px}
+  .btn-filters{display:inline-flex}
+  .filters{display:none;position:static;max-height:none;overflow:visible;padding:22px;margin-bottom:22px;background:var(--surface);border:1px solid var(--line);border-radius:3px}
+  body.show-filters .filters{display:flex}
+  .close-filters{display:block;border:1px solid var(--primary);background:var(--primary);color:var(--on-primary);border-radius:2px;padding:12px;cursor:pointer;font:600 10.5px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase}
+  footer .wrap{grid-template-columns:1fr 1fr}
+}
+@media (max-width:640px){
+  .topline{flex-direction:column;align-items:flex-start}
+  .facts{display:grid;grid-template-columns:1fr 1fr;gap:18px 0}
+  .facts div{padding:0 0 0 16px;margin:0;border-right:0;border-left:1px solid var(--band-line)}
+  .facts dd{font-size:32px}
+  .lede{font-size:16px}
+  .item{grid-template-columns:minmax(0,1fr);gap:12px;padding:22px 18px}
+  .num{flex-direction:row;flex-wrap:wrap;align-items:baseline;gap:4px 10px}
+  .num .caps{display:none}
+  .num a{font-size:24px}
+  .acts{flex-direction:row;flex-wrap:wrap;align-items:center;justify-content:flex-start;gap:16px}
+  .q{font-size:18px}
+  .ghead{padding:22px 18px 12px}
+  .gitems{margin:0 18px}
+  .gitems li{grid-template-columns:22px minmax(0,1fr)}
+  .search kbd{display:none}
+  .search{gap:9px;padding:0 10px}
+  .chat{right:8px;left:8px;bottom:8px;width:auto;max-height:calc(100dvh - 16px)}
+  .chat-open{right:12px;bottom:12px}
+  .ctrls{flex:1 1 100%;justify-content:space-between}
+  footer .wrap{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation-duration:.001ms!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="mk" viewBox="0 0 48 48"><circle cx="24" cy="24" r="20.4" fill="none" stroke="currentColor" stroke-width="3.2" stroke-dasharray="93.8 34.4" stroke-linecap="round" transform="rotate(50 24 24)"/><rect x="14.6" y="15.4" width="16" height="3.2" rx="1.6" style="fill:currentColor;opacity:.55"/><rect x="14.6" y="22.4" width="29.5" height="3.2" rx="1.6" style="fill:var(--band-accent)"/><rect x="14.6" y="29.4" width="11" height="3.2" rx="1.6" style="fill:currentColor;opacity:.55"/></symbol></svg>
+<header class="mast">
+  <div class="wrap">
+    <div class="topline">
+      <div class="brand"><svg class="mark" aria-hidden="true"><use href="#mk"/></svg><span class="brand-copy"><strong class="caps" style="font-size:10.5px;letter-spacing:.16em;color:var(--band-accent)">Bitácora</strong><small><span id="inst">OECE</span> · Dirección Técnico Normativa · <span id="yr">2026</span></small></span></div>
+      <p class="byline" style="margin:0">Elaborado por <strong>J. Rodolfo Mercado Pajares</strong><a href="{{LINKEDIN}}" target="_blank" rel="noopener">LinkedIn ↗</a></p>
+    </div>
+    <div class="mhero">
+      <div>
+        <h1>Bitácora <em>de</em> Opiniones</h1>
+        <p class="lede">Las consultas absueltas por <span id="linst">el OECE</span> <span id="lyr">en 2026</span>, ordenadas por etapa de la contratación, tema y marco normativo. Busque el supuesto que le interesa y abra la opinión oficial.</p>
+        <button type="button" class="hero-ask" id="heroAsk"><img class="av" src="{{AVATAR}}" alt="" width="38" height="38"><span><b>Pregúntele a CriterIA</b><small>Cuéntele su caso y le dice qué opiniones lo tratan</small></span></button>
+        <dl class="facts" id="facts"></dl>
+      </div>
+      <figure class="months" id="months">
+        <figcaption><span class="caps" id="mtitle">Opiniones por año</span><span id="mhint">Seleccione un año para filtrar</span></figcaption>
+        <div class="mbars" id="mbars"></div>
+        <div class="mlabs" id="mlabs"></div>
+      </figure>
+    </div>
+  </div>
+</header>
+
+<div class="bar">
+  <div class="wrap">
+    <label class="search" for="q">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      <span class="sr">Buscar</span>
+      <input id="q" type="search" placeholder="Buscar un supuesto, un tema o una opinión (D092)…" autocomplete="off" spellcheck="false">
+      <button class="xq" id="xq" type="button" aria-label="Borrar búsqueda" hidden><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      <kbd>/</kbd>
+    </label>
+    <div class="ctrls">
+      <button class="btn-filters" id="btnFilters" type="button" aria-expanded="false" aria-controls="filters">Filtros <span class="n" id="fn" hidden></span></button>
+      <div class="tabs" role="group" aria-label="Vista">
+        <button type="button" data-view="consultas" aria-pressed="true">Consultas</button>
+        <button type="button" data-view="opiniones" aria-pressed="false">Por opinión</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<main class="wrap layout">
+  <aside class="filters" id="filters" aria-label="Filtros">
+    <section class="facet">
+      <h3 class="caps">Año</h3>
+      <ul class="opts" id="f-anio"></ul>
+    </section>
+    <section class="facet">
+      <h3 class="caps">Etapa</h3>
+      <ul class="opts" id="f-etapa"></ul>
+    </section>
+    <section class="facet">
+      <h3 class="caps">Marco normativo</h3>
+      <ul class="opts" id="f-marco"></ul>
+    </section>
+    <section class="facet">
+      <h3 class="caps">Categoría <button type="button" data-clear="cats" hidden>quitar</button></h3>
+      <ul class="opts" id="f-cat"></ul>
+    </section>
+    <section class="facet">
+      <h3 class="caps">Tema <button type="button" data-clear="temas" hidden>quitar</button></h3>
+      <label for="tq" class="sr">Filtrar la lista de temas</label>
+      <input class="tsearch" id="tq" type="text" placeholder="Filtrar temas…" autocomplete="off">
+      <div id="f-tema"></div>
+    </section>
+    <button type="button" class="close-filters" id="closeFilters">Ver resultados</button>
+  </aside>
+
+  <section aria-label="Resultados">
+    <div class="rhead">
+      <p class="rcount" id="rcount" role="status" tabindex="-1"></p>
+      <label class="sortl caps" for="sort">Ordenar
+        <select id="sort">
+          <option value="desc">Más recientes</option>
+          <option value="asc">Más antiguas</option>
+          <option value="tema">Por tema</option>
+        </select>
+      </label>
+      <div class="active" id="active"></div>
+    </div>
+    <div class="list" id="list"></div>
+    <div class="more" id="more"></div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <div class="brand" style="margin-bottom:22px"><svg class="mark" aria-hidden="true"><use href="#mk"/></svg><span class="brand-copy"><strong>Bitácora de Opiniones</strong></span></div>
+      <h4 class="caps">Elaborado por</h4>
+      <p class="sig">J. Rodolfo Mercado Pajares</p>
+      <a class="sig-link" href="{{LINKEDIN}}" target="_blank" rel="noopener">Ver perfil en LinkedIn ↗</a>
+    </div>
+    <div>
+      <h4 class="caps">Sobre este índice</h4>
+      <p>Índice de las opiniones de la Dirección Técnico Normativa del OSCE y del OECE, elaborado con información pública de gob.pe y actualizado al <span id="upd"></span>.</p>
+      <p>Cada ficha enlaza al PDF de la opinión y a su página en gob.pe. Este índice orienta la búsqueda y no reemplaza la lectura íntegra de la opinión.</p>
+    </div>
+    <div>
+      <h4 class="caps">Marco normativo</h4>
+      <ul id="normlist"></ul>
+    </div>
+    <div>
+      <h4 class="caps">Cómo leer las fichas</h4>
+      <p><strong>N.°</strong>: número oficial completo, para citar la opinión; en la lista se usa la forma corta (D092).</p>
+      <p><strong>Conclusión</strong>: la conclusión de la opinión que absuelve ese supuesto.</p>
+      <p><strong>Fecha</strong>: la de la opinión, según su página en gob.pe.</p>
+      <p><strong>Clasificación automática</strong>: en las opiniones que no figuran en la bitácora (2023 a 2025 y las más recientes), la etapa, la categoría y el tema se asignan a partir del texto de la opinión; son referenciales.</p>
+      <p><strong>Aviso ámbar</strong>: el enlace registrado abre una opinión con otro número; conviene confirmarla.</p>
+    </div>
+  </div>
+</footer>
+
+<div class="chat-tip" id="chatTip" hidden role="button" tabindex="0">¿Busca una opinión de la DTN? <strong>Pregúntele a CriterIA</strong>: cuéntele su caso y le dice cuál lo trata.<button class="chat-tip-x" id="chatTipX" type="button" aria-label="Cerrar el aviso"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+<button class="chat-open" id="chatOpen" type="button" aria-expanded="false" aria-controls="chat"><img class="av" src="{{AVATAR}}" alt="" width="44" height="44"><span><b>Pregúntele a CriterIA</b><small>¿Qué opinión trata su caso?</small></span></button>
+<section class="chat" id="chat" hidden aria-label="CriterIA, el consultor de la bitácora">
+  <header class="chat-h"><img class="av" src="{{AVATAR}}" alt="" width="36" height="36"><span class="chat-t"><strong>CriterIA</strong><small>Le digo qué opiniones tratan su caso</small></span>
+    <button class="chat-x" id="chatClose" type="button" aria-label="Cerrar CriterIA"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  </header>
+  <div class="chat-log" id="chatLog" role="log" aria-live="polite"></div>
+  <form class="chat-f" id="chatForm">
+    <label class="sr" for="chatQ">Escriba su consulta</label>
+    <input id="chatQ" type="text" autocomplete="off" placeholder="¿Se puede ampliar el plazo por lluvias?">
+    <button class="chat-s" type="submit">Enviar</button>
+  </form>
+  <p class="chat-n">CriterIA busca entre las consultas absueltas por la DTN y las ordena por pertinencia. No sustituye la lectura de la opinión oficial.</p>
+</section>
+
+<script type="application/json" id="data">{{DATA}}</script>
+<script>
+(function(){
+"use strict";
+var D=JSON.parse(document.getElementById("data").textContent);
+var ROWS=D.rows, CAT={}, CAT_ORDER=[], TEMA=D.temas;
+D.cats.forEach(function(c){CAT[c[0]]=c[1];CAT_ORDER.push(c[0]);});
+var MARCO={
+  "32069":{short:"Ley 32069",name:"Ley N.° 32069, Ley General de Contrataciones Públicas",sub:"Reglamento: D.S. N.° 009-2025-EF · vigentes desde el 22.04.2025",leyT:"Ley 32069"},
+  "30225":{short:"Ley 30225",name:"Ley N.° 30225, modificada por el D.L. N.° 1444",sub:"Reglamento: D.S. N.° 344-2018-EF · vigentes desde el 30.01.2019",leyT:"Ley 30225 y modificatorias"},
+  "1017":{short:"D.L. 1017",name:"D.L. N.° 1017, Ley de Contrataciones del Estado",sub:"Reglamento: D.S. N.° 184-2008-EF y modificatorias",leyT:"D.L. 1017"}
+};
+/* Los enlaces a la ley y al reglamento vienen del Excel (columnas I y J), que los actualiza cada quincena.
+   La columna del reglamento de la Ley 30225 apunta al TUO (D.S. 082-2019-EF): se rotula "TUO". */
+function alDia(u){var m=/hasta-el-(\d{2})-(\d{2})-(\d{4})/.exec(u||"");return m?" (texto al "+m[1]+"."+m[2]+"."+m[3]+")":"";}
+Object.keys(MARCO).forEach(function(k){
+  var M=MARCO[k],L=(D.normas||{})[k]||{},tuo=/082[-_]?2019/i.test(L.reg||"");M.links=[];
+  if(L.ley)M.links.push({u:L.ley,l:"Ley",t:M.leyT+alDia(L.ley)});
+  if(L.reg)M.links.push({u:L.reg,l:tuo?"TUO":"Reglamento",t:tuo?"TUO de la "+M.short+" (D.S. 082-2019-EF)":"Reglamento"+alDia(L.reg)});
+});
+var GRUPO={obras:"Ejecución de obras",seleccion:"Selección, bienes y servicios"};
+var MES=["ene","feb","mar","abr","may","jun","jul","ago","set","oct","nov","dic"];
+var MES_L=["enero","febrero","marzo","abril","mayo","junio","julio","agosto","setiembre","octubre","noviembre","diciembre"];
+
+function norm(s){return s.normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase();}
+function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
+function fdate(f){var p=f.split("-");return (+p[2])+" "+MES[+p[1]-1]+" "+p[0];}
+function concl(k){if(!k.length)return"";return k.length===1?"Conclusión "+k[0]:"Conclusiones "+k.slice(0,-1).join(", ")+" y "+k[k.length-1];}
+/* Número oficial de una opinión del OECE a partir de su forma corta (para el aviso ámbar: r.lk); el de cada fila viene en r.o */
+function ofiD(code,y){return code.charAt(0)+("000000"+parseInt(code.slice(1),10)).slice(-6)+"-"+y+"-OECE-DTN";}
+var ASUNTO=D.asuntos||{};
+
+ROWS.forEach(function(r){
+  r.num=parseInt(r.op.replace(/\D/g,""),10);
+  r.key=r.y+"-"+r.s+"-"+r.op; /* la numeración se reinicia cada año; en 2025 hay una serie del OSCE y otra del OECE */
+  r.so=r.s==="OSCE"?0:1;
+  r.mes=r.f.slice(0,7);
+  var d=r.op.charAt(0)==="D"?" #d"+r.num+"# #d"+r.num+"-"+r.y+"# #d"+r.num+"-"+r.y+"-"+r.s.toLowerCase()+"#":"";
+  r.hay=norm([r.q,ASUNTO[r.key]||"",TEMA[r.t],CAT[r.c],GRUPO[r.g],MARCO[r.m].short,r.s,r.op,r.op+"-"+r.y,r.o].join(" "))+" #n"+r.num+"-"+r.y+"#"+d;
+});
+function byNum(x,y){return (x.y-y.y)||(x.so-y.so)||(x.num-y.num);}
+
+var PAGE_I=60,PAGE_G=25; /* los resultados se muestran por tandas: la lista completa pesa en los teléfonos */
+var S={q:"",ask:"",anio:null,etapa:"all",marco:null,cats:new Set(),temas:new Set(),mes:null,view:"consultas",sort:"desc",tq:"",lim:0};
+try{var sv=localStorage.getItem("bitacora-vista");if(sv==="opiniones"||sv==="consultas")S.view=sv;}catch(e){}
+
+/* Buscan la opinión exacta: "D092", "d92", "D092-2026", "D000010-2025-OSCE-DTN", "045-2024/DTN" o el número oficial
+   pegado tal cual ("Opinión N.° D000092-2026-OECE-DTN"); con un número de opinión se ignoran "opinión" y "N.°" */
+var CODE_D=/^d0*(\d{1,6})(?:-(\d{4}))?(?:-(oece|osce))?(?:-dtn)?$/,CODE_N=/^0*(\d{1,3})-(\d{4})\/dtn$/;
+var NOISE={"opinion":1,"n":1,"n.":1,"n°":1,"n.°":1,"nº":1,"n.º":1,"no":1,"nro":1,"nro.":1};
+function tokens(){
+  var code=false,ts=norm(S.q).split(/\s+/).filter(Boolean).map(function(t){
+    var c=t.replace(/^[(«"“']+|[)»"”'.,;:]+$/g,""),m=c.match(CODE_D);
+    if(m){code=true;return "#d"+parseInt(m[1],10)+(m[2]?"-"+m[2]+(m[3]?"-"+m[3]:""):"")+"#";}
+    m=c.match(CODE_N);
+    if(m){code=true;return "#n"+parseInt(m[1],10)+"-"+m[2]+"#";}
+    return t;});
+  return code?ts.filter(function(t){return !NOISE[t];}):ts;
+}
+var TK=[];
+function pass(r,skip){
+  if(skip!=="anio"&&S.anio&&r.y!==S.anio)return false;
+  if(skip!=="etapa"&&S.etapa!=="all"&&r.g!==S.etapa)return false;
+  if(skip!=="marco"&&S.marco&&r.m!==S.marco)return false;
+  if(skip!=="cats"&&S.cats.size&&!S.cats.has(r.c))return false;
+  if(skip!=="temas"&&S.temas.size&&!S.temas.has(r.t))return false;
+  if(skip!=="mes"&&S.mes&&r.mes!==S.mes)return false;
+  if(S.ask&&!(r.sc>0))return false;
+  for(var i=0;i<TK.length;i++){if(r.hay.indexOf(TK[i])<0)return false;}
+  return true;
+}
+function count(skip,key){var o={};ROWS.forEach(function(r){if(pass(r,skip)){o[r[key]]=(o[r[key]]||0)+1;}});return o;}
+
+function hl(text){
+  var ts=S.ask?AHL:TK.filter(function(t){return t.charAt(0)!=="#"&&t.length>1;});
+  if(!ts.length)return esc(text);
+  var n="",map=[];
+  for(var i=0;i<text.length;i++){var c=norm(text[i]);for(var j=0;j<c.length;j++){n+=c[j];map.push(i);}}
+  var marks=new Array(text.length).fill(false);
+  ts.forEach(function(t){var p=n.indexOf(t);while(p>=0){for(var k=p;k<p+t.length;k++)marks[map[k]]=true;p=n.indexOf(t,p+1);}});
+  var out="",open=false;
+  for(var i2=0;i2<text.length;i2++){
+    if(marks[i2]&&!open){out+="<mark>";open=true;}
+    if(!marks[i2]&&open){out+="</mark>";open=false;}
+    out+=esc(text[i2]);
+  }
+  if(open)out+="</mark>";
+  return out;
+}
+
+/* ---------- header ---------- */
+/* una fila por opinión; se prefiere la que enlaza a su propio PDF (fecha correcta) */
+var ops={};ROWS.forEach(function(r){if(!ops[r.key]||(ops[r.key].lk&&!r.lk))ops[r.key]=r;});
+var nOps=Object.keys(ops).length,nTemas=Object.keys(count("x","t")).length;
+var YRS=Object.keys(ROWS.reduce(function(o,r){o[r.y]=1;return o;},{})).sort();
+var INST=["OSCE","OECE"].filter(function(s){return ROWS.some(function(r){return r.s===s;});});
+if(YRS.length){
+  document.getElementById("yr").textContent=YRS.length>1?YRS[0]+"–"+YRS[YRS.length-1]:YRS[0];
+  document.getElementById("lyr").textContent=YRS.length>1?"entre "+YRS[0]+" y "+YRS[YRS.length-1]:"en "+YRS[0];
+  document.getElementById("inst").textContent=INST.join(" · ");
+  document.getElementById("linst").textContent=INST.length>1?"el OSCE y el OECE":"el "+INST[0];
+}
+var updP=D.updated.split("-");
+document.getElementById("upd").textContent=(+updP[2])+" de "+MES_L[+updP[1]-1]+" de "+updP[0];
+document.getElementById("facts").innerHTML=
+  [[nOps,"Opiniones"],[ROWS.length,"Consultas"],[nTemas,"Temas"],[(+updP[2])+" "+MES[+updP[1]-1],"Actualizada"]]
+  .map(function(f){return '<div><dt class="caps">'+f[1]+'</dt><dd>'+f[0]+'</dd></div>';}).join("");
+
+/* Gráfico de la cabecera: opiniones por año; al elegir un año, por mes de ese año */
+var byY={},byM={};Object.keys(ops).forEach(function(k){var r=ops[k];byY[r.y]=(byY[r.y]||0)+1;byM[r.mes]=(byM[r.mes]||0)+1;});
+var mbars=document.getElementById("mbars"),mlabs=document.getElementById("mlabs"),chartYear;
+function renderChart(){
+  var y=S.anio,cnt=y?byM:byY,ks=y?Object.keys(byM).filter(function(m){return m.slice(0,4)===y;}).sort():YRS.slice();
+  var max=Math.max.apply(null,ks.map(function(k){return cnt[k];}));
+  mbars.style.setProperty("--n",ks.length);mlabs.style.setProperty("--n",ks.length);
+  mbars.innerHTML=ks.map(function(k){var lab=y?MES_L[+k.slice(5)-1]+" de "+y:"año "+k;
+    return '<button type="button" class="mbar" '+(y?'data-mes':'data-anio')+'="'+k+'" aria-pressed="false" aria-label="'+lab+': '+cnt[k]+(cnt[k]===1?' opinión':' opiniones')+'"><span class="v">'+cnt[k]+'</span><span class="c" style="--h:'+(cnt[k]/max).toFixed(3)+'"></span></button>';}).join("");
+  mlabs.innerHTML=ks.map(function(k){return "<span>"+(y?MES[+k.slice(5)-1]:k)+"</span>";}).join("");
+  document.getElementById("mtitle").textContent=y?"Opiniones por mes · "+y:"Opiniones por año";
+  document.getElementById("mhint").innerHTML=y?'<button type="button" id="allYears">Ver todos los años</button>':"Seleccione un año para filtrar";
+  chartYear=y;
+}
+function setAnio(y){S.anio=y||null;if(S.mes&&S.mes.slice(0,4)!==S.anio)S.mes=null;}
+document.getElementById("months").addEventListener("click",function(e){
+  var b=e.target.closest(".mbar,#allYears");if(!b)return;
+  var had=document.activeElement===b,prev=S.anio;
+  if(b.id==="allYears")setAnio(null);else if(b.dataset.anio)setAnio(b.dataset.anio);else S.mes=S.mes===b.dataset.mes?null:b.dataset.mes;
+  render();
+  /* las barras cambian al pasar de años a meses: quien usa el teclado sigue en el gráfico */
+  if(had){var f=b.id==="allYears"?mbars.querySelector('[data-anio="'+prev+'"]'):b.dataset.anio?mbars.firstElementChild:b;if(f)f.focus();}
+});
+
+document.getElementById("normlist").innerHTML=["32069","30225","1017"].map(function(k){var M=MARCO[k];
+  var ls=M.links.map(function(l){return '<a href="'+esc(l.u)+'" target="_blank" rel="noopener">'+esc(l.t)+'</a>';}).join("<br>");
+  return "<li><strong>"+esc(M.name)+"</strong><br>"+esc(M.sub)+(ls?"<br>"+ls:"")+"</li>";}).join("");
+
+/* ---------- facets ---------- */
+var fAnio=document.getElementById("f-anio"),fEtapa=document.getElementById("f-etapa"),fMarco=document.getElementById("f-marco"),fCat=document.getElementById("f-cat"),fTema=document.getElementById("f-tema");
+function opt(cls,pressed,label,cnt,data,extra){
+  return '<li><button type="button" class="opt '+cls+(cnt?"":" zero")+'" aria-pressed="'+pressed+'" '+data+'><span class="box"></span><span class="lab"><span>'+label+'</span>'+(extra||"")+'</span><span class="cnt">'+cnt+'</span></button></li>';
+}
+var TEMA_TOTAL={},TEMA_G={};ROWS.forEach(function(r){TEMA_TOTAL[r.t]=(TEMA_TOTAL[r.t]||0)+1;TEMA_G[r.t]=r.g;});
+var maxT=Math.max.apply(null,Object.keys(TEMA_TOTAL).map(function(k){return TEMA_TOTAL[k];}));
+
+function renderFacets(){
+  var ca=count("anio","y"),ta=0;Object.keys(ca).forEach(function(k){ta+=ca[k];});
+  fAnio.innerHTML=[["","Todos los años",ta]].concat(YRS.slice().reverse().map(function(y){return [y,y,ca[y]||0];}))
+    .map(function(a){return opt("radio",(S.anio||"")===a[0],a[1],a[2],'data-anio="'+a[0]+'"');}).join("");
+  var ce=count("etapa","g"),tot=0;Object.keys(ce).forEach(function(k){tot+=ce[k];});
+  fEtapa.innerHTML=[["all","Todas las etapas",tot],["obras",GRUPO.obras,ce.obras||0],["seleccion",GRUPO.seleccion,ce.seleccion||0]]
+    .map(function(e){return opt("radio",S.etapa===e[0],e[1],e[2],'data-etapa="'+e[0]+'"');}).join("");
+  var cm=count("marco","m");
+  fMarco.innerHTML=["32069","30225","1017"].map(function(k){
+    return opt("radio",S.marco===k,'<span class="dot" style="background:var(--m'+k+')"></span>'+esc(MARCO[k].short),cm[k]||0,'data-marco="'+k+'"');}).join("");
+  var cc=count("cats","c");
+  fCat.innerHTML=CAT_ORDER.filter(function(k){return ROWS.some(function(r){return r.c===k;});})
+    .map(function(k){return opt("",S.cats.has(k),esc(CAT[k]),cc[k]||0,'data-cat="'+esc(k)+'"');}).join("");
+  var ct=count("temas","t"),tq=norm(S.tq),html="";
+  ["obras","seleccion"].forEach(function(g){
+    var ks=Object.keys(TEMA_TOTAL).filter(function(k){return TEMA_G[k]===g&&(!tq||norm(TEMA[k]).indexOf(tq)>=0);})
+      .sort(function(a,b){return (ct[b]||0)-(ct[a]||0)||TEMA_TOTAL[b]-TEMA_TOTAL[a]||TEMA[a].localeCompare(TEMA[b],"es");});
+    if(!ks.length)return;
+    html+='<p class="tgroup">'+GRUPO[g]+'</p><ul class="opts">'+ks.map(function(k){var c=ct[k]||0;
+      return opt("",S.temas.has(k),esc(TEMA[k]),c,'data-tema="'+esc(k)+'"','<span class="meter"><i style="width:'+(c/maxT*100).toFixed(1)+'%"></i></span>');}).join("")+'</ul>';
+  });
+  fTema.innerHTML=html||'<p class="tgroup">Ningún tema coincide.</p>';
+  document.querySelector('[data-clear="cats"]').hidden=!S.cats.size;
+  document.querySelector('[data-clear="temas"]').hidden=!S.temas.size;
+}
+document.getElementById("filters").addEventListener("click",function(e){
+  var b=e.target.closest("button");if(!b)return;
+  var had=document.activeElement===b,again;
+  if(b.dataset.anio!==undefined){setAnio(b.dataset.anio);again=sel("anio",b.dataset.anio);}
+  else if(b.dataset.etapa){S.etapa=b.dataset.etapa;again=sel("etapa",b.dataset.etapa);}
+  else if(b.dataset.marco){S.marco=S.marco===b.dataset.marco?null:b.dataset.marco;again=sel("marco",b.dataset.marco);}
+  else if(b.dataset.cat){toggle(S.cats,b.dataset.cat);again=sel("cat",b.dataset.cat);}
+  else if(b.dataset.tema){toggle(S.temas,b.dataset.tema);again=sel("tema",b.dataset.tema);}
+  else if(b.dataset.clear){S[b.dataset.clear].clear();again=b.dataset.clear==="cats"?"#f-cat .opt":"#f-tema .opt";}
+  else if(b.id==="closeFilters"){setFilters(false);document.getElementById("list").scrollIntoView({block:"start"});return;}
+  else return;
+  render();
+  /* las opciones se vuelven a pintar: quien usa el teclado conserva su lugar */
+  if(had){var el=document.querySelector(again);if(el)el.focus({preventScroll:true});}
+});
+function sel(k,v){return '[data-'+k+'="'+CSS.escape(v)+'"]';}
+function toggle(set,v){if(set.has(v))set.delete(v);else set.add(v);}
+document.getElementById("tq").addEventListener("input",function(e){S.tq=e.target.value;renderFacets();});
+
+
+/* ---------- consultor: preguntar en lenguaje natural ---------- */
+/* Ordena las consultas por pertinencia (BM25 con sinónimos del rubro). Todo ocurre en la página:
+   no se envía la pregunta a ningún servidor. La capa de IA, si el visor la permite, es aparte. */
+var STOP={},SYN={},PHR=[],IDX=null,AVAC=[],AHL=[],SAMPLE=null,AIC=null;
+("a al algo alguna algunas alguno algunos ante antes aquel aquella aquello asi aun aunque cada casi como con contra cual cuales cualquier cuando cuanta cuantas cuanto cuantos cuyo cuya de del demas desde donde dos e el ella ellas ello ellos en entonces entre era eran eres es esa esas ese eso esos esta estas este esto estos estan estar fue fueron ha habia han hasta hay la las le les lo los mas mediante menos me mi mientras misma mismo mucho muchos muy nos nuestra nuestro no o os otra otras otro otros para pero poco por porque pues que quien quienes se sea segun ser si sido siendo sin sino sobre solo son su sus tal tales tambien tan tanto te tiene tienen toda todas todo todos tras un una unas uno unos y ya "+
+ "puede pueden podria podrian pudiera debe deben deberia debera deberan corresponde corresponden procede proceden existe existen cabe caben resulta necesito quiero busco buscar decir dice dicen habla hablan trata tratan tratan sirve saber conocer favor hola gracias pregunta preguntar cuestion consultar duda ayuda ayudame dime muestrame quisiera desea pregunto "+
+ "opinion opiniones dtn osce oece entidad forma manera caso casos supuesto supuestos tema temas parte partes lugar vez veces ahora luego despues antes")
+ .split(" ").forEach(function(w){STOP[w]=1;});
+
+/* Sinónimos y variantes del rubro: acercan la pregunta al vocabulario de las opiniones. */
+[ "ampliacion prorroga ampliar prorrogar extension",
+  "penalidad multa mora penalizar",
+  "sancion inhabilitacion impedimento impedido prohibicion",
+  "adelanto anticipo adelantos amortizacion",
+  "adicional adicionales deductivo reduccion metrado",
+  "valorizacion metrado avance pago pagar",
+  "liquidacion cierre saldo",
+  "resolucion resolver resuelto",
+  "nulidad nulo anular invalidez",
+  "garantia fianza retencion fideicomiso",
+  "supervisor supervision inspector inspeccion",
+  "contratista ejecutor proveedor contratado",
+  "postor participante oferente",
+  "oferta propuesta cotizacion",
+  "adjudicacion otorgamiento",
+  "arbitraje arbitral conciliacion controversia disputa jrd jprd",
+  "consorcio consorciado integrante",
+  "subcontratacion subcontrato subcontratar",
+  "obra construccion edificacion",
+  "bien bienes suministro",
+  "servicio consultoria",
+  "recepcion conformidad entrega",
+  "cuaderno anotacion incidencia",
+  "residente personal plantel profesional",
+  "suspension paralizacion paralizar",
+  "reajuste polinomica indice",
+  "igv tributo impuesto detraccion",
+  "rnp registro proveedor",
+  "seace pladicop plataforma",
+  "referencial estimado presupuesto costo precio",
+  "modificacion adenda modificar variacion",
+  "cesion ceder",
+  "vicio oculto defecto",
+  "desierto declaratoria",
+  "emergencia catastrofe desastre",
+  "licitacion concurso subasta seleccion",
+  "comite oec",
+  "bases integracion observacion",
+  "lluvia clima climatico pluvial",
+  "retraso atraso demora injustificado",
+  "plazo dia dias calendario cronograma",
+  "expediente tecnico",
+  "catalogo marco perucompras",
+  "perfeccionamiento suscripcion firma",
+  "gasto general improductivo",
+  "ejecucion contractual",
+  "terreno predio saneamiento",
+  "presupuesto financiamiento certificacion",
+  "requisito calificacion experiencia factor",
+  "aprueba aprueban aprobar aprobacion aprobado",
+  "otorga otorgan otorgar otorgamiento otorgado",
+  "suscribe suscriben suscribir suscripcion",
+  "presenta presentan presentar presentacion",
+  "declara declaran declarar declaratoria",
+  "notifica notificar notificacion",
+  "autoriza autorizar autorizacion",
+  "acredita acreditar acreditacion",
+  "subsana subsanar subsanacion",
+  "absuelve absolver absolucion",
+  "cumple cumplir cumplimiento",
+  "incumple incumplir incumplimiento",
+  "inicia iniciar inicio",
+  "suspende suspender suspension",
+  "valoriza valorizar valorizacion",
+  "liquida liquidar liquidacion",
+  "devuelve devolver devolucion",
+  "computa computar computo",
+  "aplica aplicar aplicacion",
+  "ejecuta ejecutar ejecucion",
+  "contrata contratar contratacion",
+  "recibe recibir recepcion",
+  "calcula calcular calculo",
+  "exige exigir exigencia"
+].forEach(function(g){var ws=g.split(" ");
+  ws.forEach(function(w){SYN[w]=(SYN[w]||[]).concat(ws.filter(function(x){return x!==w;}));});});
+
+/* Frases: si la pregunta las contiene, pesan más que sus palabras sueltas. */
+[ "ampliacion de plazo","ampliacion excepcional","adelanto directo","adelanto para materiales","carta fianza",
+  "fiel cumplimiento","buena pro","valor referencial","valor estimado","expediente tecnico","cuaderno de obra",
+  "prestacion adicional","mayores metrados","formula polinomica","contratacion directa","acuerdo marco",
+  "catalogo electronico","resolucion de contrato","resolucion contractual","nulidad de oficio","vicios ocultos",
+  "gastos generales","liquidacion de obra","recepcion de obra","comite de seleccion","subasta inversa",
+  "adjudicacion simplificada","concurso publico","licitacion publica","penalidad por mora","suspension del plazo",
+  "intervencion economica","saldo de obra","residente de obra","fiscalizacion posterior","pago anticipado",
+  "cesion de posicion contractual","junta de resolucion de disputas","registro de participantes",
+  "sustitucion de personal","obligaciones esenciales","personal clave","prestaciones adicionales",
+  "contrato menor","contrataciones menores","fast track","llave en mano","concurso oferta","diseno y construccion",
+  "consulta al expediente","modificacion contractual","perfeccionamiento del contrato","declaratoria de desierto"
+].forEach(function(f){PHR.push(f);});
+Object.keys(TEMA).forEach(function(k){var t=norm(TEMA[k]).replace(/ · .*/,"");if(t.split(" ").length>1&&PHR.indexOf(t)<0)PHR.push(t);});
+
+var IRR={meses:"mes",bienes:"bien",paises:"pais",intereses:"interes"};
+function st(w){
+  if(IRR[w])return IRR[w];
+  if(w.length>4&&/ces$/.test(w))return w.slice(0,-3)+"z";
+  if(w.length>4&&/(des|nes|res|les|yes)$/.test(w))return w.slice(0,-2);
+  if(w.length>3&&/s$/.test(w))return w.slice(0,-1);
+  return w;
+}
+function bag(text,into,w){
+  var ws=norm(text||"").split(/[^a-z0-9]+/),n=0;
+  for(var i=0;i<ws.length;i++){
+    var x=ws[i];if(x.length<3||STOP[x])continue;
+    var t=st(x);if(STOP[t])continue;
+    into[t]=(into[t]||0)+w;n++;
+  }
+  return n;
+}
+function buildIndex(){
+  if(IDX)return;
+  var df={},tot=0;
+  ROWS.forEach(function(r){
+    var tf={},n=0;
+    n+=bag(r.q,tf,1);
+    n+=bag(ASUNTO[r.key]||"",tf,.9);
+    bag(TEMA[r.t]+" "+CAT[r.c]+" "+GRUPO[r.g],tf,2);
+    bag(r.y+" "+MARCO[r.m].short,tf,1.2);
+    r.tf=tf;r.dl=n||1;r.txt=norm(r.q+" "+(ASUNTO[r.key]||"")+" "+TEMA[r.t]+" "+CAT[r.c]);
+    tot+=r.dl;
+    Object.keys(tf).forEach(function(t){df[t]=(df[t]||0)+1;});
+  });
+  IDX={df:df,n:ROWS.length,avg:tot/ROWS.length};
+}
+/* Cada palabra de la pregunta es un concepto: ella misma y sus variantes. De un concepto
+   cuenta su mejor coincidencia, no cuántas variantes aparezcan. */
+function qconc(q){
+  var raw=norm(q).split(/[^a-z0-9]+/),seen={},out=[];
+  raw.forEach(function(x){
+    if(x.length<3||STOP[x])return;
+    var t=st(x);if(STOP[t]||seen[t])return;seen[t]=1;out.push({p:t,o:x,ms:[{t:t,w:1}]});
+  });
+  out.forEach(function(c){
+    (SYN[c.p]||SYN[c.o]||[]).forEach(function(y){var u=st(y);if(seen[u])return;seen[u]=1;c.ms.push({t:u,w:.6});});
+  });
+  return out;
+}
+/* Puntúa cada consulta frente a la pregunta y se queda con lo pertinente. */
+function askNow(q){
+  S.ask=q;buildIndex();if(AIC){AIC.abort();AIC=null;}
+  var N=IDX.n,cs=qconc(q),mass=0;AVAC=[];
+  cs.forEach(function(c){
+    c.ms=c.ms.filter(function(m){var d=IDX.df[m.t]||0;if(!d||d>N*.5)return false;m.i=Math.log(1+(N-d+.5)/(d+.5));return true;});
+    /* si la palabra preguntada no existe en la bitácora, su variante es la única evidencia: vale casi igual */
+    if(!IDX.df[c.p])c.ms.forEach(function(m){m.w=.9;});
+    c.i=0;c.ms.forEach(function(m){if(m.w*m.i>c.i)c.i=m.w*m.i;});
+    if(!c.ms.length&&!IDX.df[c.p])AVAC.push(c.o);   /* palabras que no aparecen en ninguna consulta */
+    mass+=c.i;
+  });
+  cs=cs.filter(function(c){return c.ms.length;});
+  mass=mass||1;
+  AHL=cs.map(function(c){return c.p;}).filter(function(t){return t.length>3&&IDX.df[t];});
+  var nq=norm(q),fr=[];
+  PHR.forEach(function(f){
+    if(nq.indexOf(f)<0)return;
+    var d=0;ROWS.forEach(function(r){if(r.txt.indexOf(f)>=0)d++;});
+    if(d)fr.push({f:f,i:Math.log(1+(N-d+.5)/(d+.5))});
+  });
+  var max=0;
+  ROWS.forEach(function(r){
+    var sc=0,cob=0;
+    cs.forEach(function(c){
+      var best=0;
+      c.ms.forEach(function(m){
+        var tf=r.tf[m.t];if(!tf)return;
+        var v=m.w*Math.pow(m.i,1.5)*(tf*2.2)/(tf+1.2*(.35+.65*r.dl/IDX.avg));
+        if(v>best)best=v;
+      });
+      if(best){sc+=best;cob+=c.i;}
+    });
+    /* pesa cuánto de lo preguntado cubre la consulta, no cuántas palabras coinciden */
+    if(sc)sc*=(.3+.7*cob/mass);
+    fr.forEach(function(x){if(r.txt.indexOf(x.f)>=0)sc+=1.8*x.i;});
+    r.sc=sc;if(sc>max)max=sc;
+  });
+  var cut=max*.33,keep=[];
+  ROWS.forEach(function(r){if(r.sc<cut)r.sc=0;else keep.push(r);});
+  if(keep.length>120){ /* con preguntas muy generales, nos quedamos con lo mejor */
+    keep.sort(function(a,b){return b.sc-a.sc;});
+    keep.slice(120).forEach(function(r){r.sc=0;});
+  }
+  S.sort="rel";
+}
+function askOff(){S.ask="";AVAC=[];AHL=[];if(AIC){AIC.abort();AIC=null;}if(S.sort==="rel")S.sort="desc";ROWS.forEach(function(r){r.sc=0;});}
+function syncSort(){
+  var sel=document.getElementById("sort"),o=sel.querySelector('[value="rel"]');
+  if(S.ask&&!o)sel.insertAdjacentHTML("afterbegin",'<option value="rel">Más pertinentes</option>');
+  if(!S.ask&&o)o.remove();
+  sel.value=S.sort;
+}
+var EJEMPLOS=["ampliación de plazo por lluvias","penalidad por mora en un servicio","adelanto directo en una obra","impedimentos para contratar"];
+/* Temas más parecidos a la pregunta, para cuando no hay coincidencias. */
+function temasCercanos(){
+  var ws=qconc(S.ask).map(function(c){return c.p;});
+  return Object.keys(TEMA).map(function(k){
+    var t=norm(TEMA[k]),sc=0;ws.forEach(function(w){if(t.indexOf(w.slice(0,5))>=0)sc++;});
+    return {k:k,sc:sc,n:TEMA_TOTAL[k]||0};
+  }).filter(function(x){return x.n;}).sort(function(a,b){return b.sc-a.sc||b.n-a.n;}).slice(0,4).map(function(x){return x.k;});
+}
+
+/* ---------- results ---------- */
+function sorted(list){
+  var a=list.slice();
+  if(S.sort==="rel")a.sort(function(x,y){return (y.sc-x.sc)||byNum(y,x)||x.n-y.n;});
+  else if(S.sort==="asc")a.sort(function(x,y){return byNum(x,y)||x.n-y.n;});
+  else if(S.sort==="tema")a.sort(function(x,y){return TEMA[x.t].localeCompare(TEMA[y.t],"es")||byNum(y,x)||x.n-y.n;});
+  else a.sort(function(x,y){return byNum(y,x)||x.n-y.n;});
+  return a;
+}
+function normsLinks(m){var ls=MARCO[m].links;if(!ls.length)return"";
+  return '<span class="norms">'+ls.map(function(l){return '<a href="'+esc(l.u)+'" target="_blank" rel="noopener" title="'+esc(l.t)+'">'+l.l+'</a>';}).join("·")+'</span>';}
+function marcoTag(m){return '<span class="marco" style="--mc:var(--m'+m+')" title="'+esc(MARCO[m].name)+'">'+MARCO[m].short+'</span>';}
+function kicker(r){return '<p class="kicker caps"><button type="button" class="tlink" data-go-tema="'+esc(r.t)+'" title="Ver todas las consultas de este tema">'+esc(TEMA[r.t])+'</button><span class="sep">/</span><span>'+esc(CAT[r.c])+'</span></p>';}
+function foot(r,full){
+  var parts=[];
+  if(full)parts.push('<span class="ofi" title="Número oficial de la opinión">N.° '+esc(r.o)+'</span>');
+  if(r.k.length)parts.push('<span class="concl" title="Conclusión de la opinión que absuelve este supuesto">'+concl(r.k)+'</span>');
+  if(full)parts.push(marcoTag(r.m));
+  if(r.src==="g")parts.push('<span class="auto" title="Etapa, categoría y tema asignados automáticamente a partir del texto de la opinión; son referenciales">clasificación automática</span>');
+  return parts.length?'<p class="foot">'+parts.join("")+'</p>':"";
+}
+function warnHTML(r){return r.lk?'<div class="warn">Este enlace abre la Opinión '+esc(r.lk)+'. <a href="'+esc(r.u)+'" target="_blank" rel="noopener">Revisar</a></div>':"";}
+var ARROW='<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>';
+/* el PDF y la página de gob.pe son los de la opinión que abre el enlace (r.lk si no coincide con la fila) */
+function pdfBtn(r){return '<a class="btn" href="'+esc(r.u)+'" target="_blank" rel="noopener" aria-label="Ver la Opinión N.° '+esc(r.lk?ofiD(r.lk,r.y):r.o)+' en PDF">Ver opinión '+ARROW+'</a>';}
+function pageLink(r){return r.h?'<a class="plink" href="'+esc(r.h)+'" target="_blank" rel="noopener" title="Publicación oficial de la opinión en gob.pe">Página en gob.pe</a>':"";}
+
+function itemHTML(r){
+  return '<article class="item"><div class="num"><span class="caps">'+r.s+'</span><a href="'+esc(r.u)+'" target="_blank" rel="noopener" title="Opinión N.° '+esc(r.o)+'">'+esc(r.op)+'</a><time datetime="'+r.f+'">'+fdate(r.f)+'</time></div>'+
+    '<div>'+kicker(r)+'<p class="q">'+hl(r.q)+'</p>'+foot(r,true)+warnHTML(r)+'</div>'+
+    '<div class="acts">'+pdfBtn(r)+pageLink(r)+normsLinks(r.m)+'</div></article>';
+}
+function groupHTML(g){
+  var main=g.rows.filter(function(r){return !r.lk;})[0]||g.rows[0],o=main.o,cut=o.indexOf("-"),a=ASUNTO[main.key];
+  return '<section class="group"><div class="ghead"><div class="gtitle"><span class="caps">Opinión N.°</span><span class="gcode">'+esc(o.slice(0,cut))+'<span>'+esc(o.slice(cut))+'</span></span>'+
+    '<span class="ginfo"><span>'+main.s+'</span><time datetime="'+main.f+'">'+fdate(main.f)+'</time>'+marcoTag(main.m)+'<span>'+g.rows.length+(g.rows.length===1?" consulta":" consultas")+'</span></span>'+
+    (a?'<p class="gasunto">'+hl(a)+'</p>':'')+'</div>'+
+    '<span class="acts">'+normsLinks(main.m)+pageLink(main)+pdfBtn(main)+'</span></div>'+
+    '<ol class="gitems">'+g.rows.map(function(r,i){return '<li><span class="ix">'+(i+1)+'</span><div><p class="q">'+hl(r.q)+'</p>'+kicker(r)+foot(r,false)+warnHTML(r)+'</div></li>';}).join("")+'</ol></section>';
+}
+
+var list=document.getElementById("list"),more=document.getElementById("more");
+function render(keep){
+  if(!keep)S.lim=0;
+  TK=S.ask?[]:tokens();
+  var res=sorted(ROWS.filter(function(r){return pass(r);}));
+  var nOp=new Set(res.map(function(r){return r.key;})).size;
+  syncSort();
+  document.getElementById("rcount").innerHTML="<strong>"+res.length+"</strong> "+(res.length===1?"consulta":"consultas")+" en <strong>"+nOp+"</strong> "+(nOp===1?"opinión":"opiniones");
+  if(!res.length){
+    list.innerHTML='<div class="empty"><p>Ninguna consulta coincide'+(S.q&&!S.ask?" con «"+esc(S.q)+"»":"")+'.</p><button type="button" id="reset">Quitar '+(S.ask?"la consulta":"búsqueda")+' y filtros</button></div>';
+  }else if(S.view==="opiniones"){
+    var gs=[],idx={};
+    res.forEach(function(r){if(!(r.key in idx)){idx[r.key]=gs.length;gs.push({rows:[]});}gs[idx[r.key]].rows.push(r);});
+    if(S.sort==="tema"){gs.sort(function(a,b){return byNum(b.rows[0],a.rows[0]);});}
+    gs.forEach(function(g){g.rows.sort(function(a,b){return a.n-b.n;});});
+    S.lim=S.lim||PAGE_G;
+    list.innerHTML=gs.slice(0,S.lim).map(groupHTML).join("");
+    moreBtn(gs.length,"opiniones");
+  }else{
+    S.lim=S.lim||PAGE_I;
+    list.innerHTML=res.slice(0,S.lim).map(itemHTML).join("");
+    moreBtn(res.length,"consultas");
+  }
+  if(!res.length)more.innerHTML="";
+  renderFacets();renderActive();
+  if(chartYear!==S.anio)renderChart();
+  Array.prototype.forEach.call(mbars.children,function(b){
+    b.setAttribute("aria-pressed",String(S.mes===b.dataset.mes));
+    b.classList.toggle("dim",!!S.mes&&S.mes!==b.dataset.mes);});
+  document.querySelectorAll("[data-view]").forEach(function(b){b.setAttribute("aria-pressed",String(S.view===b.dataset.view));});
+  document.getElementById("xq").hidden=!S.q;
+}
+function moreBtn(total,unit){
+  var n=total-S.lim;
+  more.innerHTML=n>0?'<button type="button" id="moreBtn">Mostrar más<span>quedan '+n+' '+(n===1?(unit==="opiniones"?"opinión":"consulta"):unit)+'</span></button>':"";
+}
+more.addEventListener("click",function(e){
+  var b=e.target.closest("#moreBtn");if(!b)return;
+  var had=document.activeElement===b,from=list.children.length;
+  S.lim+=S.view==="opiniones"?PAGE_G:PAGE_I;render(true);
+  if(had){var f=list.children[from];f=f&&f.querySelector("a,button");if(f)f.focus();}
+});
+function nActive(){return (S.anio?1:0)+(S.etapa!=="all"?1:0)+(S.marco?1:0)+S.cats.size+S.temas.size+(S.mes?1:0);}
+var X='<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>';
+function renderActive(){
+  var c=[];
+  if(S.ask)c.push(["ask","","Consulta: «"+(S.ask.length>46?S.ask.slice(0,44)+"…":S.ask)+"»"]);
+  if(S.anio)c.push(["anio","","Año "+S.anio]);
+  if(S.etapa!=="all")c.push(["etapa","",GRUPO[S.etapa]]);
+  if(S.marco)c.push(["marco","",MARCO[S.marco].short]);
+  if(S.mes)c.push(["mes","",MES_L[+S.mes.slice(5)-1]+" "+S.mes.slice(0,4)]);
+  S.cats.forEach(function(k){c.push(["cats",k,CAT[k]]);});
+  S.temas.forEach(function(k){c.push(["temas",k,TEMA[k]]);});
+  var n=nActive(),fn=document.getElementById("fn");fn.hidden=!n;fn.textContent=n;
+  document.getElementById("active").innerHTML=c.map(function(x){
+    return '<button type="button" class="achip" data-rm="'+x[0]+'" data-v="'+esc(x[1])+'" aria-label="Quitar filtro '+esc(x[2])+'">'+esc(x[2])+X+'</button>';}).join("")+
+    (c.length>1?'<button type="button" class="clear" data-rm="all">limpiar filtros</button>':"");
+}
+function resetAll(){S.q="";askOff();document.getElementById("q").value="";S.anio=null;S.etapa="all";S.marco=null;S.mes=null;S.cats.clear();S.temas.clear();}
+document.getElementById("active").addEventListener("click",function(e){
+  var b=e.target.closest("[data-rm]");if(!b)return;var k=b.dataset.rm;
+  var had=document.activeElement===b,i=Array.prototype.indexOf.call(this.children,b);
+  if(k==="all"){var q=S.q;resetAll();S.q=q;document.getElementById("q").value=q;}
+  else if(k==="ask")askOff();
+  else if(k==="anio")setAnio(null);else if(k==="etapa")S.etapa="all";else if(k==="marco")S.marco=null;else if(k==="mes")S.mes=null;
+  else S[k].delete(b.dataset.v);
+  render();
+  if(had){var cs=this.querySelectorAll(".achip");(cs[Math.min(i,cs.length-1)]||rc).focus({preventScroll:true});}
+});
+var rc=document.getElementById("rcount");
+list.addEventListener("click",function(e){
+  var t=e.target.closest("[data-go-tema]");
+  if(t){S.temas=new Set([t.dataset.goTema]);render();document.querySelector(".rhead").scrollIntoView({block:"nearest"});rc.focus({preventScroll:true});return;}
+  if(e.target.id==="reset"){var had=document.activeElement===e.target;resetAll();render();if(had)qi.focus();}
+});
+
+/* ---------- toolbar ---------- */
+var qi=document.getElementById("q"),timer;
+qi.addEventListener("input",function(){clearTimeout(timer);timer=setTimeout(function(){S.q=qi.value.trim();render();},120);});
+qi.addEventListener("keydown",function(e){if(e.key==="Escape"){qi.value="";S.q="";render();}});
+document.getElementById("xq").addEventListener("click",function(){qi.value="";S.q="";render();qi.focus();});
+document.addEventListener("keydown",function(e){
+  if(e.key==="/"&&!e.ctrlKey&&!e.metaKey&&!e.altKey&&!/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)){e.preventDefault();qi.focus();}
+  else if(e.key==="Escape"&&!chatEl.hidden){chAbrir(false);}
+  else if(e.key==="Escape"&&e.target!==qi&&document.body.classList.contains("show-filters")){setFilters(false);bf.focus();}
+});
+document.querySelectorAll("[data-view]").forEach(function(b){b.addEventListener("click",function(){
+  S.view=b.dataset.view;try{localStorage.setItem("bitacora-vista",S.view);}catch(e){}render();});});
+document.getElementById("sort").addEventListener("change",function(e){S.sort=e.target.value;render();});
+var bf=document.getElementById("btnFilters");
+function setFilters(on){document.body.classList.toggle("show-filters",on);bf.setAttribute("aria-expanded",String(on));}
+bf.addEventListener("click",function(){setFilters(!document.body.classList.contains("show-filters"));});
+
+/* ---------- consultor: el chat de CriterIA ---------- */
+/* Es la única puerta para preguntar en lenguaje natural. Cada pregunta ordena la página por
+   pertinencia (S.ask, que se ve como un filtro más) y responde en la conversación. */
+var chatEl=document.getElementById("chat"),chatLog=document.getElementById("chatLog"),
+    chatQ=document.getElementById("chatQ"),chatBtn=document.getElementById("chatOpen"),chatTip=document.getElementById("chatTip");
+var AVATAR="{{AVATAR}}",MASCOTA="{{MASCOTA}}",CH=[],AIOK=false,pensando=null;
+
+function aiHTML(m,i){
+  return '<div class="ai-out">'+(m.ai.t||"Leyendo las consultas…")+'</div>'+
+    (m.ai.st==="run"?'<div class="cacts"><button type="button" class="lnk" data-parar="'+i+'">Detener</button></div>':"")+
+    (m.ai.t?'<small class="ai-note">Redactado con IA a partir del texto de estas consultas. La bitácora no guarda las conclusiones de la DTN: para saber qué se respondió, abra la opinión.</small>':"");
+}
+function chDraw(abajo){
+  var cerca=chatLog.scrollHeight-chatLog.scrollTop-chatLog.clientHeight<90;
+  chatLog.innerHTML=CH.map(function(m,i){
+    var c=m.h+(m.ai?aiHTML(m,i):"")+(m.tail||"");
+    if(m.w==="a")c='<img class="cav" src="'+AVATAR+'" alt="CriterIA">'+"<div>"+c+"</div>";
+    return '<div class="cb '+m.w+(m.ai?" has-ai":"")+'" data-i="'+i+'">'+c+'</div>';}).join("");
+  if(abajo||cerca)chatLog.scrollTop=chatLog.scrollHeight;
+}
+function chPush(w,h,tail){CH.push({w:w,h:h,tail:tail||"",ai:null});chDraw(true);}
+/* Los puntitos: la búsqueda es instantánea, pero leer la respuesta de golpe se siente brusco. */
+function chPensar(on){
+  if(on){if(pensando!==null)return;pensando=CH.length;
+    CH.push({w:"a",h:'<span class="typing" aria-label="CriterIA está buscando"><i></i><i></i><i></i></span>',tail:"",ai:null});chDraw(true);}
+  else if(pensando!==null){CH.splice(pensando,1);pensando=null;}
+}
+function chAbrir(on){
+  chatEl.hidden=!on;document.body.classList.toggle("chat-on",on);chatBtn.setAttribute("aria-expanded",String(on));
+  if(on){
+    tipFuera();
+    if(!CH.length)chPush("w",'<img src="'+MASCOTA+'" alt="">'+
+      "<p><strong>¡Hola! Soy CriterIA.</strong></p><p>Cuénteme su caso en una línea y le digo qué opiniones de la DTN hablan de eso.</p>",
+      '<p class="cej">Por ejemplo</p><div class="cacts">'+EJEMPLOS.map(function(q){return chip("ej",q,q);}).join("")+'</div>');
+    chatQ.focus();
+  }else chatBtn.focus();
+}
+function chVer(){chAbrir(false);document.querySelector(".rhead").scrollIntoView({block:"start",behavior:"smooth"});rc.focus({preventScroll:true});}
+function chip(d,v,txt){return '<button type="button" class="chip" data-'+d+'="'+esc(v)+'">'+esc(txt)+'</button>';}
+
+/* Con un número de opinión no hace falta pertinencia: se busca tal cual en la página. */
+function esCodigo(t){return norm(t).split(/\s+/).some(function(w){
+  var c=w.replace(/^[(«"“']+|[)»"”'.,;:]+$/g,"");return CODE_D.test(c)||CODE_N.test(c);});}
+function chLimpio(){S.q="";qi.value="";S.anio=null;S.etapa="all";S.marco=null;S.mes=null;S.cats.clear();S.temas.clear();}
+
+function chPreguntar(t){
+  t=(t||"").trim();if(!t)return;
+  chatQ.value="";chPush("u",esc(t));chPensar(true);
+  setTimeout(function(){chPensar(false);chResolver(t);},420);
+}
+function chResolver(t){
+  if(esCodigo(t)){
+    askOff();chLimpio();S.q=t;qi.value=t;render();
+    var n=new Set(ROWS.filter(function(r){return pass(r);}).map(function(r){return r.key;})).size;
+    chPush("a",n?"<p>Ese es el número de una opinión: se lo dejé en el buscador de la página.</p>":"<p>No encontré ninguna opinión con ese número. Revise el año y la serie (OSCE u OECE).</p>",
+      n?'<div class="cacts">'+chip("ver","1","Verla")+'</div>':"");
+    return;
+  }
+  if(norm(t).replace(/[^a-z0-9]+/g," ").trim().length<4){
+    chPush("a","<p>Cuénteme un poco más: un supuesto, un tema o unas palabras clave.</p>");return;}
+  chLimpio();askNow(t);render();chResponder("");
+}
+function chResponder(pref){
+  var res=sorted(ROWS.filter(function(r){return pass(r);}));
+  var falta=AVAC.length?"<p>Eso sí: la bitácora no registra "+AVAC.map(function(w){return "«"+esc(w)+"»";}).join(", ")+".</p>":"";
+  if(!res.length){
+    chPush("a","<p>No encontré consultas sobre eso.</p>"+falta+"<p>Pruebe con otras palabras. ¿Le sirve alguno de estos temas?</p>",
+      '<div class="cacts">'+temasCercanos().map(function(k){return chip("tema",k,TEMA[k]);}).join("")+'</div>');
+    return;
+  }
+  var nOp=new Set(res.map(function(r){return r.key;})).size,vis={},top=[];
+  res.slice().sort(function(a,b){return b.sc-a.sc;}).forEach(function(r){if(top.length<4&&!vis[r.key]){vis[r.key]=1;top.push(r);}});
+  var h="<p>"+(pref||"")+"Encontré <strong>"+nOp+"</strong> "+(nOp===1?"opinión":"opiniones")+" sobre eso"+
+    (nOp>top.length?". Estas son las que más se parecen a su caso:":(nOp===1?". Es esta:":". Son estas:"))+"</p>"+falta;
+  var tail='<ul class="chits">'+top.map(function(r){
+    return '<li><a class="chit" href="'+esc(r.u)+'" target="_blank" rel="noopener">'+
+      '<span class="ch1"><span class="ccode">'+esc(r.op)+'</span><span class="cmeta">'+fdate(r.f)+" · "+esc(TEMA[r.t])+'</span></span>'+
+      '<span class="cq">'+esc(r.q)+'</span></a></li>';}).join("")+'</ul>';
+  var i=CH.length,acc=[chip("ver","1",nOp>top.length?"Ver las "+nOp+" en la página":"Verla en la página")];
+  var g={},mk={};res.forEach(function(r){g[r.g]=1;mk[r.m]=1;});
+  if(S.etapa==="all"&&g.obras&&g.seleccion){acc.push(chip("ref","obras","Solo obras"));acc.push(chip("ref","seleccion","Solo bienes y servicios"));}
+  if(!S.marco&&Object.keys(mk).length>1)["32069","30225","1017"].forEach(function(k){if(mk[k])acc.push(chip("ref",k,"Solo "+MARCO[k].short));});
+  if(SAMPLE&&!AIOK)acc.unshift(chip("ia",String(i),"Explíquemelo"));
+  chPush("a",h,tail+'<div class="cacts">'+acc.join("")+'</div>');
+  if(SAMPLE&&AIOK)explicar(i);
+}
+function chRefinar(v){
+  chPensar(true);
+  setTimeout(function(){
+    chPensar(false);
+    if(v==="obras"||v==="seleccion")S.etapa=v;else S.marco=v;
+    render();
+    chResponder(v==="obras"?"Solo en obras: ":v==="seleccion"?"Solo en bienes y servicios: ":"Con la "+MARCO[v].short+": ");
+  },260);
+}
+chatBtn.addEventListener("click",function(){chAbrir(true);});
+document.getElementById("heroAsk").addEventListener("click",function(){chAbrir(true);});
+document.getElementById("chatClose").addEventListener("click",function(){chAbrir(false);});
+document.getElementById("chatForm").addEventListener("submit",function(e){e.preventDefault();chPreguntar(chatQ.value);});
+chatLog.addEventListener("click",function(e){
+  var b=e.target.closest("button");if(!b)return;var d=b.dataset;
+  if(d.ej!==undefined)chPreguntar(d.ej);
+  else if(d.tema!==undefined){askOff();chLimpio();S.temas=new Set([d.tema]);render();
+    chPush("a","<p>Listo: le dejé filtrado el tema <strong>"+esc(TEMA[d.tema])+"</strong> en la página.</p>",
+      '<div class="cacts">'+chip("ver","1","Ver en la página")+'</div>');}
+  else if(d.ref!==undefined)chRefinar(d.ref);
+  else if(d.ver!==undefined)chVer();
+  else if(d.ia!==undefined)explicar(+d.ia);
+  else if(d.parar!==undefined){if(AIC){AIC.abort();AIC=null;}var m=CH[+d.parar];if(m){m.ai=null;chDraw();}}
+});
+
+/* Aviso de enganche: una sola vez por navegador, unos segundos después de llegar. */
+function tipFuera(){chatTip.hidden=true;try{localStorage.setItem("bitacora-criteria","1");}catch(e){}}
+(function(){
+  var visto=true;try{visto=!!localStorage.getItem("bitacora-criteria");}catch(e){}
+  if(visto)return;
+  setTimeout(function(){
+    if(!chatEl.hidden)return;
+    chatTip.hidden=false;
+    setTimeout(function(){if(!chatTip.hidden&&chatEl.hidden)chatTip.hidden=true;},16000);
+  },4500);
+})();
+chatTip.addEventListener("click",function(e){if(e.target.closest("#chatTipX")){tipFuera();chatBtn.focus();}else chAbrir(true);});
+chatTip.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();chAbrir(true);}});
+
+/* ---------- explicación con IA (opcional) ---------- */
+/* Solo si el visor la concede. Resume lo que se preguntó en las opiniones halladas; nunca inventa
+   lo que respondió la DTN, porque la bitácora guarda las consultas, no las conclusiones. */
+try{
+  if(window.claude&&claude.use)claude.use("sample").then(function(x){if(x)SAMPLE=x;}).catch(function(){});
+}catch(e){}
+function aiEsc(t){return esc(t).replace(/\*\*(.+?)\*\*/g,"<strong>$1</strong>");}
+function aiPaint(i){
+  var n=chatLog.querySelector('[data-i="'+i+'"] .ai-out');
+  if(!n){chDraw();return;}
+  var cerca=chatLog.scrollHeight-chatLog.scrollTop-chatLog.clientHeight<90;
+  n.innerHTML=CH[i].ai.t||"Leyendo las consultas…";
+  if(cerca)chatLog.scrollTop=chatLog.scrollHeight;
+}
+function explicar(i){
+  var m=CH[i];if(!SAMPLE||!m||(m.ai&&m.ai.st==="run"))return;
+  var res=sorted(ROWS.filter(function(r){return pass(r);})).slice().sort(function(a,b){return b.sc-a.sc;}).slice(0,8);
+  if(!res.length)return;
+  var ctx=res.map(function(r,k){
+    return (k+1)+") Opinión N.° "+r.o+" ("+fdate(r.f)+"), "+MARCO[r.m].short+", tema: "+TEMA[r.t]+
+      (ASUNTO[r.key]?"\n   Asunto: "+ASUNTO[r.key]:"")+"\n   Consulta absuelta: "+r.q;}).join("\n\n");
+  var pr=["Eres CriterIA, el consultor de la Bitácora de Opiniones de la Dirección Técnico Normativa (OSCE/OECE) del Perú.",
+    "Un usuario consulta: «"+S.ask+"»","",
+    "Consultas más pertinentes de la bitácora:","",ctx,"",
+    "Responde en español del Perú, en 90 palabras como máximo: un párrafo breve y hasta cuatro viñetas «- N.° … : …».",
+    "Reglas estrictas:",
+    "1. Explica QUÉ SE PREGUNTÓ en cada opinión pertinente y cuál se acerca más al caso; di en una frase qué las diferencia.",
+    "2. No afirmes qué respondió o concluyó la DTN: aquí solo está el texto de las consultas, no las conclusiones. Cierra invitando a abrir la opinión más cercana.",
+    "3. Usa únicamente el material anterior. Si nada responde al caso, dilo en una línea.",
+    "4. Cita las opiniones por su número oficial. Sin encabezados, sin negritas salvo el número, sin asesoría legal."].join("\n");
+  m.ai={t:"",st:"run"};AIC=new AbortController();chDraw();
+  SAMPLE(pr,{signal:AIC.signal,modelTier:"default",onText:function(o){m.ai.t=aiEsc(o.text);aiPaint(i);}})
+    .then(function(o){m.ai.t=aiEsc(o.text);m.ai.st="";AIC=null;AIOK=true;chDraw();})
+    .catch(function(e){
+      AIC=null;var c=e&&e.code;
+      if(c==="cancelled")m.ai=null;
+      else if(c==="not_granted"){SAMPLE=null;m.ai=null;}
+      else{m.ai.st="";m.ai.t=c==="rate_limited"?"No pude redactar la explicación ahora; inténtelo en unos minutos.":"No pude redactar la explicación. Las opiniones de arriba siguen ordenadas por pertinencia.";}
+      chDraw();});
+}
+
+render();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,5 @@
+# El proyecto escribe todo con saltos de linea LF: que git no los cambie en Windows
+* text=auto eol=lf
+*.webp binary
+*.xlsx binary
+*.pdf binary

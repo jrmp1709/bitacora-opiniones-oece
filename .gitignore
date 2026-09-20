@@ -1,0 +1,19 @@
+# Excel de origen: no se publica
+data/*.xlsx
+~$*.xlsx
+
+# Versión para el Artifact de claude.ai (la genera build.py; no va a GitHub Pages)
+artifact.html
+
+# Base completa en Excel (la genera build.py) y caché de descargas de gob.pe (scripts/gobpe.py)
+base_opiniones.xlsx
+cache/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Sistema
+.DS_Store
+Thumbs.db
