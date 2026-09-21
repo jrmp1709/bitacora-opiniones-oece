@@ -26,6 +26,8 @@ scripts/actualizar.py    El ciclo de actualización: buscar, validar, regenerar 
 requirements.txt         openpyxl y pypdf
 assets/                  La mascota de CriterIA: criteria-original.webp (la imagen que dio el autor, 1254 px)
                          y sus dos recortes, criteria-avatar.webp (cabeza, 168 px) y criteria-mascota.webp (cuerpo, 380 px).
+                         og.png: la imagen de vista previa al compartir el enlace (1200×627; etiquetas og: en la plantilla).
+                         Dice "+380 opiniones" y "+760 consultas" para no quedar desactualizada con cada opinión nueva.
 data/*.xlsx              Excel de la bitácora. Está en .gitignore y no se sube a GitHub.
 data/gobpe_indice.json   Índice de opiniones de gob.pe (id, URL, año, serie, número)
 data/gobpe.json          Lo extraído de cada opinión: fecha, asunto, consultas, PDF, página
