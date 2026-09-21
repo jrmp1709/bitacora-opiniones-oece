@@ -2,7 +2,8 @@
 """Descarga y extrae las opiniones de la DTN (OSCE / OECE) publicadas en gob.pe.
 
 Uso:
-    python scripts/gobpe.py actualizar            # lo de cada semana: descubrir + descargar + extraer, y cuántas faltan clasificar
+    python scripts/gobpe.py actualizar            # descubrir + descargar + extraer, y cuántas faltan clasificar
+                                                  # (el ciclo completo, sin intervención: scripts/actualizar.py)
     python scripts/gobpe.py descubrir             # nuevas opiniones: primera página de la colección del OECE
     python scripts/gobpe.py descubrir --sitemaps  # todas: recorre los sitemaps de gob.pe (lento, solo la carga inicial)
     python scripts/gobpe.py descargar 2023 2024   # páginas y PDF pendientes de esos años (sin años: todos los del índice)
@@ -33,7 +34,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CACHE = os.path.join(ROOT, "cache")
 INDICE = os.path.join(ROOT, "data", "gobpe_indice.json")
 SALIDA = os.path.join(ROOT, "data", "gobpe.json")
-UA = "BitacoraOpiniones/1.0 (indice publico de opiniones de la DTN; +https://claude.ai/artifact/CmToMKGB5f1CDha4Ff1gTX)"
+UA = "BitacoraOpiniones/1.0 (indice publico de opiniones de la DTN; +https://jrmp1709.github.io/bitacora-opiniones-oece/)"
 COLECCION = "https://www.gob.pe/institucion/oece/colecciones/66839-opiniones-de-la-direccion-tecnico-normativa-oece"
 PAUSA = 1.0  # segundos entre solicitudes
 MESES = {"enero": 1, "febrero": 2, "marzo": 3, "abril": 4, "mayo": 5, "junio": 6, "julio": 7, "agosto": 8,
@@ -174,7 +175,9 @@ def leer_pdf(e, pdf_url):
 
 def descargar(anios):
     indice = cargar_indice()
-    pendientes = [e for e in indice.values() if (not anios or e["anio"] in anios)
+    # lo ya extraído en data/gobpe.json no se vuelve a bajar: en GitHub Actions la caché empieza vacía
+    hechas = json.load(open(SALIDA, encoding="utf-8"))["opiniones"] if os.path.exists(SALIDA) else {}
+    pendientes = [e for e in indice.values() if (not anios or e["anio"] in anios) and clave(e) not in hechas
                   and not os.path.exists(os.path.join(CACHE, "texto", f"{e['id']}.txt"))]
     print(f"Por descargar: {len(pendientes)} opiniones")
     for i, e in enumerate(sorted(pendientes, key=lambda x: x["id"]), 1):
@@ -309,11 +312,14 @@ def marco_probable(texto, e, umbral=2):
 
 def extraer():
     indice = cargar_indice()
+    previas = json.load(open(SALIDA, encoding="utf-8"))["opiniones"] if os.path.exists(SALIDA) else {}
     salida = {}
     for k, e in sorted(indice.items()):
         pag = os.path.join(CACHE, "paginas", f"{e['id']}.json")
         txt = os.path.join(CACHE, "texto", f"{e['id']}.txt")
         if not (os.path.exists(pag) and os.path.exists(txt)):
+            if k in previas:  # sin caché (p. ej. en GitHub Actions): se conserva lo ya extraído
+                salida[k] = previas[k]
             continue
         p = json.load(open(pag, encoding="utf-8"))
         t = limpiar(open(txt, encoding="utf-8").read())
@@ -430,6 +436,7 @@ def actualizar():
     faltan = [k for k in datos if k not in hechas and k not in en_excel]
     print(f"Opiniones nuevas en gob.pe: {nuevas}. Por clasificar: {len(faltan)}"
           f"{' (' + ', '.join(faltan) + ')' if faltan else ''}")
+    return faltan
 
 
 if __name__ == "__main__":

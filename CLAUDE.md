@@ -16,9 +16,15 @@ Sitio web estático (una sola página) para buscar las opiniones que emite la Di
 index.html               Sitio generado. No se edita a mano: se regenera con el script.
 artifact.html            La misma página sin doctype, <head> ni <body>, para el Artifact de claude.ai. En .gitignore.
 base_opiniones.xlsx      Toda la base en una hoja de cálculo (para Excel o Google Sheets). La genera build.py. En .gitignore.
-src/template.html        Plantilla (HTML + CSS + JS en un solo archivo). Placeholders: {{DATA}}, {{LINKEDIN}}
-scripts/build.py         Une el Excel y las opiniones de gob.pe y genera data/opiniones.json, index.html, artifact.html y base_opiniones.xlsx
+src/template.html        Plantilla (HTML + CSS + JS en un solo archivo). Placeholders: {{DATA}}, {{LINKEDIN}}, {{AVATAR}}, {{MASCOTA}}
+scripts/build.py         Une el Excel (o su copia, data/excel.json) y las opiniones de gob.pe y genera data/opiniones.json,
+                         index.html, artifact.html y base_opiniones.xlsx
 scripts/gobpe.py         Descarga, extrae y ayuda a clasificar las opiniones publicadas en gob.pe
+scripts/clasificador.py  Clasificación automática de las consultas nuevas, sin intervención (vecinas más parecidas)
+scripts/validar.py       Validación de referencias de las opiniones nuevas y del sitio generado, antes de publicar
+scripts/actualizar.py    El ciclo completo sin intervención: buscar, clasificar, validar, regenerar y publicar
+.github/workflows/actualizar.yml   Lo corre en GitHub Actions cada 5 días (y cuando cambia el código o el Excel)
+requirements.txt         openpyxl y pypdf
 assets/                  La mascota de CriterIA: criteria-original.webp (la imagen que dio el autor, 1254 px)
                          y sus dos recortes, criteria-avatar.webp (cabeza, 168 px) y criteria-mascota.webp (cuerpo, 380 px).
 data/*.xlsx              Excel de la bitácora. Está en .gitignore y no se sube a GitHub.
@@ -26,6 +32,8 @@ data/gobpe_indice.json   Índice de opiniones de gob.pe (id, URL, año, serie, n
 data/gobpe.json          Lo extraído de cada opinión: fecha, asunto, consultas, PDF, página
 data/clasificacion.json  Etapa/categoría/tema (y marco) de cada consulta de gob.pe
 data/opiniones.json      Datos limpios generados (lo que se incrusta en la página)
+data/excel.json          Lo leído del Excel (filas, enlaces a normas, fecha). Permite regenerar sin el Excel; lo escribe build.py
+data/retenidas.json      Opiniones que no pasaron la validación de referencias: no se publican hasta que pasen
 cache/                   Páginas y texto de los PDF descargados de gob.pe. En .gitignore.
 ```
 
@@ -53,12 +61,22 @@ Requisitos: `pip install openpyxl pypdf` (y `pillow` solo si hay que rehacer los
 
 ### Clasificación automática (`data/clasificacion.json`)
 
-Las consultas de gob.pe se clasifican con la misma taxonomía de la bitácora, leyendo su texto, y el sitio las marca como "clasificación automática". Flujo:
+Las consultas de gob.pe se clasifican con la misma taxonomía de la bitácora y el sitio las marca como "clasificación automática". Hay dos caminos.
+
+**Sin intervención (lo que hace la actualización automática): `scripts/clasificador.py`.** Aprende de lo ya clasificado —las filas del Excel y las consultas de gob.pe revisadas— y a cada consulta nueva le da el tema y la categoría de sus nueve vecinas más parecidas (TF-IDF sobre la consulta y el asunto, que pesa el doble). Reglas encima: si la consulta habla de una obra ("obra", "valorización", "residente", "metrado"), no puede quedar en Bienes y servicios; y la obra se separa por marco (Ley 30225 → "Solo construcción", Ley 32069 → "Solo Constr/Diseño Constr."). Cada consulta guarda su confianza en el campo `auto`; con menos de 0,45 la opinión se lista "por revisar" en el resumen de la ejecución. Precisión medida dejando fuera cada opinión (`python scripts/clasificador.py evaluar`, 21.09.2026): tema 67 %, categoría 72 %; con confianza ≥ 0,45 (tres de cada cuatro consultas) el tema acierta 75 %. El clasificador no aprende de sus propias conjeturas (ignora las entradas con `auto`).
+
+**Revisada (con Claude, cuando se quiera afinar):**
 1. `python scripts/gobpe.py pendientes > cache/pendientes.txt`: lista lo que falta, con los códigos C1… (categorías) y T1… (temas).
 2. Se escribe una línea por opinión: `CLAVE: C?/T? ; C?/T? …` (un par por consulta, en orden). `X` omite un texto que no es consulta; `CLAVE: =C?/T?` muestra la opinión con su asunto cuando el PDF no se leyó bien; al final, `| m=30225,32069,…` fija el marco de cada consulta cuando la pista "m≈" no es correcta.
 3. `python scripts/gobpe.py clasificar archivo.txt` valida los códigos y la cantidad de consultas, y guarda.
 
 Convenciones: obra con Ley 30225 → C6 Solo construcción; obra con Ley 32069 → C8; supervisión/consultoría de obra → C5 (tema T1 para todo lo del contrato de supervisión, como hace la bitácora); diseño y construcción / concurso oferta / llave en mano → C7; expediente técnico → C2; estudios de preinversión → C1; procedimiento de selección → C4; actos preparatorios, valor estimado/referencial, PAC y ámbito de aplicación → C3 (T51 o T6); bienes y servicios → C11; acuerdos marco y compras corporativas → C10 (T46 si no hay un tema más preciso); arbitraje y temas generales de la entidad → C12. Desde el 22.04.2025 conviven la anterior Ley 30225 y la Ley 32069: el marco se fija por consulta. Las consultas sobre contratos del D.L. 1017 (D.S. 184-2008-EF, D.S. 138-2012-EF) van con marco 1017.
+
+### Validación antes de publicar (`scripts/validar.py`)
+
+- **Cada opinión nueva**, contra gob.pe: el título de su página trae el mismo número oficial que su clave; la página y el PDF son de gob.pe y responden, y el PDF es de verdad un PDF (empieza por `%PDF`); si el nombre del PDF trae número y año, son los de la opinión y su prefijo es el id de la página; la fecha existe, no es futura y es del año de la opinión; tiene consultas (o asunto) y una clasificación con códigos válidos; y el marco es coherente con la fecha (no hay consultas sobre la Ley 32069 antes de su publicación, el 24.06.2024; entre su publicación y su vigencia sí las hubo, como la D000014-2025-OSCE-DTN). La que no pasa queda en `data/retenidas.json`, `build.py` no la publica y se vuelve a probar en la siguiente ejecución.
+- **El sitio generado**, sin conexión: campos completos, enlaces de gob.pe, fechas válidas, marcos conocidos, sin duplicados (la misma casuística en dos categorías no es duplicado: el Excel lo hace a propósito, p. ej. D069–D071) y sin placeholders sin reemplazar. Si algo falla, no se publica nada.
+- `python scripts/validar.py todo [--en-linea]` revisa todas las opiniones (en línea es lento: dos solicitudes por opinión, una por segundo).
 
 ### Campos del JSON (`data/opiniones.json`)
 
@@ -96,7 +114,9 @@ Con el Excel del 15.09.2026 se resolvieron cuatro filas:
 
 ## Funciones del sitio (no romper)
 
-- Dos formas de buscar: el **buscador** de la barra, que filtra en vivo por lo que se escribe, y **CriterIA**, el chat flotante donde se describe el caso en lenguaje natural (ver la sección siguiente). Son cosas distintas a propósito y no se mezclan.
+- Dos formas de buscar: el **buscador** de la barra, que filtra en vivo por lo que se escribe, y **CriterIA**, que responde en lenguaje natural desde la portada o desde su chat flotante (ver la sección siguiente). Son cosas distintas a propósito y no se mezclan.
+- **Cobertura, en un solo lugar** (JS, objeto `COB`): desde qué año hay opiniones, el último pronunciamiento incorporado (la consulta con la fecha más reciente) y la fecha de actualización completa. Se usa en la línea superior ("desde 2023"), la bajada, las cifras ("Cobertura desde 2023"), la línea bajo las cifras, el pie y la nota de CriterIA. No se escribe a mano en ningún lado.
+- **Régimen normativo:** cada ficha lleva "Ley N.° 32069 · vigente" (azul) o "Ley N.° 30225 · régimen anterior" / "D.L. N.° 1017 · régimen anterior" (ámbar, con el detalle al pasar el cursor). Encima de los resultados, un aviso dice cuántas opiniones son del régimen anterior y ofrece "Ver solo las de la Ley N.° 32069"; en la vista por opinión, la nota va en la cabecera de cada opinión anterior. El texto es informativo: esos criterios siguen valiendo para los contratos y procedimientos regidos por la norma anterior.
 - Búsqueda insensible a tildes y mayúsculas. Varias palabras funcionan como AND. Buscan la opinión exacta: "D092", "d92", "D092-2026", "D000010-2025-OSCE-DTN", "045-2024/DTN" o el número oficial pegado tal cual ("Opinión N.° D000092-2026-OECE-DTN"); con un número de opinión, las palabras "opinión" y "N.°" se ignoran. También se busca en el asunto de cada opinión. Los términos se resaltan con `<mark>`.
 - Filtros con conteos que se recalculan según los demás filtros: año (radio), etapa (radio), marco normativo (radio), categoría (múltiple), tema (múltiple, con buscador y barras) y mes.
 - Gráfico de la cabecera: opiniones por año; al elegir un año (en el gráfico o en el filtro), opiniones por mes de ese año, con clic en el mes para filtrar y "Ver todos los años" para volver.
@@ -112,7 +132,7 @@ Con el Excel del 15.09.2026 se resolvieron cuatro filas:
 El asistente del sitio se llama **CriterIA** (criterio + IA) y se escribe siempre así, con "IA" en mayúsculas. Tiene mascota: el robot con casco de obra que dio el autor. Vive en un chat flotante y se mantiene **aparte del buscador** para que nadie confunda la búsqueda exacta con la consulta en lenguaje natural.
 
 Dónde se le ve (la idea es que salte a la vista, no que haya que buscarlo):
-- **Portada:** botón "Pregúntele a CriterIA · Cuéntele su caso y le dice qué opiniones lo tratan", debajo de la bajada.
+- **Portada:** un formulario propio, "Pregúntele a CriterIA", debajo de la bajada: campo blanco sobre la banda azul, botón latón "Consultar" y tres ejemplos. Al enviar, se abre el chat con la pregunta ya respondida; no hace falta tocar los filtros.
 - **Botón flotante** abajo a la derecha, con la mascota y el mismo llamado.
 - **Aviso de enganche:** a los 4,5 segundos de llegar aparece una viñeta junto al botón ("¿Busca una opinión de la DTN? Pregúntele a CriterIA…"). Sale **una sola vez por navegador** (`localStorage: bitacora-criteria`), se cierra con la × y desaparece sola a los 16 segundos. Si alguien ya abrió el chat, no vuelve a salir.
 - **En el chat:** la mascota completa encabeza el saludo y su cabeza va como avatar en cada respuesta.
@@ -120,6 +140,10 @@ Dónde se le ve (la idea es que salte a la vista, no que haya que buscarlo):
 Las imágenes se incrustan como `data:` URI (placeholders `{{AVATAR}}` y `{{MASCOTA}}`, que `build.py` rellena desde `assets/`), así el sitio sigue siendo un solo archivo. Suman unos 120 KB.
 
 El tono: usted, frases cortas y directas ("Encontré 34 opiniones sobre eso. Estas son las que más se parecen a su caso:"). Antes de cada respuesta se muestran tres puntitos durante 0,4 s: la búsqueda es instantánea, pero leerla de golpe se siente brusco.
+
+Identidad: el nombre se escribe "Criter" + "IA" en latón (`<span class="ia">`), como en su logo; su avatar va en un círculo con filete latón; la cabecera del chat es la banda azul con el filete latón inferior, como la cabecera del sitio.
+
+Cada opinión que muestra lleva: número oficial (enlazado al PDF), régimen (vigente o anterior), fecha, tema y marco, el texto de la consulta, **"Por qué es pertinente"** (función `porQue`: las frases y palabras de la pregunta que contiene, tal como están escritas en la consulta, y las que coinciden por una variante, p. ej. «pluviales» (por «lluvias»); si solo coincide por su tema, lo dice) y los enlaces "Documento oficial (PDF)" y "Página en gob.pe". El resumen avisa cuántas de las opiniones halladas son del régimen anterior. En la página, mientras hay una consulta, cada ficha muestra la misma línea como "Pertinencia".
 
 Qué hace con cada pregunta (`src/template.html`, bloques "consultor" y "el chat"):
 
@@ -144,15 +168,16 @@ Estilo sobrio y formal, hermanado con el otro sitio del autor, https://radar-nor
 - **Logo:** emblema circular de la misma familia que la marca "radar" del otro sitio: un anillo abierto (`stroke-dasharray`, abertura a la derecha) con tres líneas de un registro dentro; la del medio, en latón, sale por la abertura. Está definido una sola vez como `<symbol id="mk">` al inicio del `<body>` y se reutiliza con `<use href="#mk">` en la cabecera, el pie, el botón de CriterIA y la cabecera del chat (los colores viajan por `currentColor` y `--band-accent`, en `style=` dentro del símbolo, porque el CSS del documento no entra en el `<use>`). El favicon es el mismo dibujo en un `data:` URI: si se cambia el emblema, hay que cambiarlo en el símbolo y en el favicon.
 - Botones con borde fino y esquinas casi rectas (2–3 px), sin rellenos de color vivos. Nada de emojis ni sombras duras.
 - Modo oscuro completo mediante tokens CSS (`prefers-color-scheme` y `[data-theme]`).
-- Colores del marco normativo: 32069 azul `#2C4A7C`, 30225 latón `#8C6A2C`, 1017 vino `#7C2D3B`.
+- Colores del marco normativo: 32069 azul `#2C4A7C`, 30225 latón `#8C6A2C`, 1017 vino `#7C2D3B`. Las alertas de régimen anterior usan el ámbar de aviso (`--warn`); lo vigente, el azul de la 32069.
 
 ## Publicación y actualización
 
 - **La dirección oficial del sitio es la de GitHub Pages** (ver más abajo). También hay una copia como Artifact de claude.ai, https://claude.ai/artifact/CmToMKGB5f1CDha4Ff1gTX, que desde el 21.09.2026 ya no se actualiza sola: quedó con los datos del 19.09.2026 y solo cambia si se republica a mano.
 - Para actualizar el Artifact: correr `python scripts/build.py` y publicar `artifact.html` (no `index.html`) en esa misma URL, con la herramienta Artifact, el parámetro `url` y `capabilities: {sample: {}}` (la capacidad que habilita la explicación con IA; si se omite `capabilities` se conserva la declarada). Desde otra conversación, primero `action: "read"` con esa URL. El servicio agrega su propio doctype, `<head>` y `<body>`, por eso `artifact.html` no los trae.
-- **Actualización automática cada 5 días:** la tarea programada "Actualizar Bitácora de Opiniones OECE" (`actualizar-bitacora-oece`, los días 1, 6, 11, 16, 21 y 26 de cada mes a las 9:00) ejecuta `python scripts/gobpe.py actualizar`, clasifica lo nuevo, corre `build.py` y lo publica con `git push` en GitHub Pages (solo los archivos que genera: `data/*.json` e `index.html`). Si no hay opiniones nuevas, no toca nada. Corre en la PC del autor mientras la app de Claude está abierta (si está cerrada, al abrirla). Los permisos que se aprueban en una ejecución quedan guardados para las siguientes; si una ejecución queda "en curso" sin avanzar, está esperando un permiso.
-- **Excel nuevo (cada quincena):** copiarlo en `data/`, correr `python scripts/build.py`, revisar los avisos y republicar. Sus filas reemplazan a las automáticas de las mismas opiniones.
-- **GitHub Pages:** el proyecto vive en https://github.com/jrmp1709/bitacora-opiniones-oece y el sitio se publica solo desde la rama `main` (carpeta raíz) en https://jrmp1709.github.io/bitacora-opiniones-oece/. Para actualizarlo: `python scripts/build.py` y luego `git add -A && git commit && git push`. El Excel de origen, `artifact.html`, `base_opiniones.xlsx` y `cache/` están en .gitignore y no se suben.
+- **Actualización automática cada 5 días, en GitHub Actions** (`.github/workflows/actualizar.yml`): corre en los servidores de GitHub los días 1, 6, 11, 16, 21 y 26 a las 9:00 de Lima, así que no depende de Claude ni de que la PC del autor esté encendida. Ejecuta `python scripts/actualizar.py --publicar`: busca opiniones nuevas en gob.pe (desde GitHub, gob.pe responde: se probó el 21.09.2026), las clasifica sin intervención, valida sus referencias, regenera el sitio sin el Excel (con `data/excel.json`), valida el conjunto y, si todo está en orden, hace commit y push; luego pide a GitHub Pages que publique. El resumen de cada ejecución queda en la pestaña Actions del repositorio (opiniones nuevas, las "por revisar" y las retenidas). Si gob.pe bloquea el acceso o la validación falla, la ejecución termina en rojo sin publicar nada y GitHub avisa por correo al dueño del repositorio. También corre a mano (Actions → Actualizar bitácora → Run workflow) y cada vez que cambia el código del sitio o `data/excel.json`.
+- La antigua tarea programada de Claude (`actualizar-bitacora-oece`) quedó **desactivada** el 21.09.2026: la reemplaza GitHub Actions. Puede reactivarse para revisar con Claude las clasificaciones "por revisar".
+- **Excel nuevo (cada quincena):** `git pull`, copiar el Excel en `data/`, correr `python scripts/build.py`, revisar los avisos y subir con `git add -A && git commit && git push`. Así se actualiza `data/excel.json`, y sus filas reemplazan a las automáticas de las mismas opiniones.
+- **GitHub Pages:** el proyecto vive en https://github.com/jrmp1709/bitacora-opiniones-oece y el sitio se publica solo desde la rama `main` (carpeta raíz) en https://jrmp1709.github.io/bitacora-opiniones-oece/. Para cambios a mano: `git pull` (la nube también sube cambios), `python scripts/build.py` y luego `git add -A && git commit && git push`. El Excel de origen, `artifact.html`, `base_opiniones.xlsx` y `cache/` están en .gitignore y no se suben.
 - Se descartó Google Sheets como base: el conector de Drive crea archivos pero no puede actualizar su contenido. La base vive en `data/` (sincronizada por OneDrive) y `base_opiniones.xlsx` sirve para abrirla en Excel o subirla a Sheets.
 
 ## Ideas pendientes (opcionales)

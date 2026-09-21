@@ -82,12 +82,28 @@ button,input,select{font:inherit;color:inherit}
 h1{margin:0;font:780 clamp(2.4rem,5.4vw,3.7rem)/1.02 var(--display);letter-spacing:-.035em;text-wrap:balance}
 h1 em{font-style:normal;font-weight:780;color:var(--band-accent)}
 .lede{margin:18px 0 0;max-width:56ch;color:var(--band-2);font:400 16.5px/1.6 var(--sans)}
-.hero-ask{display:inline-flex;align-items:center;gap:12px;margin:24px 0 0;padding:8px 18px 8px 8px;border:1px solid var(--band-line);
-  border-radius:3px;background:rgba(255,255,255,.05);color:var(--band-ink);cursor:pointer;text-align:left;transition:background .2s,border-color .2s}
-.hero-ask:hover{background:rgba(255,255,255,.09);border-color:var(--band-accent)}
-.hero-ask .av{width:38px;height:38px}
-.hero-ask b{display:block;font:700 14.5px/1.2 var(--display);letter-spacing:-.025em}
-.hero-ask small{display:block;margin-top:2px;font:500 11.5px/1.3 var(--sans);color:var(--band-2)}
+/* CriterIA en la portada: se pregunta directo, sin pasar antes por los filtros */
+.ia{color:var(--brass)}
+.mast .ia,.chat-h .ia,.chat-open .ia{color:var(--band-accent)}
+.hero-ia{margin:26px 0 0;max-width:660px;padding:16px 16px 14px;border:1px solid var(--band-line);border-radius:4px;background:rgba(255,255,255,.045);transition:border-color .2s}
+.hero-ia:focus-within{border-color:var(--band-accent)}
+.hero-ia-t{display:flex;align-items:center;gap:12px;margin:0 0 12px}
+.hero-ia-t .av{width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.07);box-shadow:0 0 0 1.5px var(--band-accent)}
+.hero-ia-t b{display:block;font:700 16.5px/1.2 var(--display);letter-spacing:-.025em;color:var(--band-ink)}
+.hero-ia-t small{display:block;margin-top:3px;font:500 12.5px/1.4 var(--sans);color:var(--band-2)}
+.hero-ia-f{display:flex;gap:8px}
+.hero-ia-f input{flex:1;min-width:0;height:50px;padding:0 15px;border:1px solid transparent;border-radius:3px;background:#FFFFFF;color:#151A21;font-size:15.5px;outline:none}
+.hero-ia-f input::placeholder{color:#6A707A}
+.hero-ia-f input:focus{border-color:var(--band-accent);box-shadow:0 0 0 3px rgba(205,171,104,.35)}
+.hero-ia-f button{flex:none;height:50px;padding:0 20px;border:1px solid var(--band-accent);border-radius:3px;background:var(--band-accent);color:#0F1C2E;cursor:pointer;font:700 11px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;transition:filter .2s}
+.hero-ia-f button:hover{filter:brightness(1.07)}
+.hero-ia-ej{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:11px;font-size:12px;color:var(--band-2)}
+.hero-ia-ej button{border:1px solid var(--band-line);background:none;border-radius:2px;padding:4px 9px;color:var(--band-ink);font:500 12px var(--sans);cursor:pointer;text-align:left}
+.hero-ia-ej button:hover{border-color:var(--band-accent)}
+/* cobertura de la base: desde qué año, último pronunciamiento incorporado y fecha de actualización */
+.cobertura{margin:16px 0 0;max-width:66ch;font-size:13px;line-height:1.6;color:var(--band-2)}
+.cobertura strong{color:var(--band-ink);font-weight:600}
+.cobertura a{color:var(--band-ink);text-decoration:none;border-bottom:1px solid var(--band-accent)}
 .facts{display:flex;flex-wrap:wrap;gap:16px 0;margin:30px 0 0;padding:0}
 .facts div{display:flex;flex-direction:column;gap:6px;padding-inline:0 26px;margin-right:26px;border-right:1px solid var(--band-line)}
 .facts div:last-child{border-right:0;margin-right:0}
@@ -173,7 +189,7 @@ h1 em{font-style:normal;font-weight:780;color:var(--band-accent)}
 .chat-open{position:fixed;right:clamp(14px,3vw,28px);bottom:clamp(14px,3vw,28px);z-index:60;display:inline-flex;align-items:center;gap:11px;
   background:var(--band);color:var(--band-ink);border:1px solid var(--band-accent);border-radius:3px;padding:8px 17px 8px 9px;cursor:pointer;
   box-shadow:var(--shadow);text-align:left}
-.chat-open .av{width:44px;height:44px;transition:transform .25s}
+.chat-open .av{width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.07);box-shadow:0 0 0 1.5px var(--band-accent);transition:transform .25s}
 .chat-open b{display:block;font:700 14.5px/1.15 var(--display);letter-spacing:-.025em}
 .chat-open small{display:block;margin-top:2px;font:500 11px/1.3 var(--sans);color:var(--band-2)}
 .chat-open:hover{background:#17253a;border-color:var(--band-ink)}
@@ -192,10 +208,10 @@ body.chat-on .chat-open{display:none}
   max-height:min(660px,calc(100vh - 36px));display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);
   border-radius:4px;box-shadow:var(--shadow);overflow:hidden}
 .chat[hidden]{display:none}
-.chat-h{display:flex;align-items:center;gap:11px;padding:12px 12px 12px 14px;background:var(--band);color:var(--band-ink)}
-.chat-h .av{width:36px;height:36px}
+.chat-h{display:flex;align-items:center;gap:12px;padding:12px 12px 12px 14px;background:var(--band);color:var(--band-ink);border-bottom:2px solid var(--band-accent)}
+.chat-h .av{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.07);box-shadow:0 0 0 1.5px var(--band-accent)}
 .chat-t{display:flex;flex-direction:column;gap:2px;flex:1;min-width:0}
-.chat-t strong{font:700 15px/1.2 var(--display);letter-spacing:-.025em}
+.chat-t strong{font:700 16px/1.2 var(--display);letter-spacing:-.025em}
 .chat-t small{font:500 10.5px/1.35 var(--sans);color:var(--band-2)}
 .chat-x{border:0;background:none;color:var(--band-2);cursor:pointer;padding:7px;line-height:0;border-radius:2px}
 .chat-x:hover{color:var(--band-ink)}
@@ -218,13 +234,20 @@ body.chat-on .chat-open{display:none}
 @keyframes dot{0%,65%,100%{opacity:.3;transform:translateY(0)}32%{opacity:1;transform:translateY(-3px)}}
 .cb.a strong{color:var(--ink);font-weight:600;font-variant-numeric:lining-nums}
 .cb.a .ai-out{margin-top:11px}
-.chits{list-style:none;margin:11px 0 0;padding:0;display:flex;flex-direction:column;gap:8px}
-.chit{display:block;background:var(--surface);border:1px solid var(--line);border-left:2px solid var(--brass);border-radius:3px;padding:10px 12px;text-decoration:none;color:inherit}
-.chit:hover{border-color:var(--primary);border-left-color:var(--brass)}
-.ch1{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap}
-.ccode{font:600 15px/1 var(--mono);letter-spacing:-.03em;color:var(--ink)}
-.cmeta{font:400 11.5px var(--sans);color:var(--muted)}
-.cq{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;margin-top:5px;font-size:13.5px;line-height:1.5;color:var(--ink-2)}
+.chits{list-style:none;margin:11px 0 0;padding:0;display:flex;flex-direction:column;gap:9px}
+.chit{background:var(--surface);border:1px solid var(--line);border-left:2px solid var(--m32069);border-radius:3px;padding:11px 12px 10px}
+.chit.ant{border-left-color:var(--warn)}
+.ch1{display:flex;align-items:center;justify-content:space-between;gap:6px 10px;flex-wrap:wrap}
+.ccode{font:600 13.5px/1.2 var(--mono);letter-spacing:-.03em;color:var(--ink);text-decoration:none;border-bottom:1px solid transparent}
+.ccode:hover{border-bottom-color:currentColor}
+.cmeta{margin-top:4px;font:400 11.5px/1.4 var(--sans);color:var(--muted)}
+.cq{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;margin:6px 0 0!important;font-size:13.5px;line-height:1.5;color:var(--ink)}
+.cwhy{margin:7px 0 0!important;padding-top:7px;border-top:1px dashed var(--line);font-size:12.5px;line-height:1.5;color:var(--ink-2)}
+.cwhy b{color:var(--brass);font-weight:600}
+.creg{margin:6px 0 0!important;font-size:12px;line-height:1.45;color:var(--warn)}
+.clinks{display:flex;flex-wrap:wrap;gap:4px 14px;margin-top:8px}
+.clinks a{font:600 11.5px var(--sans);color:var(--primary);text-decoration:none;border-bottom:1px solid var(--line)}
+.clinks a:hover{border-bottom-color:currentColor}
 .cacts{display:flex;flex-wrap:wrap;gap:7px;margin-top:11px}
 .has-ai [data-ia]{display:none}
 .chat-f{display:flex;gap:8px;padding:11px;border-top:1px solid var(--line);background:var(--surface)}
@@ -264,6 +287,19 @@ select option{background:var(--surface);color:var(--ink)}
 .concl{font:500 13px var(--sans);color:var(--ink-2)}
 .marco{display:inline-flex;align-items:center;gap:7px}
 .marco::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--mc)}
+/* régimen normativo: la Ley 32069 rige desde el 22.04.2025; la 30225 y el D.L. 1017 son régimen anterior */
+.reg{display:inline-flex;align-items:center;gap:6px;padding:2px 8px;border-radius:2px;font:600 10px/1.5 var(--sans);letter-spacing:.09em;text-transform:uppercase;white-space:nowrap}
+.reg svg{flex:none}
+.reg.vig{color:var(--m32069);background:color-mix(in srgb,var(--m32069) 11%,transparent)}
+.reg.ant{color:var(--warn);background:var(--warn-soft)}
+.regnota{display:flex;gap:9px;align-items:flex-start;margin:12px 0 0;padding:8px 11px;border-left:2px solid var(--warn);background:var(--warn-soft);color:var(--warn);font-size:12.5px;line-height:1.5}
+.regnota svg{flex:none;margin-top:2px}
+.regnota b{font-weight:600}
+.regnota button{border:0;background:none;padding:0;color:inherit;font:inherit;font-weight:600;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.rlist{margin:0 0 16px}
+/* por qué aparece un resultado, cuando se consulta a CriterIA */
+.why{margin:10px 0 0;font-size:13px;line-height:1.5;color:var(--ink-2)}
+.why .caps{color:var(--brass);margin-right:6px;font-size:10px}
 .warn{display:inline-flex;flex-wrap:wrap;gap:4px 8px;align-items:baseline;margin-top:12px;background:var(--warn-soft);color:var(--warn);border-left:2px solid var(--warn);padding:5px 10px;font-size:13px;line-height:1.4}
 .warn a{font-weight:600;text-underline-offset:3px}
 .acts{display:flex;flex-direction:column;align-items:flex-end;gap:10px;padding-top:4px}
@@ -366,8 +402,17 @@ footer a:hover{color:var(--band-accent);border-bottom-color:currentColor}
       <div>
         <h1>Bitácora <em>de</em> Opiniones</h1>
         <p class="lede">Las consultas absueltas por <span id="linst">el OECE</span> <span id="lyr">en 2026</span>, ordenadas por etapa de la contratación, tema y marco normativo. Busque el supuesto que le interesa y abra la opinión oficial.</p>
-        <button type="button" class="hero-ask" id="heroAsk"><img class="av" src="{{AVATAR}}" alt="" width="38" height="38"><span><b>Pregúntele a CriterIA</b><small>Cuéntele su caso y le dice qué opiniones lo tratan</small></span></button>
+        <form class="hero-ia" id="heroForm" role="search" aria-label="Consultar a CriterIA">
+          <div class="hero-ia-t"><img class="av" src="{{AVATAR}}" alt="" width="44" height="44"><div><b>Pregúntele a Criter<span class="ia">IA</span></b><small>Describa su caso con sus palabras: no hace falta usar los filtros.</small></div></div>
+          <div class="hero-ia-f">
+            <label class="sr" for="heroQ">Su consulta para CriterIA</label>
+            <input id="heroQ" type="text" autocomplete="off" enterkeyhint="search" placeholder="Ej.: ¿procede ampliar el plazo de una obra por lluvias?">
+            <button type="submit">Consultar</button>
+          </div>
+          <div class="hero-ia-ej" id="heroEj"></div>
+        </form>
         <dl class="facts" id="facts"></dl>
+        <p class="cobertura" id="cob"></p>
       </div>
       <figure class="months" id="months">
         <figcaption><span class="caps" id="mtitle">Opiniones por año</span><span id="mhint">Seleccione un año para filtrar</span></figcaption>
@@ -436,6 +481,7 @@ footer a:hover{color:var(--band-accent);border-bottom-color:currentColor}
       </label>
       <div class="active" id="active"></div>
     </div>
+    <div class="rlist" id="rnota"></div>
     <div class="list" id="list"></div>
     <div class="more" id="more"></div>
   </section>
@@ -451,7 +497,7 @@ footer a:hover{color:var(--band-accent);border-bottom-color:currentColor}
     </div>
     <div>
       <h4 class="caps">Sobre este índice</h4>
-      <p>Índice de las opiniones de la Dirección Técnico Normativa del OSCE y del OECE, elaborado con información pública de gob.pe y actualizado al <span id="upd"></span>.</p>
+      <p id="fcob">Índice de las opiniones de la Dirección Técnico Normativa del OSCE y del OECE, elaborado con información pública de gob.pe.</p>
       <p>Cada ficha enlaza al PDF de la opinión y a su página en gob.pe. Este índice orienta la búsqueda y no reemplaza la lectura íntegra de la opinión.</p>
     </div>
     <div>
@@ -469,10 +515,10 @@ footer a:hover{color:var(--band-accent);border-bottom-color:currentColor}
   </div>
 </footer>
 
-<div class="chat-tip" id="chatTip" hidden role="button" tabindex="0">¿Busca una opinión de la DTN? <strong>Pregúntele a CriterIA</strong>: cuéntele su caso y le dice cuál lo trata.<button class="chat-tip-x" id="chatTipX" type="button" aria-label="Cerrar el aviso"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
-<button class="chat-open" id="chatOpen" type="button" aria-expanded="false" aria-controls="chat"><img class="av" src="{{AVATAR}}" alt="" width="44" height="44"><span><b>Pregúntele a CriterIA</b><small>¿Qué opinión trata su caso?</small></span></button>
+<div class="chat-tip" id="chatTip" hidden role="button" tabindex="0">¿Busca una opinión de la DTN? <strong>Pregúntele a Criter<span class="ia">IA</span></strong>: cuéntele su caso y le dice cuál lo trata.<button class="chat-tip-x" id="chatTipX" type="button" aria-label="Cerrar el aviso"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+<button class="chat-open" id="chatOpen" type="button" aria-expanded="false" aria-controls="chat"><img class="av" src="{{AVATAR}}" alt="" width="44" height="44"><span><b>Pregúntele a Criter<span class="ia">IA</span></b><small>¿Qué opinión trata su caso?</small></span></button>
 <section class="chat" id="chat" hidden aria-label="CriterIA, el consultor de la bitácora">
-  <header class="chat-h"><img class="av" src="{{AVATAR}}" alt="" width="36" height="36"><span class="chat-t"><strong>CriterIA</strong><small>Le digo qué opiniones tratan su caso</small></span>
+  <header class="chat-h"><img class="av" src="{{AVATAR}}" alt="" width="36" height="36"><span class="chat-t"><strong>Criter<span class="ia">IA</span></strong><small>Asistente de la Bitácora de Opiniones</small></span>
     <button class="chat-x" id="chatClose" type="button" aria-label="Cerrar CriterIA"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
   </header>
   <div class="chat-log" id="chatLog" role="log" aria-live="polite"></div>
@@ -481,7 +527,7 @@ footer a:hover{color:var(--band-accent);border-bottom-color:currentColor}
     <input id="chatQ" type="text" autocomplete="off" placeholder="¿Se puede ampliar el plazo por lluvias?">
     <button class="chat-s" type="submit">Enviar</button>
   </form>
-  <p class="chat-n">CriterIA busca entre las consultas absueltas por la DTN y las ordena por pertinencia. No sustituye la lectura de la opinión oficial.</p>
+  <p class="chat-n" id="chatN">CriterIA busca entre las consultas absueltas por la DTN y las ordena por pertinencia. No sustituye la lectura de la opinión oficial.</p>
 </section>
 
 <script type="application/json" id="data">{{DATA}}</script>
@@ -580,17 +626,26 @@ var ops={};ROWS.forEach(function(r){if(!ops[r.key]||(ops[r.key].lk&&!r.lk))ops[r
 var nOps=Object.keys(ops).length,nTemas=Object.keys(count("x","t")).length;
 var YRS=Object.keys(ROWS.reduce(function(o,r){o[r.y]=1;return o;},{})).sort();
 var INST=["OSCE","OECE"].filter(function(s){return ROWS.some(function(r){return r.s===s;});});
+/* Cobertura de la base, calculada en un solo lugar y usada en la cabecera, el pie y CriterIA:
+   desde qué año hay opiniones, cuál es el último pronunciamiento incorporado y cuándo se actualizó */
+function fLarga(f){var p=f.split("-");return (+p[2])+" de "+MES_L[+p[1]-1]+" de "+p[0];}
+var ULT=ROWS.reduce(function(a,r){return !a||r.f>a.f||(r.f===a.f&&byNum(r,a)>0)?r:a;},null);
+var COB={desde:YRS[0],ult:ULT,upd:D.updated};
 if(YRS.length){
-  document.getElementById("yr").textContent=YRS.length>1?YRS[0]+"–"+YRS[YRS.length-1]:YRS[0];
-  document.getElementById("lyr").textContent=YRS.length>1?"entre "+YRS[0]+" y "+YRS[YRS.length-1]:"en "+YRS[0];
+  document.getElementById("yr").textContent="desde "+COB.desde;
+  document.getElementById("lyr").textContent="desde "+COB.desde;
   document.getElementById("inst").textContent=INST.join(" · ");
   document.getElementById("linst").textContent=INST.length>1?"el OSCE y el OECE":"el "+INST[0];
 }
-var updP=D.updated.split("-");
-document.getElementById("upd").textContent=(+updP[2])+" de "+MES_L[+updP[1]-1]+" de "+updP[0];
+var ultLink='<a href="'+esc(ULT.u)+'" target="_blank" rel="noopener">Opinión N.° '+esc(ULT.o)+'</a>';
 document.getElementById("facts").innerHTML=
-  [[nOps,"Opiniones"],[ROWS.length,"Consultas"],[nTemas,"Temas"],[(+updP[2])+" "+MES[+updP[1]-1],"Actualizada"]]
+  [[nOps,"Opiniones"],[ROWS.length,"Consultas"],[nTemas,"Temas"],[COB.desde,"Cobertura desde"]]
   .map(function(f){return '<div><dt class="caps">'+f[1]+'</dt><dd>'+f[0]+'</dd></div>';}).join("");
+document.getElementById("cob").innerHTML="Opiniones emitidas desde "+COB.desde+". Último pronunciamiento incorporado: "+ultLink+
+  ", del "+fLarga(ULT.f)+". Actualizado el <strong>"+fLarga(COB.upd)+"</strong>.";
+document.getElementById("fcob").innerHTML="Índice de las opiniones de la Dirección Técnico Normativa del OSCE y del OECE emitidas desde "+
+  COB.desde+", elaborado con información pública de gob.pe. Actualizado el "+fLarga(COB.upd)+"; último pronunciamiento incorporado: "+ultLink+
+  " ("+fdate(ULT.f)+").";
 
 /* Gráfico de la cabecera: opiniones por año; al elegir un año, por mes de ese año */
 var byY={},byM={};Object.keys(ops).forEach(function(k){var r=ops[k];byY[r.y]=(byY[r.y]||0)+1;byM[r.mes]=(byM[r.mes]||0)+1;});
@@ -676,7 +731,7 @@ document.getElementById("tq").addEventListener("input",function(e){S.tq=e.target
 /* ---------- consultor: preguntar en lenguaje natural ---------- */
 /* Ordena las consultas por pertinencia (BM25 con sinónimos del rubro). Todo ocurre en la página:
    no se envía la pregunta a ningún servidor. La capa de IA, si el visor la permite, es aparte. */
-var STOP={},SYN={},PHR=[],IDX=null,AVAC=[],AHL=[],SAMPLE=null,AIC=null;
+var STOP={},SYN={},PHR=[],IDX=null,AVAC=[],AHL=[],SAMPLE=null,AIC=null,ASKC=[],ASKF=[];
 ("a al algo alguna algunas alguno algunos ante antes aquel aquella aquello asi aun aunque cada casi como con contra cual cuales cualquier cuando cuanta cuantas cuanto cuantos cuyo cuya de del demas desde donde dos e el ella ellas ello ellos en entonces entre era eran eres es esa esas ese eso esos esta estas este esto estos estan estar fue fueron ha habia han hasta hay la las le les lo los mas mediante menos me mi mientras misma mismo mucho muchos muy nos nuestra nuestro no o os otra otras otro otros para pero poco por porque pues que quien quienes se sea segun ser si sido siendo sin sino sobre solo son su sus tal tales tambien tan tanto te tiene tienen toda todas todo todos tras un una unas uno unos y ya "+
  "puede pueden podria podrian pudiera debe deben deberia debera deberan corresponde corresponden procede proceden existe existen cabe caben resulta necesito quiero busco buscar decir dice dicen habla hablan trata tratan tratan sirve saber conocer favor hola gracias pregunta preguntar cuestion consultar duda ayuda ayudame dime muestrame quisiera desea pregunto "+
  "opinion opiniones dtn osce oece entidad forma manera caso casos supuesto supuestos tema temas parte partes lugar vez veces ahora luego despues antes")
@@ -800,7 +855,9 @@ function buildIndex(){
     n+=bag(ASUNTO[r.key]||"",tf,.9);
     bag(TEMA[r.t]+" "+CAT[r.c]+" "+GRUPO[r.g],tf,2);
     bag(r.y+" "+MARCO[r.m].short,tf,1.2);
-    r.tf=tf;r.dl=n||1;r.txt=norm(r.q+" "+(ASUNTO[r.key]||"")+" "+TEMA[r.t]+" "+CAT[r.c]);
+    r.raw=(r.q+" "+(ASUNTO[r.key]||"")).normalize("NFC");r.nq=r.raw.length;
+    r.raw+=" "+TEMA[r.t]+" "+CAT[r.c];
+    r.tf=tf;r.dl=n||1;r.txt=norm(r.raw);   /* norm() conserva las posiciones: r.txt[i] corresponde a r.raw[i] */
     tot+=r.dl;
     Object.keys(tf).forEach(function(t){df[t]=(df[t]||0)+1;});
   });
@@ -809,10 +866,11 @@ function buildIndex(){
 /* Cada palabra de la pregunta es un concepto: ella misma y sus variantes. De un concepto
    cuenta su mejor coincidencia, no cuántas variantes aparezcan. */
 function qconc(q){
-  var raw=norm(q).split(/[^a-z0-9]+/),seen={},out=[];
+  var raw=norm(q).split(/[^a-z0-9]+/),seen={},out=[],sup={};
+  (q.normalize("NFC").match(/[A-Za-zÁÉÍÓÚÜÑáéíóúüñ0-9]+/g)||[]).forEach(function(w){sup[norm(w)]=w;});
   raw.forEach(function(x){
     if(x.length<3||STOP[x])return;
-    var t=st(x);if(STOP[t]||seen[t])return;seen[t]=1;out.push({p:t,o:x,ms:[{t:t,w:1}]});
+    var t=st(x);if(STOP[t]||seen[t])return;seen[t]=1;out.push({p:t,o:x,s:sup[x]||x,ms:[{t:t,w:1}]});
   });
   out.forEach(function(c){
     (SYN[c.p]||SYN[c.o]||[]).forEach(function(y){var u=st(y);if(seen[u])return;seen[u]=1;c.ms.push({t:u,w:.6});});
@@ -832,7 +890,7 @@ function askNow(q){
     mass+=c.i;
   });
   cs=cs.filter(function(c){return c.ms.length;});
-  mass=mass||1;
+  mass=mass||1;ASKC=cs;
   AHL=cs.map(function(c){return c.p;}).filter(function(t){return t.length>3&&IDX.df[t];});
   var nq=norm(q),fr=[];
   PHR.forEach(function(f){
@@ -840,6 +898,7 @@ function askNow(q){
     var d=0;ROWS.forEach(function(r){if(r.txt.indexOf(f)>=0)d++;});
     if(d)fr.push({f:f,i:Math.log(1+(N-d+.5)/(d+.5))});
   });
+  ASKF=fr;
   var max=0;
   ROWS.forEach(function(r){
     var sc=0,cob=0;
@@ -864,6 +923,37 @@ function askNow(q){
     keep.slice(120).forEach(function(r){r.sc=0;});
   }
   S.sort="rel";
+}
+/* Por qué una consulta es pertinente: las frases y palabras de la pregunta que contiene, tal como están
+   escritas en ella (o en su asunto), y las que coinciden por una variante ("lluvias" → "pluviales"). */
+function superficie(r,t){
+  var re=/[A-Za-zÁÉÍÓÚÜÑáéíóúüñ0-9]+/g,m;
+  while((m=re.exec(r.raw))){
+    if(m.index>=r.nq)break;
+    if(st(norm(m[0]))===t)return m[0];
+  }
+  return null;
+}
+function porQue(r){
+  if(!r.sc||!ASKC.length&&!ASKF.length)return "";
+  var frases=[],partes=[],usadas={};
+  ASKF.forEach(function(x){var i=r.txt.indexOf(x.f);if(i>=0&&i<r.nq){frases.push("«"+r.raw.substr(i,x.f.length)+"»");
+    x.f.split(" ").forEach(function(w){usadas[st(w)]=1;});}});
+  var tema=false;
+  ASKC.forEach(function(c){
+    var hit=null;c.ms.forEach(function(m){if(!hit&&r.tf[m.t])hit=m;});
+    if(!hit||usadas[hit.t]||usadas[c.p])return;
+    var w=superficie(r,hit.t);
+    if(!w){tema=true;return;}   /* solo coincide en el tema o la categoría */
+    var misma=hit.w===1||norm(w).slice(0,5)===c.o.slice(0,5);   /* ampliación ← ampliar: la misma palabra */
+    partes.push(misma?"«"+w+"»":"«"+w+"» (por «"+c.s+"»)");
+  });
+  var out=[];
+  if(frases.length)out.push("trata de "+frases.slice(0,2).join(" y "));
+  if(partes.length)out.push((frases.length?"y menciona ":"menciona ")+partes.slice(0,3).join(", "));
+  if(!out.length||tema&&out.length<2)out.push((out.length?"; ":"")+"es del tema «"+TEMA[r.t]+"»");
+  var t=out.join(" ").replace(" ; ","; ");
+  return t.charAt(0).toUpperCase()+t.slice(1)+".";
 }
 function askOff(){S.ask="";AVAC=[];AHL=[];if(AIC){AIC.abort();AIC=null;}if(S.sort==="rel")S.sort="desc";ROWS.forEach(function(r){r.sc=0;});}
 function syncSort(){
@@ -894,12 +984,25 @@ function sorted(list){
 function normsLinks(m){var ls=MARCO[m].links;if(!ls.length)return"";
   return '<span class="norms">'+ls.map(function(l){return '<a href="'+esc(l.u)+'" target="_blank" rel="noopener" title="'+esc(l.t)+'">'+l.l+'</a>';}).join("·")+'</span>';}
 function marcoTag(m){return '<span class="marco" style="--mc:var(--m'+m+')" title="'+esc(MARCO[m].name)+'">'+MARCO[m].short+'</span>';}
+/* Régimen normativo: la Ley 32069 rige desde el 22.04.2025; lo emitido bajo la 30225 o el D.L. 1017 es régimen anterior */
+var ALERTA='<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3l9.5 17h-19z"/><path d="M12 10v4.5M12 17.5v.5"/></svg>';
+var VIGENTE='<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+var REG_T={"30225":"Emitida bajo la Ley N.° 30225, modificada por el D.L. 1444. Desde el 22.04.2025 rige la Ley N.° 32069: el criterio sigue siendo útil para los contratos y procedimientos regidos por la ley anterior, pero verifique si la nueva regulación lo mantiene.",
+  "1017":"Emitida sobre el D.L. N.° 1017, régimen anterior a la Ley N.° 30225: se refiere a contratos celebrados con esa norma."};
+function regTag(m){
+  return m==="32069"?'<span class="reg vig" title="Ley N.° 32069, Ley General de Contrataciones Públicas, vigente desde el 22.04.2025">'+VIGENTE+'Ley N.° 32069 · vigente</span>'
+    :'<span class="reg ant" title="'+esc(REG_T[m])+'">'+ALERTA+(m==="1017"?"D.L. N.° 1017":"Ley N.° 30225")+' · régimen anterior</span>';
+}
+function regNota(m,corta){
+  if(m==="32069")return "";
+  return '<p class="regnota">'+ALERTA+'<span><b>Régimen anterior.</b> '+(corta?(m==="1017"?"Se refiere a contratos del D.L. N.° 1017.":"Interpreta la Ley N.° 30225; desde el 22.04.2025 rige la Ley N.° 32069."):esc(REG_T[m]))+'</span></p>';
+}
 function kicker(r){return '<p class="kicker caps"><button type="button" class="tlink" data-go-tema="'+esc(r.t)+'" title="Ver todas las consultas de este tema">'+esc(TEMA[r.t])+'</button><span class="sep">/</span><span>'+esc(CAT[r.c])+'</span></p>';}
 function foot(r,full){
   var parts=[];
   if(full)parts.push('<span class="ofi" title="Número oficial de la opinión">N.° '+esc(r.o)+'</span>');
   if(r.k.length)parts.push('<span class="concl" title="Conclusión de la opinión que absuelve este supuesto">'+concl(r.k)+'</span>');
-  if(full)parts.push(marcoTag(r.m));
+  if(full)parts.push(regTag(r.m));
   if(r.src==="g")parts.push('<span class="auto" title="Etapa, categoría y tema asignados automáticamente a partir del texto de la opinión; son referenciales">clasificación automática</span>');
   return parts.length?'<p class="foot">'+parts.join("")+'</p>':"";
 }
@@ -909,18 +1012,19 @@ var ARROW='<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="c
 function pdfBtn(r){return '<a class="btn" href="'+esc(r.u)+'" target="_blank" rel="noopener" aria-label="Ver la Opinión N.° '+esc(r.lk?ofiD(r.lk,r.y):r.o)+' en PDF">Ver opinión '+ARROW+'</a>';}
 function pageLink(r){return r.h?'<a class="plink" href="'+esc(r.h)+'" target="_blank" rel="noopener" title="Publicación oficial de la opinión en gob.pe">Página en gob.pe</a>':"";}
 
+function whyHTML(r){var w=S.ask&&porQue(r);return w?'<p class="why"><span class="caps">Pertinencia</span>'+esc(w)+'</p>':"";}
 function itemHTML(r){
   return '<article class="item"><div class="num"><span class="caps">'+r.s+'</span><a href="'+esc(r.u)+'" target="_blank" rel="noopener" title="Opinión N.° '+esc(r.o)+'">'+esc(r.op)+'</a><time datetime="'+r.f+'">'+fdate(r.f)+'</time></div>'+
-    '<div>'+kicker(r)+'<p class="q">'+hl(r.q)+'</p>'+foot(r,true)+warnHTML(r)+'</div>'+
+    '<div>'+kicker(r)+'<p class="q">'+hl(r.q)+'</p>'+whyHTML(r)+foot(r,true)+warnHTML(r)+'</div>'+
     '<div class="acts">'+pdfBtn(r)+pageLink(r)+normsLinks(r.m)+'</div></article>';
 }
 function groupHTML(g){
   var main=g.rows.filter(function(r){return !r.lk;})[0]||g.rows[0],o=main.o,cut=o.indexOf("-"),a=ASUNTO[main.key];
   return '<section class="group"><div class="ghead"><div class="gtitle"><span class="caps">Opinión N.°</span><span class="gcode">'+esc(o.slice(0,cut))+'<span>'+esc(o.slice(cut))+'</span></span>'+
-    '<span class="ginfo"><span>'+main.s+'</span><time datetime="'+main.f+'">'+fdate(main.f)+'</time>'+marcoTag(main.m)+'<span>'+g.rows.length+(g.rows.length===1?" consulta":" consultas")+'</span></span>'+
-    (a?'<p class="gasunto">'+hl(a)+'</p>':'')+'</div>'+
+    '<span class="ginfo"><span>'+main.s+'</span><time datetime="'+main.f+'">'+fdate(main.f)+'</time>'+regTag(main.m)+'<span>'+g.rows.length+(g.rows.length===1?" consulta":" consultas")+'</span></span>'+
+    (a?'<p class="gasunto">'+hl(a)+'</p>':'')+regNota(main.m,true)+'</div>'+
     '<span class="acts">'+normsLinks(main.m)+pageLink(main)+pdfBtn(main)+'</span></div>'+
-    '<ol class="gitems">'+g.rows.map(function(r,i){return '<li><span class="ix">'+(i+1)+'</span><div><p class="q">'+hl(r.q)+'</p>'+kicker(r)+foot(r,false)+warnHTML(r)+'</div></li>';}).join("")+'</ol></section>';
+    '<ol class="gitems">'+g.rows.map(function(r,i){return '<li><span class="ix">'+(i+1)+'</span><div><p class="q">'+hl(r.q)+'</p>'+whyHTML(r)+kicker(r)+foot(r,false)+warnHTML(r)+'</div></li>';}).join("")+'</ol></section>';
 }
 
 var list=document.getElementById("list"),more=document.getElementById("more");
@@ -947,6 +1051,7 @@ function render(keep){
     moreBtn(res.length,"consultas");
   }
   if(!res.length)more.innerHTML="";
+  renderRegimen(res);
   renderFacets();renderActive();
   if(chartYear!==S.anio)renderChart();
   Array.prototype.forEach.call(mbars.children,function(b){
@@ -955,6 +1060,18 @@ function render(keep){
   document.querySelectorAll("[data-view]").forEach(function(b){b.setAttribute("aria-pressed",String(S.view===b.dataset.view));});
   document.getElementById("xq").hidden=!S.q;
 }
+function renderRegimen(res){
+  var el=document.getElementById("rnota"),ant=0,ops={};
+  res.forEach(function(r){if(r.m!=="32069"&&!ops[r.key]){ops[r.key]=1;ant++;}});
+  var tot=new Set(res.map(function(r){return r.key;})).size;
+  if(!ant||S.marco){el.innerHTML="";return;}
+  el.innerHTML='<p class="regnota" style="margin:0">'+ALERTA+'<span><b>'+(ant===tot?(tot===1?"Esta opinión es":"Todas estas opiniones son"):ant+" de estas "+tot+" opiniones son")+
+    ' del régimen anterior</b> (Ley N.° 30225 o D.L. N.° 1017). Desde el 22.04.2025 rige la Ley N.° 32069: esos criterios siguen siendo útiles para los contratos y procedimientos regidos por la norma anterior, pero conviene verificar si la nueva regulación los mantiene.'+
+    (ant<tot?' <button type="button" id="soloVig">Ver solo las de la Ley N.° 32069</button>':"")+'</span></p>';
+}
+document.getElementById("rnota").addEventListener("click",function(e){
+  if(e.target.id==="soloVig"){S.marco="32069";render();rc.focus({preventScroll:true});}
+});
 function moreBtn(total,unit){
   var n=total-S.lim;
   more.innerHTML=n>0?'<button type="button" id="moreBtn">Mostrar más<span>quedan '+n+' '+(n===1?(unit==="opiniones"?"opinión":"consulta"):unit)+'</span></button>':"";
@@ -1048,7 +1165,7 @@ function chAbrir(on){
   if(on){
     tipFuera();
     if(!CH.length)chPush("w",'<img src="'+MASCOTA+'" alt="">'+
-      "<p><strong>¡Hola! Soy CriterIA.</strong></p><p>Cuénteme su caso en una línea y le digo qué opiniones de la DTN hablan de eso.</p>",
+      "<p><strong>¡Hola! Soy Criter<span class=\"ia\">IA</span>.</strong></p><p>Cuénteme su caso en una línea y le digo qué opiniones de la DTN hablan de eso: su número, fecha, marco normativo y por qué son pertinentes.</p>",
       '<p class="cej">Por ejemplo</p><div class="cacts">'+EJEMPLOS.map(function(q){return chip("ej",q,q);}).join("")+'</div>');
     chatQ.focus();
   }else chatBtn.focus();
@@ -1088,12 +1205,22 @@ function chResponder(pref){
   }
   var nOp=new Set(res.map(function(r){return r.key;})).size,vis={},top=[];
   res.slice().sort(function(a,b){return b.sc-a.sc;}).forEach(function(r){if(top.length<4&&!vis[r.key]){vis[r.key]=1;top.push(r);}});
+  var antOp={};res.forEach(function(r){if(r.m!=="32069")antOp[r.key]=1;});
+  var nAnt=Object.keys(antOp).length;
   var h="<p>"+(pref||"")+"Encontré <strong>"+nOp+"</strong> "+(nOp===1?"opinión":"opiniones")+" sobre eso"+
-    (nOp>top.length?". Estas son las que más se parecen a su caso:":(nOp===1?". Es esta:":". Son estas:"))+"</p>"+falta;
+    (nOp>top.length?". Estas son las que más se parecen a su caso:":(nOp===1?". Es esta:":". Son estas:"))+"</p>"+falta+
+    (nAnt&&!S.marco?"<p class=\"creg\">"+(nAnt===nOp?(nOp===1?"Es":"Todas son"):nAnt+" de ellas son")+
+      " del régimen anterior (Ley N.° 30225 o D.L. N.° 1017); desde el 22.04.2025 rige la Ley N.° 32069.</p>":"");
   var tail='<ul class="chits">'+top.map(function(r){
-    return '<li><a class="chit" href="'+esc(r.u)+'" target="_blank" rel="noopener">'+
-      '<span class="ch1"><span class="ccode">'+esc(r.op)+'</span><span class="cmeta">'+fdate(r.f)+" · "+esc(TEMA[r.t])+'</span></span>'+
-      '<span class="cq">'+esc(r.q)+'</span></a></li>';}).join("")+'</ul>';
+    var w=porQue(r);
+    return '<li><article class="chit'+(r.m!=="32069"?" ant":"")+'">'+
+      '<div class="ch1"><a class="ccode" href="'+esc(r.u)+'" target="_blank" rel="noopener" title="Abrir el PDF oficial">N.° '+esc(r.o)+'</a>'+regTag(r.m)+'</div>'+
+      '<p class="cmeta">'+fdate(r.f)+" · "+esc(TEMA[r.t])+" · "+esc(MARCO[r.m].short)+'</p>'+
+      '<p class="cq">'+esc(r.q)+'</p>'+
+      (w?'<p class="cwhy"><b>Por qué es pertinente:</b> '+esc(w)+'</p>':"")+
+      '<div class="clinks"><a href="'+esc(r.u)+'" target="_blank" rel="noopener">Documento oficial (PDF) ↗</a>'+
+      (r.h?'<a href="'+esc(r.h)+'" target="_blank" rel="noopener">Página en gob.pe ↗</a>':"")+'</div>'+
+      '</article></li>';}).join("")+'</ul>';
   var i=CH.length,acc=[chip("ver","1",nOp>top.length?"Ver las "+nOp+" en la página":"Verla en la página")];
   var g={},mk={};res.forEach(function(r){g[r.g]=1;mk[r.m]=1;});
   if(S.etapa==="all"&&g.obras&&g.seleccion){acc.push(chip("ref","obras","Solo obras"));acc.push(chip("ref","seleccion","Solo bienes y servicios"));}
@@ -1112,7 +1239,20 @@ function chRefinar(v){
   },260);
 }
 chatBtn.addEventListener("click",function(){chAbrir(true);});
-document.getElementById("heroAsk").addEventListener("click",function(){chAbrir(true);});
+/* La consulta de la portada va directo a CriterIA: abre el chat con la pregunta ya respondida */
+var heroQ=document.getElementById("heroQ");
+document.getElementById("heroEj").innerHTML="Por ejemplo:"+EJEMPLOS.slice(0,3).map(function(q){
+  return ' <button type="button" data-hej="'+esc(q)+'">'+esc(q)+'</button>';}).join("");
+document.getElementById("heroForm").addEventListener("submit",function(e){
+  e.preventDefault();var t=heroQ.value.trim();
+  if(!t){heroQ.focus();return;}
+  heroQ.value="";chAbrir(true);chPreguntar(t);
+});
+document.getElementById("heroEj").addEventListener("click",function(e){
+  var b=e.target.closest("[data-hej]");if(!b)return;chAbrir(true);chPreguntar(b.dataset.hej);
+});
+document.getElementById("chatN").textContent="CriterIA busca entre las "+ROWS.length+" consultas de las opiniones emitidas desde "+COB.desde+
+  " (la más reciente, del "+fdate(COB.ult.f)+") y las ordena por pertinencia. No sustituye la lectura de la opinión oficial.";
 document.getElementById("chatClose").addEventListener("click",function(){chAbrir(false);});
 document.getElementById("chatForm").addEventListener("submit",function(e){e.preventDefault();chPreguntar(chatQ.value);});
 chatLog.addEventListener("click",function(e){

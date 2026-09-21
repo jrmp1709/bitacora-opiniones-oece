@@ -31,6 +31,8 @@ FIRST_ROW = 5  # la fila 4 tiene los encabezados
 FICHA = "https://www.gob.pe/institucion/oece/informes-publicaciones/{id}-opinion-n-{code}-{year}-oece-dtn"
 GOBPE = os.path.join(ROOT, "data", "gobpe.json")                # opiniones descargadas de gob.pe (scripts/gobpe.py)
 CLASIF = os.path.join(ROOT, "data", "clasificacion.json")       # su clasificación por etapa, categoría y tema
+EXCEL_JSON = os.path.join(ROOT, "data", "excel.json")           # lo leído del Excel: regenerar sin él (GitHub Actions)
+RETENIDAS = os.path.join(ROOT, "data", "retenidas.json")        # opiniones que no pasaron la validación (scripts/validar.py)
 BASE_XLSX = os.path.join(ROOT, "base_opiniones.xlsx")           # la base completa, para abrirla en Excel
 
 # Categorías en el orden del ciclo de contratación (hoja "Apoyo" del Excel) -> etiqueta legible
@@ -133,7 +135,8 @@ def updated_date(ws):
     return datetime.date.today().isoformat()
 
 
-def build(xlsx):
+def leer_excel(xlsx):
+    """Filas de la bitácora, enlaces a las normas y fecha de actualización, tal como vienen en el Excel."""
     wb = openpyxl.load_workbook(xlsx)
     ws = wb[SHEET]
     rows, temas_usados, cats_usadas, normas = [], {}, {}, {}
@@ -198,12 +201,36 @@ def build(xlsx):
         if len(cnt) > 1:
             warnings.append(f"Marco {m}: hay {len(cnt)} pares distintos de enlaces a ley/reglamento; se usa el más frecuente")
         links[m] = {"ley": ley or None, "reg": reg or None}
+    return rows, links, updated_date(ws)
+
+
+def build(xlsx):
+    """Une las filas del Excel con lo publicado en gob.pe. Sin Excel (xlsx=None) usa la copia de data/excel.json:
+    el Excel no se sube a GitHub, pero lo que se lee de él ya es público en el sitio."""
+    if xlsx:
+        rows, links, fecha_excel = leer_excel(xlsx)
+        with open(EXCEL_JSON, "w", encoding="utf-8", newline="\n") as fh:
+            json.dump({"archivo": os.path.basename(xlsx), "actualizado": fecha_excel, "normas": links, "filas": rows},
+                      fh, ensure_ascii=False, indent=1)
+    else:
+        copia = json.load(open(EXCEL_JSON, encoding="utf-8"))
+        rows, links, fecha_excel = copia["filas"], copia["normas"], copia["actualizado"]
+    temas_usados, cats_usadas = {}, {}
+    for row in rows:
+        if row["c"] not in CAT:
+            warnings.append(f"Categoría nueva {row['c']!r}; agréguela a CAT en build.py")
+            CAT[row["c"]] = pretty(row["c"])
+        if row["t"] not in TEMA:
+            warnings.append(f"Tema nuevo {row['t']!r}; agréguelo a TEMA (y a OBRAS si es de obras)")
+            TEMA[row["t"]] = pretty(row["t"])
+        temas_usados[row["t"]], cats_usadas[row["c"]] = TEMA[row["t"]], CAT[row["c"]]
 
     # ---------- Opiniones descargadas de gob.pe (scripts/gobpe.py) ----------
     # El Excel manda en las opiniones que registra; gob.pe aporta los años anteriores, las opiniones que el Excel
     # aún no registra y, para todas, la fecha de la opinión (la del Excel es la de carga del PDF) y su asunto.
     gob = json.load(open(GOBPE, encoding="utf-8")) if os.path.exists(GOBPE) else {"actualizado": None, "opiniones": {}}
     clas = json.load(open(CLASIF, encoding="utf-8")) if os.path.exists(CLASIF) else {}
+    retenidas = json.load(open(RETENIDAS, encoding="utf-8")) if os.path.exists(RETENIDAS) else {}
     ops = gob["opiniones"]
 
     # Filas cuyo enlace abre otra opinión: se resuelven contra gob.pe y solo queda el aviso si no está claro
@@ -242,6 +269,9 @@ def build(xlsx):
         g = ops[key]
         if key in en_excel:
             continue
+        if key in retenidas:  # no pasó la validación de referencias: no se publica hasta que pase
+            warnings.append(f"{g['oficial']}: retenida por la validación ({'; '.join(retenidas[key]['problemas'])})")
+            continue
         if key not in clas:
             sin_clasificar.append(key)
             continue
@@ -269,7 +299,7 @@ def build(xlsx):
                         f"{' …' if len(sin_clasificar) > 12 else ''}")
 
     data = {
-        "updated": max(d for d in (updated_date(ws), gob["actualizado"]) if d),
+        "updated": max(d for d in (fecha_excel, gob["actualizado"]) if d),
         "rows": rows,
         "cats": [[k, v] for k, v in CAT.items() if k in cats_usadas],
         "temas": temas_usados,
@@ -368,14 +398,17 @@ def exportar_xlsx(data, ruta):
     wb.save(ruta)
 
 
-def main():
-    if len(sys.argv) > 1:
-        xlsx = sys.argv[1]
-    else:
-        files = sorted(glob.glob(os.path.join(ROOT, "data", "*.xlsx")), key=os.path.getmtime)
-        if not files:
-            sys.exit("No hay ningún .xlsx en data/. Copie ahí el Excel de la bitácora.")
-        xlsx = files[-1]
+def excel_reciente():
+    """El .xlsx más reciente de data/, o None (entonces se usa la copia de data/excel.json)."""
+    files = sorted(glob.glob(os.path.join(ROOT, "data", "*.xlsx")), key=os.path.getmtime)
+    files = [f for f in files if not os.path.basename(f).startswith("~$")]
+    return files[-1] if files else None
+
+
+def generar(xlsx=None):
+    """Genera data/opiniones.json, index.html, artifact.html y base_opiniones.xlsx, y devuelve los datos."""
+    if not xlsx and not os.path.exists(EXCEL_JSON):
+        sys.exit("No hay ningún .xlsx en data/ ni copia en data/excel.json. Copie ahí el Excel de la bitácora.")
     data = build(xlsx)
 
     # newline="\n": el mismo resultado en Windows que en Mac/Linux (sin diferencias falsas en git)
@@ -396,10 +429,16 @@ def main():
     with open(os.path.join(ROOT, "artifact.html"), "w", encoding="utf-8", newline="\n") as fh:
         fh.write(head + body)
     exportar_xlsx(data, BASE_XLSX)
+    return data
 
+
+def main():
+    xlsx = sys.argv[1] if len(sys.argv) > 1 else excel_reciente()
+    data = generar(xlsx)
     ops = {(r["y"], r["s"], r["op"]) for r in data["rows"]}
     por_anio = Counter(y for y, _, _ in ops)
-    print(f"Excel: {os.path.basename(xlsx)}")
+    print(f"Excel: {os.path.basename(xlsx)}" if xlsx else
+          f"Excel: copia de data/excel.json ({json.load(open(EXCEL_JSON, encoding='utf-8'))['archivo']})")
     print(f"Actualizado al {data['updated']}: {len(data['rows'])} consultas, {len(ops)} opiniones, {len(data['temas'])} temas")
     print("Opiniones por año:", ", ".join(f"{y}: {c}" for y, c in sorted(por_anio.items())))
     mism = [f"{r['op']}→{r['lk']}" for r in data["rows"] if r["lk"]]
