@@ -3445,5 +3445,23 @@
   "num": 99,
   "op": "D099",
   "oficial": "D000099-2026-OECE-DTN"
+ },
+ "2026-OECE-D100": {
+  "id": 8629660,
+  "url": "https://www.gob.pe/institucion/oece/informes-publicaciones/8629660-opinion-n-d000100-2026-oece-dtn",
+  "anio": "2026",
+  "serie": "OECE",
+  "num": 100,
+  "op": "D100",
+  "oficial": "D000100-2026-OECE-DTN"
+ },
+ "2026-OECE-D101": {
+  "id": 8629672,
+  "url": "https://www.gob.pe/institucion/oece/informes-publicaciones/8629672-opinion-n-d000101-2026-oece-dtn",
+  "anio": "2026",
+  "serie": "OECE",
+  "num": 101,
+  "op": "D101",
+  "oficial": "D000101-2026-OECE-DTN"
  }
 }

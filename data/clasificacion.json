@@ -3197,5 +3197,33 @@
    "c": "Bienes y Servicios",
    "t": "Ampliación de Plazo"
   }
+ ],
+ "2026-OECE-D100": [
+  {
+   "c": "Solo construcción",
+   "t": "Penalidades/Multas"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Penalidades/Multas"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Penalidades/Multas"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Penalidades/Multas"
+  }
+ ],
+ "2026-OECE-D101": [
+  {
+   "c": "Solo construcción",
+   "t": "Garantías"
+  },
+  {
+   "c": "Solo construcción",
+   "t": "Garantías"
+  }
  ]
 }

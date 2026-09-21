@@ -1,5 +1,5 @@
 {
- "actualizado": "2026-09-19",
+ "actualizado": "2026-09-21",
  "opiniones": {
   "2023-OSCE-001": {
    "id": 3828057,
@@ -9870,6 +9870,64 @@
    ],
    "conclusiones": 1,
    "marco": "32069"
+  },
+  "2026-OECE-D100": {
+   "id": 8629660,
+   "url": "https://www.gob.pe/institucion/oece/informes-publicaciones/8629660-opinion-n-d000100-2026-oece-dtn",
+   "anio": "2026",
+   "serie": "OECE",
+   "num": 100,
+   "op": "D100",
+   "oficial": "D000100-2026-OECE-DTN",
+   "fecha": "2026-09-15",
+   "pdf": "https://cdn.www.gob.pe/uploads/document/file/10666402/8629660-opinion-d100-2026-oece-dtn.pdf?v=1790022077",
+   "titulo": "Opinión N° D000100-2026-OECE-DTN",
+   "asunto": "Deducción de penalidades",
+   "consultas": [
+    {
+     "q": "1. El numeral 161.4 del artículo 161 del Reglamento de la Ley de Contrataciones del Estado, establece que las penalidades se deducen de los pagos a cuenta, de las valorizaciones, del pago final o en la liquidación final, según corresponda. ¿Cómo debe interpretarse la expresión \"según corresponda\" para determinar en cuál de esas oportunidades corresponde efectuar la deducción de una penalidad?",
+     "m": null
+    },
+    {
+     "q": "2. Conforme al numeral 161.4 del artículo 161 y al numeral 210.1 del artículo 210 del mismo Reglamento, ¿hasta qué oportunidad puede hacerse efectiva la deducción económica de una penalidad determinada durante la ejecución de un contrato de obra que no hubier a sido deducida en las valorizaciones y cómo debe ser considerada en la liquidación?",
+     "m": null
+    },
+    {
+     "q": "3. Conforme al numeral 194.1 del artículo 194 del mismo Reglamento, las valorizaciones tienen carácter de pagos a cuenta y que la liquidación permite determinar el saldo económico final del contrato de obra, ¿qué tratamiento corresponde otorgar en dicha liquidación a las penalidades determinadas durante la ejecución contractual que se encuentren pendientes de deducción?",
+     "m": null
+    },
+    {
+     "q": "4. Conforme al artículo 35, al numeral 161.4 del artículo 161, al artículo 209 y 210, referidos a los sistemas de contratación, deducción de penalidades y a la liquidación del contrato de obra, ¿el tratamiento de las penalidades pendientes de deducción al mom ento de la liquidación del contrato de obra varía según el sistema de contratación aplicable y, de ser así, de qué manera?",
+     "m": null
+    }
+   ],
+   "conclusiones": 4,
+   "marco": "30225"
+  },
+  "2026-OECE-D101": {
+   "id": 8629672,
+   "url": "https://www.gob.pe/institucion/oece/informes-publicaciones/8629672-opinion-n-d000101-2026-oece-dtn",
+   "anio": "2026",
+   "serie": "OECE",
+   "num": 101,
+   "op": "D101",
+   "oficial": "D000101-2026-OECE-DTN",
+   "fecha": "2026-09-18",
+   "pdf": "https://cdn.www.gob.pe/uploads/document/file/10666429/8629672-opinion-d101-2026-oece-dtn.pdf?v=1790022195",
+   "titulo": "Opinión N° D000101-2026-OECE-DTN",
+   "asunto": "Retención del diez por ciento (10%) del monto del contrato original como garantía de fiel cumplimiento",
+   "consultas": [
+    {
+     "q": "En el contrato de ejecución de obra convocado bajo el Texto Único Ordenado de la Ley N° 30225, Ley de Contrataciones del Estado, aprobado mediante Decreto Supremo N° 082-2019-EF, y su Reglamento, aprobado mediante Decreto Supremo N° 344-2018-EF ¿Cómo debe interpretarse la expresión “de forma prorrateada en cada pago”, prevista en el numeral 149.5 del artículo 149 del Reglamento de la Ley N° 30225 y en el numeral 33.4 del artículo 33 de la Ley N° 32103, para determinar el importe de la retención por concepto de garantía de fiel cumplimiento? En particular, ¿dicha expresión implica necesariamente que el monto total de la garantía de fiel cumplimiento deba distribuirse en cuotas de igual importe entre los pagos comprendidos en la primera mitad del número total de pagos, con independencia del monto de cada pago o valorización programado; o permite que el importe de cada retención sea determinado proporcionalmente al monto de las valorizaciones programadas (no en función a lo realmente ejecutado), comprendidas en dicho período, mediante la aplicaci ón de un porcentaje constante, de manera que la suma de las retenciones efectuadas complete el monto total correspondiente a la garantía de fiel cumplimiento?",
+     "m": "30225"
+    },
+    {
+     "q": "Asimismo, se consulta si ¿La normativa de contrataciones públicas establece algún límite respecto del porcentaje o monto máximo que puede ser retenido por concepto de garantía de fiel cumplimiento respecto de cada pago o valorización? En particular, ¿resulta jurídicamente posible que, en determinados supuestos, la retención correspondiente a una valorización pueda alcanzar hasta el 100% del monto de dicha valorización, o existe alguna disposición que impida que la retención por concepto de garantía de fiel cumplimiento absorba la totalidad del monto que correspondería pagar al contratista?",
+     "m": null
+    }
+   ],
+   "conclusiones": 2,
+   "marco": "30225"
   }
  }
 }
