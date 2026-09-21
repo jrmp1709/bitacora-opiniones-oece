@@ -31,7 +31,7 @@ FIRST_ROW = 5  # la fila 4 tiene los encabezados
 FICHA = "https://www.gob.pe/institucion/oece/informes-publicaciones/{id}-opinion-n-{code}-{year}-oece-dtn"
 GOBPE = os.path.join(ROOT, "data", "gobpe.json")                # opiniones descargadas de gob.pe (scripts/gobpe.py)
 CLASIF = os.path.join(ROOT, "data", "clasificacion.json")       # su clasificación por etapa, categoría y tema
-EXCEL_JSON = os.path.join(ROOT, "data", "excel.json")           # lo leído del Excel: regenerar sin él (GitHub Actions)
+EXCEL_JSON = os.path.join(ROOT, "data", "excel.json")           # lo leído del Excel: regenerar el sitio sin él
 RETENIDAS = os.path.join(ROOT, "data", "retenidas.json")        # opiniones que no pasaron la validación (scripts/validar.py)
 BASE_XLSX = os.path.join(ROOT, "base_opiniones.xlsx")           # la base completa, para abrirla en Excel
 

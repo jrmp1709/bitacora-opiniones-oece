@@ -3,7 +3,7 @@
 
 Uso:
     python scripts/gobpe.py actualizar            # descubrir + descargar + extraer, y cuántas faltan clasificar
-                                                  # (el ciclo completo, sin intervención: scripts/actualizar.py)
+                                                  # (el ciclo completo con validación: scripts/actualizar.py)
     python scripts/gobpe.py descubrir             # nuevas opiniones: primera página de la colección del OECE
     python scripts/gobpe.py descubrir --sitemaps  # todas: recorre los sitemaps de gob.pe (lento, solo la carga inicial)
     python scripts/gobpe.py descargar 2023 2024   # páginas y PDF pendientes de esos años (sin años: todos los del índice)
@@ -175,7 +175,7 @@ def leer_pdf(e, pdf_url):
 
 def descargar(anios):
     indice = cargar_indice()
-    # lo ya extraído en data/gobpe.json no se vuelve a bajar: en GitHub Actions la caché empieza vacía
+    # lo ya extraído en data/gobpe.json no se vuelve a bajar, aunque falte la caché (p. ej. en otra PC)
     hechas = json.load(open(SALIDA, encoding="utf-8"))["opiniones"] if os.path.exists(SALIDA) else {}
     pendientes = [e for e in indice.values() if (not anios or e["anio"] in anios) and clave(e) not in hechas
                   and not os.path.exists(os.path.join(CACHE, "texto", f"{e['id']}.txt"))]
@@ -318,7 +318,7 @@ def extraer():
         pag = os.path.join(CACHE, "paginas", f"{e['id']}.json")
         txt = os.path.join(CACHE, "texto", f"{e['id']}.txt")
         if not (os.path.exists(pag) and os.path.exists(txt)):
-            if k in previas:  # sin caché (p. ej. en GitHub Actions): se conserva lo ya extraído
+            if k in previas:  # sin caché (p. ej. en otra PC): se conserva lo ya extraído
                 salida[k] = previas[k]
             continue
         p = json.load(open(pag, encoding="utf-8"))

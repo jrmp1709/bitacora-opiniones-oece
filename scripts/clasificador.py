@@ -1,16 +1,18 @@
 #!/usr/bin/env python3
-"""Clasificación automática de las consultas nuevas, sin intervención de nadie.
+"""Sugerencias de clasificación para las consultas nuevas (segunda opinión; no guarda nada).
+
+La clasificación de la bitácora la hace Claude en la tarea programada: se descartó publicar
+clasificaciones automáticas sin revisión para evitar errores. Este módulo solo sugiere.
 
 Aprende de lo ya clasificado —las filas del Excel de la bitácora (hechas a mano) y las consultas de
 gob.pe clasificadas antes— y a cada consulta nueva le asigna el tema y la categoría de sus vecinas
 más parecidas (k vecinos más cercanos sobre TF-IDF del texto de la consulta y del asunto). La
 categoría de obra se ajusta al marco, como en la bitácora: Ley 30225 → "Solo construcción" y
-Ley 32069 → "Solo Constr/Diseño Constr.". Cada consulta guarda la confianza de su clasificación
-("auto", de 0 a 1); las que quedan por debajo de REVISAR se listan para revisión.
+Ley 32069 → "Solo Constr/Diseño Constr.". Cada sugerencia trae su confianza (de 0 a 1).
 
 Uso:
-    python scripts/clasificador.py evaluar      # precisión, dejando fuera cada opinión (validación cruzada)
-    python scripts/clasificador.py pendientes   # clasifica las opiniones que falten y las guarda
+    python scripts/clasificador.py evaluar   # precisión, dejando fuera cada opinión (validación cruzada)
+    python scripts/clasificador.py sugerir   # sugerencias para las opiniones sin clasificar (no guarda nada)
 """
 import json
 import math
@@ -28,7 +30,7 @@ GOBPE = os.path.join(ROOT, "data", "gobpe.json")
 CLASIF = os.path.join(ROOT, "data", "clasificacion.json")
 OPINIONES = os.path.join(ROOT, "data", "opiniones.json")
 K = 9          # vecinas que votan
-REVISAR = .45  # por debajo de esta confianza, la clasificación se lista para revisión
+REVISAR = .45  # umbral de confianza que reporta la evaluación
 OBRA_30225, OBRA_32069 = "Solo construcción", "Solo Constr/Diseño Constr."
 OBRA = {"obra", "obras", "valori", "reside", "metrad"}  # raíces que delatan un contrato de obra
 
@@ -146,8 +148,8 @@ def evaluar():
     print(f"Con confianza ≥ {REVISAR}: {seguras / n:.0%} de las consultas, y en ellas el tema acierta {ok_seguras / max(seguras, 1):.0%}")
 
 
-def pendientes():
-    """Clasifica las opiniones de gob.pe que no tienen clasificación ni están en el Excel. Devuelve las claves."""
+def sugerir():
+    """Imprime una sugerencia para cada consulta de las opiniones sin clasificar. No guarda nada."""
     gob = json.load(open(GOBPE, encoding="utf-8"))["opiniones"]
     clas = json.load(open(CLASIF, encoding="utf-8")) if os.path.exists(CLASIF) else {}
     en_excel = set()
@@ -156,35 +158,20 @@ def pendientes():
                     if r.get("src") == "x"}
     faltan = [k for k in gob if k not in clas and k not in en_excel]
     if not faltan:
-        print("Clasificación automática: no hay opiniones pendientes")
-        return [], []
+        print("No hay opiniones sin clasificar.")
+        return
     modelo = Modelo(ejemplos())
-    dudosas = []
+    print("Sugerencias (segunda opinión, no se guardan):")
     for k in faltan:
         g = gob[k]
-        if not g["consultas"]:  # sin consultas legibles: una ficha con el asunto
-            cat, tema, conf = modelo.predecir(texto("", g.get("asunto")), g.get("marco"))
-            clas[k] = {"asunto": {"c": cat, "t": tema, "m": g.get("marco") or "32069", "auto": conf}}
-            if conf < REVISAR:
-                dudosas.append(k)
-            continue
-        fila = []
-        for q in g["consultas"]:
-            marco = q.get("m") or g.get("marco")
-            cat, tema, conf = modelo.predecir(texto(q["q"], g.get("asunto")), marco)
-            fila.append({"c": cat, "t": tema, **({"m": q["m"]} if q.get("m") else {}), "auto": conf})
-        clas[k] = fila
-        if min(c["auto"] for c in fila) < REVISAR:
-            dudosas.append(k)
-        print(f"  {g['oficial']}: " + " ; ".join(f"{build.CAT[c['c']]} / {build.TEMA[c['t']]} ({c['auto']:.0%})" for c in fila))
-    with open(CLASIF, "w", encoding="utf-8", newline="\n") as fh:
-        json.dump(dict(sorted(clas.items())), fh, ensure_ascii=False, indent=1)
-    print(f"Clasificación automática: {len(faltan)} opiniones"
-          f"{'; por revisar (confianza baja): ' + ', '.join(dudosas) if dudosas else ''}")
-    return faltan, dudosas
+        qs = g["consultas"] or [{"q": "", "m": None}]
+        print(f"{k} · {g.get('asunto')}")
+        for n, q in enumerate(qs, 1):
+            cat, tema, conf = modelo.predecir(texto(q["q"], g.get("asunto")), q.get("m") or g.get("marco"))
+            print(f"   {n}. {build.CAT[cat]} / {build.TEMA[tema]} (confianza {conf:.0%})")
 
 
 if __name__ == "__main__":
-    if len(sys.argv) < 2 or sys.argv[1] not in ("evaluar", "pendientes"):
+    if len(sys.argv) < 2 or sys.argv[1] not in ("evaluar", "sugerir"):
         sys.exit(__doc__)
-    evaluar() if sys.argv[1] == "evaluar" else pendientes()
+    evaluar() if sys.argv[1] == "evaluar" else sugerir()

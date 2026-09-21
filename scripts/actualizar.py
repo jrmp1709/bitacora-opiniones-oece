@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
-"""Actualización automática de la bitácora, sin intervención (la corre GitHub Actions cada 5 días).
+"""Ciclo de actualización de la bitácora. Lo corre la tarea programada de Claude cada 5 días.
 
 1. Busca opiniones nuevas en gob.pe y descarga solo esas (gobpe.py).
-2. Clasifica automáticamente las que falten (clasificador.py).
-3. Valida sus referencias en gob.pe (validar.py): la que no pasa queda retenida y no se publica.
+2. Si alguna no tiene clasificación, se detiene (salida 5): la clasifica Claude con
+   "gobpe.py pendientes" y "gobpe.py clasificar", y luego se vuelve a correr. Aquí no se clasifica
+   nada por cuenta propia: la clasificación automática sin revisión se descartó para evitar errores.
+3. Valida en gob.pe las referencias de las opiniones aún no publicadas (validar.py): la que no pasa
+   queda retenida y no se publica.
 4. Regenera el sitio (build.py) y valida el conjunto: si algo falla, no se publica nada.
 5. Con --publicar: commit y push de los archivos generados; GitHub Pages publica el sitio.
 
@@ -12,7 +15,7 @@ Uso:
     python scripts/actualizar.py --publicar  # y además commit + push
 
 Salida: 0 si terminó bien (con o sin novedades), 2 si gob.pe bloqueó el acceso, 3 si la validación
-del conjunto falló, 4 si no se pudo subir a GitHub.
+del conjunto falló, 4 si no se pudo subir a GitHub, 5 si hay opiniones por clasificar.
 """
 import json
 import os
@@ -22,7 +25,6 @@ import sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "scripts"))
 import build  # noqa: E402
-import clasificador  # noqa: E402
 import gobpe  # noqa: E402
 import validar  # noqa: E402
 
@@ -38,32 +40,26 @@ def git(*args, ok=True):
 
 
 def informe(lineas):
-    """Resumen para el registro de GitHub Actions (y para la consola)."""
-    texto = "\n".join(lineas)
-    print("\n" + texto)
-    destino = os.environ.get("GITHUB_STEP_SUMMARY")
-    if destino:
-        with open(destino, "a", encoding="utf-8") as fh:
-            fh.write("## Actualización de la bitácora\n\n" + texto.replace("\n", "\n\n") + "\n")
-
-
-def salida_gh(nombre, valor):
-    destino = os.environ.get("GITHUB_OUTPUT")
-    if destino:
-        with open(destino, "a", encoding="utf-8") as fh:
-            fh.write(f"{nombre}={valor}\n")
+    print("\n" + "\n".join(lineas))
 
 
 def main():
     publicar = "--publicar" in sys.argv
-    salida_gh("publicado", "false")
     try:
         faltan = gobpe.actualizar()
     except gobpe.Bloqueo as b:
         informe([f"DETENIDO: {b}. No se intentó esquivar el bloqueo ni se publicó nada."])
         return 2
 
-    nuevas, dudosas = clasificador.pendientes() if faltan else ([], [])
+    if faltan:
+        informe([f"Hay {len(faltan)} opiniones por clasificar: {', '.join(faltan)}.",
+                 "Clasifíquelas (python scripts/gobpe.py pendientes, y luego gobpe.py clasificar archivo.txt) "
+                 "y vuelva a correr este script. No se publicó nada."])
+        return 5
+    # las que tienen clasificación pero aún no están en el sitio: son las que se validan antes de publicarlas
+    gob = json.load(open(validar.GOBPE, encoding="utf-8"))["opiniones"]
+    en_sitio = {f"{r['y']}-{r.get('s', 'OECE')}-{r['op']}" for r in json.load(open(validar.OPINIONES, encoding="utf-8"))["rows"]}
+    nuevas = sorted(k for k in gob if k not in en_sitio)
     previas = list(json.load(open(validar.RETENIDAS, encoding="utf-8"))) if os.path.exists(validar.RETENIDAS) else []
     por_validar = sorted(set(nuevas) | set(previas))
     try:
@@ -78,7 +74,6 @@ def main():
         informe(["La validación del sitio generado falló; no se publicó nada:"] + [f"- {p}" for p in problemas])
         return 3
 
-    gob = json.load(open(validar.GOBPE, encoding="utf-8"))["opiniones"]
     publicadas = [k for k in nuevas if k not in retenidas]
     lineas = [f"Bitácora: {len({(r['y'], r['s'], r['op']) for r in data['rows']})} opiniones y "
               f"{len(data['rows'])} consultas, actualizada al {data['updated']}."]
@@ -87,8 +82,6 @@ def main():
         lineas += [f"- {gob[k]['oficial']} ({gob[k]['fecha']}): {gob[k]['asunto']}" for k in publicadas]
     else:
         lineas.append("No hay opiniones nuevas en gob.pe.")
-    if dudosas:
-        lineas.append("Clasificación con confianza baja (conviene revisarla): " + ", ".join(dudosas))
     if retenidas:
         lineas.append("Retenidas por la validación (no se publican hasta que pasen):")
         lineas += [f"- {gob[k].get('oficial') or k}: {'; '.join(p)}" for k, p in retenidas.items()]
@@ -118,7 +111,6 @@ def main():
     else:
         informe(lineas + [f"No se pudo subir a GitHub: {r.stderr.strip()}"])
         return 4
-    salida_gh("publicado", "true")
     informe(lineas + ["Publicado en https://jrmp1709.github.io/bitacora-opiniones-oece/"])
     return 0
 

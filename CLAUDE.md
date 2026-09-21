@@ -20,10 +20,9 @@ src/template.html        Plantilla (HTML + CSS + JS en un solo archivo). Placeho
 scripts/build.py         Une el Excel (o su copia, data/excel.json) y las opiniones de gob.pe y genera data/opiniones.json,
                          index.html, artifact.html y base_opiniones.xlsx
 scripts/gobpe.py         Descarga, extrae y ayuda a clasificar las opiniones publicadas en gob.pe
-scripts/clasificador.py  Clasificación automática de las consultas nuevas, sin intervención (vecinas más parecidas)
+scripts/clasificador.py  Sugerencias de clasificación (segunda opinión para Claude; no guarda nada) y su precisión
 scripts/validar.py       Validación de referencias de las opiniones nuevas y del sitio generado, antes de publicar
-scripts/actualizar.py    El ciclo completo sin intervención: buscar, clasificar, validar, regenerar y publicar
-.github/workflows/actualizar.yml   Lo corre en GitHub Actions cada 5 días (y cuando cambia el código o el Excel)
+scripts/actualizar.py    El ciclo de actualización: buscar, validar, regenerar y publicar (se detiene si falta clasificar)
 requirements.txt         openpyxl y pypdf
 assets/                  La mascota de CriterIA: criteria-original.webp (la imagen que dio el autor, 1254 px)
                          y sus dos recortes, criteria-avatar.webp (cabeza, 168 px) y criteria-mascota.webp (cuerpo, 380 px).
@@ -32,7 +31,7 @@ data/gobpe_indice.json   Índice de opiniones de gob.pe (id, URL, año, serie, n
 data/gobpe.json          Lo extraído de cada opinión: fecha, asunto, consultas, PDF, página
 data/clasificacion.json  Etapa/categoría/tema (y marco) de cada consulta de gob.pe
 data/opiniones.json      Datos limpios generados (lo que se incrusta en la página)
-data/excel.json          Lo leído del Excel (filas, enlaces a normas, fecha). Permite regenerar sin el Excel; lo escribe build.py
+data/excel.json          Lo leído del Excel (filas, enlaces a normas, fecha): permite regenerar el sitio sin el Excel. Lo escribe build.py
 data/retenidas.json      Opiniones que no pasaron la validación de referencias: no se publican hasta que pasen
 cache/                   Páginas y texto de los PDF descargados de gob.pe. En .gitignore.
 ```
@@ -61,11 +60,11 @@ Requisitos: `pip install openpyxl pypdf` (y `pillow` solo si hay que rehacer los
 
 ### Clasificación automática (`data/clasificacion.json`)
 
-Las consultas de gob.pe se clasifican con la misma taxonomía de la bitácora y el sitio las marca como "clasificación automática". Hay dos caminos.
+Las consultas de gob.pe se clasifican con la misma taxonomía de la bitácora y el sitio las marca como "clasificación automática". **Las clasifica Claude**, leyendo cada consulta: se probó una clasificación sin intervención y el autor la descartó (21.09.2026) para evitar errores, porque acierta bastante menos.
 
-**Sin intervención (lo que hace la actualización automática): `scripts/clasificador.py`.** Aprende de lo ya clasificado —las filas del Excel y las consultas de gob.pe revisadas— y a cada consulta nueva le da el tema y la categoría de sus nueve vecinas más parecidas (TF-IDF sobre la consulta y el asunto, que pesa el doble). Reglas encima: si la consulta habla de una obra ("obra", "valorización", "residente", "metrado"), no puede quedar en Bienes y servicios; y la obra se separa por marco (Ley 30225 → "Solo construcción", Ley 32069 → "Solo Constr/Diseño Constr."). Cada consulta guarda su confianza en el campo `auto`; con menos de 0,45 la opinión se lista "por revisar" en el resumen de la ejecución. Precisión medida dejando fuera cada opinión (`python scripts/clasificador.py evaluar`, 21.09.2026): tema 67 %, categoría 72 %; con confianza ≥ 0,45 (tres de cada cuatro consultas) el tema acierta 75 %. El clasificador no aprende de sus propias conjeturas (ignora las entradas con `auto`).
+`scripts/clasificador.py sugerir` queda como segunda opinión: para cada consulta sin clasificar muestra el tema y la categoría de sus nueve vecinas más parecidas (TF-IDF sobre la consulta y el asunto), con su confianza, y **no guarda nada**. Reglas encima: si la consulta habla de una obra ("obra", "valorización", "residente", "metrado") no puede quedar en Bienes y servicios, y la obra se separa por marco. Su precisión, dejando fuera cada opinión (`python scripts/clasificador.py evaluar`, 21.09.2026): tema 67 %, categoría 72 %. No aprende de entradas con el campo `auto` (clasificaciones sin revisar), por si alguna vez las hubiera.
 
-**Revisada (con Claude, cuando se quiera afinar):**
+Flujo de Claude:
 1. `python scripts/gobpe.py pendientes > cache/pendientes.txt`: lista lo que falta, con los códigos C1… (categorías) y T1… (temas).
 2. Se escribe una línea por opinión: `CLAVE: C?/T? ; C?/T? …` (un par por consulta, en orden). `X` omite un texto que no es consulta; `CLAVE: =C?/T?` muestra la opinión con su asunto cuando el PDF no se leyó bien; al final, `| m=30225,32069,…` fija el marco de cada consulta cuando la pista "m≈" no es correcta.
 3. `python scripts/gobpe.py clasificar archivo.txt` valida los códigos y la cantidad de consultas, y guarda.
@@ -174,8 +173,8 @@ Estilo sobrio y formal, hermanado con el otro sitio del autor, https://radar-nor
 
 - **La dirección oficial del sitio es la de GitHub Pages** (ver más abajo). También hay una copia como Artifact de claude.ai, https://claude.ai/artifact/CmToMKGB5f1CDha4Ff1gTX, que desde el 21.09.2026 ya no se actualiza sola: quedó con los datos del 19.09.2026 y solo cambia si se republica a mano.
 - Para actualizar el Artifact: correr `python scripts/build.py` y publicar `artifact.html` (no `index.html`) en esa misma URL, con la herramienta Artifact, el parámetro `url` y `capabilities: {sample: {}}` (la capacidad que habilita la explicación con IA; si se omite `capabilities` se conserva la declarada). Desde otra conversación, primero `action: "read"` con esa URL. El servicio agrega su propio doctype, `<head>` y `<body>`, por eso `artifact.html` no los trae.
-- **Actualización automática cada 5 días, en GitHub Actions** (`.github/workflows/actualizar.yml`): corre en los servidores de GitHub los días 1, 6, 11, 16, 21 y 26 a las 9:00 de Lima, así que no depende de Claude ni de que la PC del autor esté encendida. Ejecuta `python scripts/actualizar.py --publicar`: busca opiniones nuevas en gob.pe (desde GitHub, gob.pe responde: se probó el 21.09.2026), las clasifica sin intervención, valida sus referencias, regenera el sitio sin el Excel (con `data/excel.json`), valida el conjunto y, si todo está en orden, hace commit y push; luego pide a GitHub Pages que publique. El resumen de cada ejecución queda en la pestaña Actions del repositorio (opiniones nuevas, las "por revisar" y las retenidas). Si gob.pe bloquea el acceso o la validación falla, la ejecución termina en rojo sin publicar nada y GitHub avisa por correo al dueño del repositorio. También corre a mano (Actions → Actualizar bitácora → Run workflow) y cada vez que cambia el código del sitio o `data/excel.json`.
-- La antigua tarea programada de Claude (`actualizar-bitacora-oece`) quedó **desactivada** el 21.09.2026: la reemplaza GitHub Actions. Puede reactivarse para revisar con Claude las clasificaciones "por revisar".
+- **Actualización cada 5 días, a cargo de Claude:** la tarea programada "Actualizar Bitácora de Opiniones OECE" (`actualizar-bitacora-oece`, días 1, 6, 11, 16, 21 y 26 a las 9:00). Corre `python scripts/actualizar.py`; si hay opiniones nuevas se detiene (salida 5) para que Claude las clasifique con `gobpe.py pendientes` / `gobpe.py clasificar`, y después `python scripts/actualizar.py --publicar` valida sus referencias en gob.pe, regenera el sitio, valida el conjunto y hace commit y push. Lo que no pasa la validación queda retenido y no se publica. Corre en la PC del autor mientras la app de Claude está abierta (si está cerrada, al abrirla). Los permisos que se aprueban en una ejecución quedan guardados para las siguientes; si una ejecución queda "en curso" sin avanzar, está esperando un permiso.
+- **Decisión del autor (21.09.2026): nada se publica sin que Claude clasifique.** Se armó y probó una actualización desatendida en GitHub Actions (gob.pe sí responde desde los servidores de GitHub) con clasificación automática, y se desmontó para prevenir errores de clasificación. No volver a proponerla salvo que el autor lo pida.
 - **Excel nuevo (cada quincena):** `git pull`, copiar el Excel en `data/`, correr `python scripts/build.py`, revisar los avisos y subir con `git add -A && git commit && git push`. Así se actualiza `data/excel.json`, y sus filas reemplazan a las automáticas de las mismas opiniones.
 - **GitHub Pages:** el proyecto vive en https://github.com/jrmp1709/bitacora-opiniones-oece y el sitio se publica solo desde la rama `main` (carpeta raíz) en https://jrmp1709.github.io/bitacora-opiniones-oece/. Para cambios a mano: `git pull` (la nube también sube cambios), `python scripts/build.py` y luego `git add -A && git commit && git push`. El Excel de origen, `artifact.html`, `base_opiniones.xlsx` y `cache/` están en .gitignore y no se suben.
 - Se descartó Google Sheets como base: el conector de Drive crea archivos pero no puede actualizar su contenido. La base vive en `data/` (sincronizada por OneDrive) y `base_opiniones.xlsx` sirve para abrirla en Excel o subirla a Sheets.
