@@ -10,6 +10,8 @@ Con información pública del portal oficial gob.pe.
 - En GitHub Pages: https://jrmp1709.github.io/bitacora-opiniones-oece/
 - En claude.ai: https://claude.ai/artifact/CmToMKGB5f1CDha4Ff1gTX
 - Se puede buscar por palabra, o preguntarle a **CriterIA** desde la portada o desde el robot de abajo a la derecha: se le cuenta el caso y dice qué opiniones lo tratan, con su número, fecha, régimen normativo, por qué son pertinentes, **lo que concluyó la DTN en texto literal** y el enlace al documento oficial.
+- Opcional: CriterIA puede **analizar su caso opinión por opinión** con Claude. Hace falta una clave de API y desplegar el
+  intermediario de `proxy/` (instrucciones en `proxy/README.md`); mientras `IA_ENDPOINT` esté vacío en `scripts/build.py`, el sitio funciona sin eso.
 - CriterIA entiende filtros dichos en la misma frase ("penalidades en obras del 2024"), seguimientos ("¿y con la ley nueva?"), preguntas sobre la base ("¿cuál es la última opinión?") y palabras mal escritas.
 - Cada 5 días Claude la actualiza: busca opiniones nuevas en gob.pe, las clasifica, valida sus referencias y publica.
 - En local: abrir `index.html` en el navegador.

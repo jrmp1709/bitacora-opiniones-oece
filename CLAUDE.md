@@ -23,6 +23,8 @@ scripts/gobpe.py         Descarga, extrae y ayuda a clasificar las opiniones pub
 scripts/clasificador.py  Sugerencias de clasificación (segunda opinión para Claude; no guarda nada) y su precisión
 scripts/validar.py       Validación de referencias de las opiniones nuevas y del sitio generado, antes de publicar
 scripts/actualizar.py    El ciclo de actualización: buscar, validar, regenerar y publicar (se detiene si falta clasificar)
+proxy/                   El intermediario que analiza el caso con Claude: worker.js, wrangler.toml y su README.
+                         Vive en Cloudflare Workers y guarda la clave de la API, que no puede estar en la página.
 requirements.txt         openpyxl y pypdf
 assets/                  La mascota de CriterIA: criteria-original.webp (la imagen que dio el autor, 1254 px)
                          y sus dos recortes, criteria-avatar.webp (cabeza, 168 px) y criteria-mascota.webp (cuerpo, 380 px).
@@ -169,7 +171,16 @@ Cómo puntúa: BM25 sobre varios campos con distinto peso —texto de la consult
 - Se descartan las palabras vacías (`STOP`, que incluye "opinión", "consulta" y los verbos de preguntar) y las que aparecen en más de la mitad de las consultas ("obra", "servicio", "contrato"): para eso están los filtros. Las que no figuran en ninguna consulta se avisan ("La bitácora no registra «…»").
 - Se muestran las consultas con puntaje ≥ 33 % del mejor, con tope de 120.
 - **CriterIA muestra lo que concluyó la DTN, pero no lo interpreta:** enseña el texto literal de las conclusiones y enlaza al documento oficial; no lo resume, no lo parafrasea y no dice si un caso procede. Los textos de la conversación se redactan así a propósito ("No opino por usted, pero…").
-- **Explicación con IA (opcional):** si el visor del Artifact concede la capacidad `sample`, aparece "Explicar con IA", que le pide a Claude un resumen de las ocho consultas más pertinentes con la instrucción expresa de no inventar la respuesta de la DTN. Lo paga quien lo usa y pide su permiso la primera vez; después de la primera vez se redacta solo en cada respuesta. Si no está disponible, el botón no aparece y el chat funciona igual. Al republicar hay que pasar `capabilities: {sample: {}}` (o no pasar `capabilities`, que conserva lo declarado).
+### "Analice mi caso" (opcional, con un modelo de lenguaje)
+
+Hasta aquí CriterIA no razona: busca, ordena y muestra el texto oficial. Para que **analice el caso opinión por opinión** hace falta un modelo de lenguaje, y para eso una clave de API que no puede vivir en una página pública. La pieza está construida y **apagada**:
+
+- `proxy/worker.js` es el intermediario (Cloudflare Workers, gratis en este volumen). Guarda la clave como secreto, solo atiende al origen del sitio, **no acepta textos libres** —recibe el caso y una lista de claves de opinión, y arma el material desde el `data/opiniones.json` publicado, así nadie puede usar la clave como un chat general—, limita a 8 análisis por visitante y 250 por día, y devuelve la respuesta en streaming.
+- El prompt del sistema (en `worker.js`) obliga a: usar solo el material entregado, analizar opinión por opinión citando la conclusión literal, distinguir el régimen normativo, decir cuándo el material no alcanza, no afirmar por cuenta propia que algo procede, y cerrar con "Qué revisar". Máximo 400 palabras.
+- En el sitio: `IA_ENDPOINT` en `scripts/build.py` (vacío = apagado; el sitio queda exactamente igual que ahora). Con dirección, CriterIA muestra "Analice mi caso" cuando la consulta tiene al menos 20 caracteres, y lo ofrece solo cuando el usuario escribió 180 o más. La primera vez avisa que el caso se enviará a un servicio de IA y pide no incluir datos personales ni información reservada.
+- Modelo y costo (setiembre de 2026): viene `claude-opus-5` (~$0,06 por análisis); `claude-sonnet-5` (~$0,025) y `claude-haiku-4-5` (~$0,012) son alternativas, cambiando `MODELO` en `worker.js`. Pasos de despliegue en `proxy/README.md`.
+
+- **Explicación con IA en el Artifact (otra vía, independiente):** si el visor del Artifact concede la capacidad `sample`, aparece "Explíquemelo", que le pide a Claude un resumen de las consultas más pertinentes. Lo paga quien lo usa. Solo existe en la copia de claude.ai, que ya no se actualiza.
 
 ## Diseño (mantener)
 

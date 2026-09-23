@@ -25,6 +25,9 @@ import openpyxl
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 LINKEDIN = "https://www.linkedin.com/in/j-rodolfo-mercado-pajares-aab7101ba/"
+# Dirección del intermediario que analiza el caso con Claude (ver proxy/README.md).
+# Vacío = el sitio no ofrece el análisis y funciona igual que siempre.
+IA_ENDPOINT = ""
 SHEET = "Bitacora"
 FIRST_ROW = 5  # la fila 4 tiene los encabezados
 # Página de la opinión en gob.pe: el número inicial del nombre del PDF es el id de la publicación
@@ -422,7 +425,8 @@ def generar(xlsx=None):
     payload = json.dumps(data, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
     html = (tpl.replace("{{DATA}}", payload).replace("{{LINKEDIN}}", LINKEDIN)
            .replace("{{AVATAR}}", data_uri("criteria-avatar.webp"))
-           .replace("{{MASCOTA}}", data_uri("criteria-mascota.webp")))
+           .replace("{{MASCOTA}}", data_uri("criteria-mascota.webp"))
+           .replace("{{IA}}", IA_ENDPOINT))
     with open(os.path.join(ROOT, "index.html"), "w", encoding="utf-8", newline="\n") as fh:
         fh.write(html)
     # Versión para el Artifact de claude.ai: el servicio pone su propio doctype, <head> y <body>,

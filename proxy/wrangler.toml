@@ -1,0 +1,14 @@
+name = "criteria"
+main = "worker.js"
+compatibility_date = "2026-09-01"
+
+# El origen del sitio: el Worker solo atiende a la bitácora.
+[vars]
+ORIGENES = "https://jrmp1709.github.io"
+
+# Contador de límites (por visitante y por día). Se crea con:
+#   npx wrangler kv namespace create LIMITES
+# y luego se pega aquí el id que imprime.
+# [[kv_namespaces]]
+# binding = "LIMITES"
+# id = "PEGUE_AQUI_EL_ID"
