@@ -777,7 +777,7 @@ var STOP={},SYN={},PHR=[],IDX=null,AVAC=[],ACORR=[],AHL=[],SAMPLE=null,AIC=null,
   "liquidacion cierre saldo",
   "resolucion resolver resuelto",
   "nulidad nulo anular invalidez",
-  "garantia fianza retencion fideicomiso",
+  "garantia fianza retencion retener retenciones fideicomiso",
   "supervisor supervision inspector inspeccion",
   "contratista ejecutor proveedor contratado",
   "postor participante oferente",
@@ -928,10 +928,11 @@ function lev(a,b,max){
   return prev[b.length];
 }
 function cercana(t){   /* la palabra del vocabulario de la bitácora más parecida a una mal escrita */
-  if(t.length<5)return null;
+  if(t.length<6)return null;
   var mejor=null,md=2;
   for(var w in IDX.df){
-    if(IDX.df[w]<3||Math.abs(w.length-t.length)>2)continue;
+    /* mismo arranque y largo parecido: así "penaliada" llega a "penalidad", pero "retener" no a "tener" */
+    if(IDX.df[w]<3||w.length<6||Math.abs(w.length-t.length)>1||w.slice(0,2)!==t.slice(0,2))continue;
     var d=lev(w,t,md);
     if(d<md||(d===md&&!mejor)){md=d;mejor=w;}
   }
