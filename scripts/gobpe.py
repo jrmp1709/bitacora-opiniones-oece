@@ -202,7 +202,7 @@ RUIDO = re.compile(
 # Encabezados de sección, en mayúsculas y solos en su línea ("2. CONSULTAS1 Y ANÁLISIS", "3. CONCLUSIONES";
 # a veces sin número o con el número errado, y con la llamada a pie de página pegada o separada)
 SEC2 = re.compile(r"(?m)^[ \t]*(?:\d\.?[ \t]+)?CONSULTAS?[ \t]*\d*[ \t]*Y[ \t]+AN[AÁ]LISIS[^\n]*\n")
-SEC3 = re.compile(r"(?m)^[ \t]*(?:\d\.?[ \t]+)?CONCLUSI[OÓ]N(?:ES)?[ \t]*\d*[ \t]*\n")
+SEC3 = re.compile(r"(?m)^[ \t]*(?:(?:\d|[IVX]{1,4})\.?[ \t]+)?CONCLUSI[OÓ]N(?:ES)?\.?[ \t]*\d*[ \t]*\n")
 TOP = re.compile(r"(?m)^[ \t]*2\.(\d{1,2})\.?(?:[ \t]+(?=\S)|[ \t]*\n|(?=[“\"]))")  # 2.1  2.2  … (una consulta cada uno)
 SUB = re.compile(r"(?m)^[ \t]*2\.\d{1,2}\.\d{1,2}\.?(?:[ \t]+|(?=[A-ZÁÉÍÓÚ¿“\"]))")  # 2.1.1 … (análisis)
 # "la consulta formulada es la siguiente:" / "las consultas formuladas son las siguientes:"
@@ -328,7 +328,7 @@ def extraer():
                          consultas=[{"q": q, "m": marco_probable(q, e, umbral=1) if re.search(
                              r"30225|32069|344-\s?2018|009-\s?2025|anterior|1017", q, re.I) else None}
                              for q in extraer_consultas(t)],
-                         conclusiones=len(concl), marco=marco_probable(" ".join(concl) or t, e))
+                         conclusiones=len(concl), concl=concl, marco=marco_probable(" ".join(concl) or t, e))
     guardar_json(SALIDA, {"actualizado": datetime.date.today().isoformat(), "opiniones": salida})
     sin = [k for k, v in salida.items() if not v["consultas"]]
     print(f"Extraídas: {len(salida)} opiniones, {sum(len(v['consultas']) for v in salida.values())} consultas")

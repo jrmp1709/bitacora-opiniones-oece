@@ -305,6 +305,9 @@ def build(xlsx):
         "temas": temas_usados,
         "normas": links,
         "asuntos": {k: g["asunto"] for k, g in ops.items() if g.get("asunto")},
+        # El texto literal de las conclusiones de cada opinión, tal como está en el PDF: es lo que
+        # responde la DTN, y el sitio lo muestra sin reescribirlo, junto al enlace al documento oficial.
+        "concl": {k: g["concl"] for k, g in ops.items() if g.get("concl")},
     }
     return data
 

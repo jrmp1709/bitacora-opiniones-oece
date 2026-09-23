@@ -8,7 +8,7 @@ Sitio web estático (una sola página) para buscar las opiniones que emite la Di
   El crédito "Elaborado por J. Rodolfo Mercado Pajares" con enlace a LinkedIn va en la cabecera y en el pie. No se quita.
 - Es el **único crédito** del sitio. No se agregan créditos, firmas ni menciones a terceros.
 - Los datos provienen de un Excel de base usado con autorización (2026, clasificado a mano) y de las publicaciones oficiales en gob.pe (2023 en adelante, clasificadas automáticamente).
-- Los textos de las consultas **no se reescriben ni se corrigen**: solo se normalizan espacios y saltos de línea, para no alterar el registro.
+- Los textos de las consultas y de las conclusiones **no se reescriben, ni se corrigen, ni se resumen**: solo se normalizan espacios y saltos de línea. El sitio los muestra literales y enlaza al documento oficial.
 
 ## Estructura
 
@@ -56,7 +56,7 @@ Requisitos: `pip install openpyxl pypdf` (y `pillow` solo si hay que rehacer los
 
 - Fuente: las páginas `https://www.gob.pe/institucion/oece/informes-publicaciones/<id>-opinion-n-…` (las del OSCE también están bajo `/oece/`). El índice inicial se armó con los sitemaps de gob.pe (`descubrir --sitemaps`, lento); las nuevas se toman de la primera página de la colección del OECE (`descubrir`).
 - Buenas prácticas: se respeta el robots.txt de gob.pe (no se recorren las páginas `?sheet=`), una solicitud por segundo, un User-Agent que identifica al proyecto y caché en `cache/`. Si gob.pe responde con un bloqueo (403, 418, 429), el script se detiene: **no se intenta esquivarlo**. Desde la PC del autor gob.pe responde normalmente; desde servidores en la nube (WebFetch) y desde el navegador integrado de la app, no.
-- De cada página se toma el título (número oficial), la **fecha de la opinión** y el enlace al PDF. La sumilla no se usa porque nombra al solicitante. Del PDF (con `pypdf`) se extraen el **asunto**, las **consultas** (apartados 2.1, 2.2… o la cita tras "la consulta formulada es la siguiente") y el número de conclusiones. Se limpian cabeceras de página, bandas de firma digital, notas al pie intercaladas y el análisis que el PDF a veces pega a la consulta.
+- De cada página se toma el título (número oficial), la **fecha de la opinión** y el enlace al PDF. La sumilla no se usa porque nombra al solicitante. Del PDF (con `pypdf`) se extraen el **asunto**, las **consultas** (apartados 2.1, 2.2… o la cita tras "la consulta formulada es la siguiente") y las **conclusiones**, con su texto literal (apartados 3.1, 3.2…; el encabezado puede ser "3. CONCLUSIONES", "3. CONCLUSIONES." o "III. CONCLUSIONES"). A 23.09.2026: 963 conclusiones en las 385 opiniones, ninguna sin reconocer. Se limpian cabeceras de página, bandas de firma digital, notas al pie intercaladas y el análisis que el PDF a veces pega a la consulta.
 - Series y números: hasta 2024 el OSCE numeraba "Opinión N.° 045-2024/DTN" (forma corta "045"); en 2025 hubo una serie del OSCE ("D000010-2025-OSCE-DTN") y otra del OECE que reinició la numeración ("D000010-2025-OECE-DTN"). Una opinión se identifica por año + serie + número (`key` en el JS).
 - Resultado a 18.09.2026: 383 opiniones (2023: 128, 2024: 61, 2025: 27 del OSCE + 68 del OECE, 2026: 99) y 758 consultas publicadas. Solo 2025-OSCE-D017 no tiene consultas legibles y se muestra con su asunto.
 
@@ -82,7 +82,7 @@ Convenciones: obra con Ley 30225 → C6 Solo construcción; obra con Ley 32069 �
 ### Campos del JSON (`data/opiniones.json`)
 
 - Por consulta: `n` orden, `op` forma corta (D092 / 045), `y` año, `s` serie (OSCE / OECE), `o` número oficial, `u` URL del PDF, `h` página en gob.pe, `lk` código que realmente abre el enlace (si no coincide con `op`), `f` fecha, `c` categoría, `t` tema, `g` grupo (obras/seleccion), `q` texto, `k` conclusiones, `m` marco (32069 / 30225 / 1017), `src` origen (`x` Excel, `g` gob.pe).
-- Nivel superior: `updated`, `rows`, `cats`, `temas`, `normas` y `asuntos` (asunto de cada opinión, por `key`).
+- Nivel superior: `updated`, `rows`, `cats`, `temas`, `normas`, `asuntos` (asunto de cada opinión, por `key`) y `concl` (el texto literal de las conclusiones de cada opinión, por `key`). Las conclusiones pesan medio megabyte: el sitio queda en 1,4 MB, unos 350 KB al viajar comprimido.
 - **Fecha:** la de la opinión según su página en gob.pe. Si no está disponible, la de carga del PDF (parámetro `?v=`, en hora de Lima).
 - **Página en gob.pe (`h`):** para las filas del Excel se deduce del PDF: el número inicial de su nombre es el id de la publicación (`…/file/9299678/7626891-opinion-d001-2026-oece-dtn.pdf` → `…/informes-publicaciones/7626891-opinion-n-d000001-2026-oece-dtn`). El autor lo verificó a mano.
 - **Número oficial:** "Opinión N.° D000001-2026-OECE-DTN" (6 dígitos) u "Opinión N.° 045-2024/DTN". El sitio muestra la forma corta en grande y el número oficial en la línea inferior de la ficha y en la cabecera de la vista por opinión. Nunca se muestra la forma mixta "D001-2026-OECE-DTN", que no es oficial.
@@ -117,6 +117,7 @@ Con el Excel del 15.09.2026 se resolvieron cuatro filas:
 
 - Dos formas de buscar: el **buscador** de la barra, que filtra en vivo por lo que se escribe, y **CriterIA**, que responde en lenguaje natural desde la portada o desde su chat flotante (ver la sección siguiente). Son cosas distintas a propósito y no se mezclan.
 - **Cobertura, en un solo lugar** (JS, objeto `COB`): desde qué año hay opiniones, el último pronunciamiento incorporado (la consulta con la fecha más reciente) y la fecha de actualización completa. Se usa en la línea superior ("desde 2023"), la bajada, las cifras ("Cobertura desde 2023"), la línea bajo las cifras, el pie y la nota de CriterIA. No se escribe a mano en ningún lado.
+- **Lo que concluyó la DTN:** cada ficha trae un bloque plegado con el texto literal de las conclusiones (`conclHTML`). Si la fila del Excel indica cuáles la responden (columna de conclusiones), muestra esas; si no, todas las de la opinión. Debajo va siempre la nota "Texto literal de la opinión. Para el análisis completo, abra el documento oficial". No se resume ni se interpreta.
 - **Régimen normativo:** cada ficha lleva "Ley N.° 32069 · vigente" (azul) o "Ley N.° 30225 · régimen anterior" / "D.L. N.° 1017 · régimen anterior" (ámbar, con el detalle al pasar el cursor). Encima de los resultados, un aviso dice cuántas opiniones son del régimen anterior y ofrece "Ver solo las de la Ley N.° 32069"; en la vista por opinión, la nota va en la cabecera de cada opinión anterior. El texto es informativo: esos criterios siguen valiendo para los contratos y procedimientos regidos por la norma anterior.
 - Búsqueda insensible a tildes y mayúsculas. Varias palabras funcionan como AND. Buscan la opinión exacta: "D092", "d92", "D092-2026", "D000010-2025-OSCE-DTN", "045-2024/DTN" o el número oficial pegado tal cual ("Opinión N.° D000092-2026-OECE-DTN"); con un número de opinión, las palabras "opinión" y "N.°" se ignoran. También se busca en el asunto de cada opinión. Los términos se resaltan con `<mark>`.
 - Filtros con conteos que se recalculan según los demás filtros: año (radio), etapa (radio), marco normativo (radio), categoría (múltiple), tema (múltiple, con buscador y barras) y mes.
@@ -146,19 +147,26 @@ Identidad: el nombre se escribe "Criter" + "IA" en latón (`<span class="ia">`),
 
 Cada opinión que muestra lleva: número oficial (enlazado al PDF), régimen (vigente o anterior), fecha, tema y marco, el texto de la consulta, **"Por qué es pertinente"** (función `porQue`: las frases y palabras de la pregunta que contiene, tal como están escritas en la consulta, y las que coinciden por una variante, p. ej. «pluviales» (por «lluvias»); si solo coincide por su tema, lo dice) y los enlaces "Documento oficial (PDF)" y "Página en gob.pe". El resumen avisa cuántas de las opiniones halladas son del régimen anterior. En la página, mientras hay una consulta, cada ficha muestra la misma línea como "Pertinencia".
 
-Qué hace con cada pregunta (`src/template.html`, bloques "consultor" y "el chat"):
+### Comprensión de la pregunta (`entender`)
 
-1. Si reconoce un número de opinión ("D092", "045-2024/DTN"), no calcula pertinencia: lo pone en el buscador de la página, que ya lo encuentra.
-2. Si no, limpia los filtros, puntúa las 758 consultas y responde con cuántas opiniones se relacionan, las cuatro más pertinentes (una por opinión, con su código, fecha, tema y el texto de la consulta, enlazadas al PDF) y botones para "Ver las N opiniones" en la página o acotar ("Solo obras", "Solo Ley 30225"). Si no hay nada, sugiere temas cercanos.
-3. La pregunta queda proyectada en la página: la lista se ordena por pertinencia y aparece el filtro "Consulta: «…»", que se quita como cualquier otro filtro. Los demás filtros, vistas y conteos siguen funcionando igual.
+CriterIA no razona como un modelo de lenguaje: **reconoce** de qué trata la pregunta y lo dice, para que se le pueda corregir. De cada mensaje saca:
 
-Cómo puntúa: BM25 sobre tres campos con distinto peso —texto de la consulta (1), asunto (0,9), tema + categoría + etapa (2) y año + marco (1,2)—. El índice se arma la primera vez que alguien pregunta, no al cargar la página. Todo ocurre en el navegador: sin servidor ni clave de API, la pregunta no sale de la página.
+- **Año** ("del 2024"), **ley** ("con la ley nueva", "Ley 30225", "el TUO", "D.L. 1017") y **tipo de contrato** ("en obras", "en servicios"): se aplican como filtros y se anuncian ("Entendí que busca en obras · año 2024"). El botón "Quitar los filtros" los suelta.
+- **Número de opinión:** lo lleva al buscador exacto de la página.
+- **Preguntas sobre la propia base** (`chMeta`): saludo, "¿qué puedes hacer?", "¿desde cuándo rige la Ley 32069?", "¿desde qué año hay opiniones?", "¿cuál es la última opinión?" y "¿cuántas opiniones hay de 2025?". Se responden con los datos del sitio, no con una lista de consultas.
+- **Preguntas de sí o no** ("¿se puede…?", "¿procede…?"): antepone que no opina por el usuario, y muestra las opiniones con su conclusión literal.
+- **Seguimientos** (`esSeguimiento`): "¿y en obras?", "solo 2026", "con la ley nueva" acotan la consulta anterior en vez de empezar otra ("Sigo con «…», ahora en obras"). Si el filtro heredado deja la consulta vacía, **lo suelta y lo explica** (p. ej. pedir la Ley 32069 sobre una consulta de 2024: "dejé de lado el año 2024: la Ley N.° 32069 rige desde el 22.04.2025").
+- **Palabras mal escritas** (`cercana`, distancia de edición ≤ 2 contra el vocabulario de la bitácora): "penaliada" → busca "penalidad" y lo avisa.
+
+Después de entender, ordena por pertinencia y responde con cuántas opiniones se relacionan, el tema que predomina, las cuatro más pertinentes (código, fecha, tema, marco, régimen, por qué es pertinente, conclusión literal y enlaces) y botones para "Ver las N opiniones" en la página o acotar. Si no hay nada, sugiere temas cercanos. La pregunta queda proyectada en la página: la lista se ordena por pertinencia y aparece el filtro "Consulta: «…»".
+
+Cómo puntúa: BM25 sobre varios campos con distinto peso —texto de la consulta (1), asunto (0,9), tema + categoría + etapa (2), año + marco (1,2) y las conclusiones de la opinión (0,5: la respuesta suele usar palabras que la pregunta no trae)—. El índice se arma la primera vez que alguien pregunta, no al cargar la página. Todo ocurre en el navegador: sin servidor ni clave de API, la pregunta no sale de la página.
 
 - **Conceptos, no palabras:** cada palabra de la pregunta forma un concepto con sus variantes (`SYN`: sinónimos del rubro y verbos conjugados, porque la gente escribe "aprueba" y la opinión dice "aprobación"). De un concepto cuenta su mejor coincidencia, no cuántas variantes aparecen. Si la palabra preguntada no existe en la bitácora pero sí una variante (subcontratar → subcontratación), la variante vale casi lo mismo.
 - **Frases** (`PHR`: las de la lista más las etiquetas de tema): si la pregunta trae "ampliación de plazo", las consultas con esa frase suben.
 - Se descartan las palabras vacías (`STOP`, que incluye "opinión", "consulta" y los verbos de preguntar) y las que aparecen en más de la mitad de las consultas ("obra", "servicio", "contrato"): para eso están los filtros. Las que no figuran en ninguna consulta se avisan ("La bitácora no registra «…»").
 - Se muestran las consultas con puntaje ≥ 33 % del mejor, con tope de 120.
-- **CriterIA no dice qué respondió la DTN:** la bitácora guarda lo que se preguntó, no las conclusiones. Los textos de la conversación se redactan así a propósito ("tratan lo que me pregunta", "las más pertinentes").
+- **CriterIA muestra lo que concluyó la DTN, pero no lo interpreta:** enseña el texto literal de las conclusiones y enlaza al documento oficial; no lo resume, no lo parafrasea y no dice si un caso procede. Los textos de la conversación se redactan así a propósito ("No opino por usted, pero…").
 - **Explicación con IA (opcional):** si el visor del Artifact concede la capacidad `sample`, aparece "Explicar con IA", que le pide a Claude un resumen de las ocho consultas más pertinentes con la instrucción expresa de no inventar la respuesta de la DTN. Lo paga quien lo usa y pide su permiso la primera vez; después de la primera vez se redacta solo en cada respuesta. Si no está disponible, el botón no aparece y el chat funciona igual. Al republicar hay que pasar `capabilities: {sample: {}}` (o no pasar `capabilities`, que conserva lo declarado).
 
 ## Diseño (mantener)

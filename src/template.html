@@ -257,7 +257,11 @@ body.chat-on .chat-open{display:none}
 .cq{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;margin:6px 0 0!important;font-size:13.5px;line-height:1.5;color:var(--ink)}
 .cwhy{margin:7px 0 0!important;padding-top:7px;border-top:1px dashed var(--line);font-size:12.5px;line-height:1.5;color:var(--ink-2)}
 .cwhy b{color:var(--brass);font-weight:600}
+.chit .concl-b{margin-top:9px;font-size:13px}
+.chit .concl-t{font-size:13px;padding:2px 11px 10px}
 .creg{margin:6px 0 0!important;font-size:12px;line-height:1.45;color:var(--warn)}
+.cent{margin:0 0 6px!important;font-size:12.5px;line-height:1.5;color:var(--muted)}
+.cent b{color:var(--ink-2);font-weight:600}
 .clinks{display:flex;flex-wrap:wrap;gap:4px 14px;margin-top:8px}
 .clinks a{font:600 11.5px var(--sans);color:var(--primary);text-decoration:none;border-bottom:1px solid var(--line)}
 .clinks a:hover{border-bottom-color:currentColor}
@@ -312,6 +316,18 @@ select option{background:var(--surface);color:var(--ink)}
 .rlist{margin:0 0 16px}
 /* por qué aparece un resultado, cuando se consulta a CriterIA */
 .why{margin:10px 0 0;font-size:13px;line-height:1.5;color:var(--ink-2)}
+/* lo que concluyó la DTN: texto literal del PDF, plegado para no tapar la consulta */
+.concl-b{margin:12px 0 0;border:1px solid var(--line);border-left:2px solid var(--m32069);border-radius:3px;background:var(--surface-2)}
+.concl-b>summary{cursor:pointer;padding:8px 12px;font:600 11px/1.4 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--m32069);list-style:none}
+.concl-b>summary::-webkit-details-marker{display:none}
+.concl-b>summary::before{content:"+ ";font-family:var(--mono)}
+.concl-b[open]>summary::before{content:"– "}
+.concl-b>summary:hover{color:var(--ink)}
+.concl-t{padding:2px 14px 12px;font-size:14px;line-height:1.6;color:var(--ink)}
+.concl-t p{margin:0 0 9px;text-wrap:pretty}
+.concl-t p:last-child{margin:0}
+.concl-t b{font:600 12px var(--mono);color:var(--brass);margin-right:6px}
+.concl-n{display:block;margin-top:9px;font-size:11.5px;line-height:1.5;color:var(--muted)}
 .why .caps{color:var(--brass);margin-right:6px;font-size:10px}
 .warn{display:inline-flex;flex-wrap:wrap;gap:4px 8px;align-items:baseline;margin-top:12px;background:var(--warn-soft);color:var(--warn);border-left:2px solid var(--warn);padding:5px 10px;font-size:13px;line-height:1.4}
 .warn a{font-weight:600;text-underline-offset:3px}
@@ -414,7 +430,7 @@ footer a:hover{color:var(--band-accent);border-bottom-color:currentColor}
     <div class="mhero">
       <div>
         <h1>Bitácora <em>de</em> Opiniones</h1>
-        <p class="lede">Las consultas absueltas por <span id="linst">el OECE</span> <span id="lyr">en 2026</span>, ordenadas por etapa de la contratación, tema y marco normativo. Busque el supuesto que le interesa y abra la opinión oficial.</p>
+        <p class="lede">Las consultas absueltas por <span id="linst">el OECE</span> <span id="lyr">en 2026</span>, con lo que concluyó la DTN en cada una, ordenadas por etapa de la contratación, tema y marco normativo.</p>
         <form class="hero-ia" id="heroForm" role="search" aria-label="Consultar a CriterIA">
           <div class="hero-ia-t"><img class="av" src="{{AVATAR}}" alt="" width="44" height="44"><div><b>Pregúntele a Criter<span class="ia">IA</span></b><small>Describa su caso con sus palabras: no hace falta usar los filtros.</small></div></div>
           <div class="hero-ia-f">
@@ -574,6 +590,7 @@ function concl(k){if(!k.length)return"";return k.length===1?"Conclusión "+k[0]:
 /* Número oficial de una opinión del OECE a partir de su forma corta (para el aviso ámbar: r.lk); el de cada fila viene en r.o */
 function ofiD(code,y){return code.charAt(0)+("000000"+parseInt(code.slice(1),10)).slice(-6)+"-"+y+"-OECE-DTN";}
 var ASUNTO=D.asuntos||{};
+var CONCL=D.concl||{};   /* texto literal de las conclusiones de cada opinión, por clave */
 
 ROWS.forEach(function(r){
   r.num=parseInt(r.op.replace(/\D/g,""),10);
@@ -744,7 +761,7 @@ document.getElementById("tq").addEventListener("input",function(e){S.tq=e.target
 /* ---------- consultor: preguntar en lenguaje natural ---------- */
 /* Ordena las consultas por pertinencia (BM25 con sinónimos del rubro). Todo ocurre en la página:
    no se envía la pregunta a ningún servidor. La capa de IA, si el visor la permite, es aparte. */
-var STOP={},SYN={},PHR=[],IDX=null,AVAC=[],AHL=[],SAMPLE=null,AIC=null,ASKC=[],ASKF=[];
+var STOP={},SYN={},PHR=[],IDX=null,AVAC=[],ACORR=[],AHL=[],SAMPLE=null,AIC=null,ASKC=[],ASKF=[];
 ("a al algo alguna algunas alguno algunos ante antes aquel aquella aquello asi aun aunque cada casi como con contra cual cuales cualquier cuando cuanta cuantas cuanto cuantos cuyo cuya de del demas desde donde dos e el ella ellas ello ellos en entonces entre era eran eres es esa esas ese eso esos esta estas este esto estos estan estar fue fueron ha habia han hasta hay la las le les lo los mas mediante menos me mi mientras misma mismo mucho muchos muy nos nuestra nuestro no o os otra otras otro otros para pero poco por porque pues que quien quienes se sea segun ser si sido siendo sin sino sobre solo son su sus tal tales tambien tan tanto te tiene tienen toda todas todo todos tras un una unas uno unos y ya "+
  "puede pueden podria podrian pudiera debe deben deberia debera deberan corresponde corresponden procede proceden existe existen cabe caben resulta necesito quiero busco buscar decir dice dicen habla hablan trata tratan tratan sirve saber conocer favor hola gracias pregunta preguntar cuestion consultar duda ayuda ayudame dime muestrame quisiera desea pregunto "+
  "opinion opiniones dtn osce oece entidad forma manera caso casos supuesto supuestos tema temas parte partes lugar vez veces ahora luego despues antes")
@@ -859,15 +876,18 @@ function bag(text,into,w){
   }
   return n;
 }
+var RAWC={};   /* las conclusiones de cada opinión, en un solo texto por opinión */
 function buildIndex(){
   if(IDX)return;
   var df={},tot=0;
+  Object.keys(CONCL).forEach(function(k){RAWC[k]=CONCL[k].join(" ").normalize("NFC");});
   ROWS.forEach(function(r){
     var tf={},n=0;
     n+=bag(r.q,tf,1);
     n+=bag(ASUNTO[r.key]||"",tf,.9);
     bag(TEMA[r.t]+" "+CAT[r.c]+" "+GRUPO[r.g],tf,2);
     bag(r.y+" "+MARCO[r.m].short,tf,1.2);
+    bag(RAWC[r.key]||"",tf,.5);   /* lo que concluyó la DTN: pesa menos que la consulta, pero se busca */
     r.raw=(r.q+" "+(ASUNTO[r.key]||"")).normalize("NFC");r.nq=r.raw.length;
     r.raw+=" "+TEMA[r.t]+" "+CAT[r.c];
     r.tf=tf;r.dl=n||1;r.txt=norm(r.raw);   /* norm() conserva las posiciones: r.txt[i] corresponde a r.raw[i] */
@@ -878,11 +898,11 @@ function buildIndex(){
 }
 /* Cada palabra de la pregunta es un concepto: ella misma y sus variantes. De un concepto
    cuenta su mejor coincidencia, no cuántas variantes aparezcan. */
-function qconc(q){
+function qconc(q,quitar){
   var raw=norm(q).split(/[^a-z0-9]+/),seen={},out=[],sup={};
   (q.normalize("NFC").match(/[A-Za-zÁÉÍÓÚÜÑáéíóúüñ0-9]+/g)||[]).forEach(function(w){sup[norm(w)]=w;});
   raw.forEach(function(x){
-    if(x.length<3||STOP[x])return;
+    if(x.length<3||STOP[x]||quitar&&quitar[x])return;
     var t=st(x);if(STOP[t]||seen[t])return;seen[t]=1;out.push({p:t,o:x,s:sup[x]||x,ms:[{t:t,w:1}]});
   });
   out.forEach(function(c){
@@ -891,13 +911,43 @@ function qconc(q){
   return out;
 }
 /* Puntúa cada consulta frente a la pregunta y se queda con lo pertinente. */
-function askNow(q){
+/* Distancia de edición con tope: para reconocer una palabra mal escrita sin recorrer todo el vocabulario. */
+function lev(a,b,max){
+  if(Math.abs(a.length-b.length)>max)return max+1;
+  var prev=[],cur=[],i,j;
+  for(j=0;j<=b.length;j++)prev[j]=j;
+  for(i=1;i<=a.length;i++){
+    cur=[i];var mejor=i;
+    for(j=1;j<=b.length;j++){
+      cur[j]=Math.min(prev[j]+1,cur[j-1]+1,prev[j-1]+(a.charAt(i-1)===b.charAt(j-1)?0:1));
+      if(cur[j]<mejor)mejor=cur[j];
+    }
+    if(mejor>max)return max+1;
+    prev=cur;
+  }
+  return prev[b.length];
+}
+function cercana(t){   /* la palabra del vocabulario de la bitácora más parecida a una mal escrita */
+  if(t.length<5)return null;
+  var mejor=null,md=2;
+  for(var w in IDX.df){
+    if(IDX.df[w]<3||Math.abs(w.length-t.length)>2)continue;
+    var d=lev(w,t,md);
+    if(d<md||(d===md&&!mejor)){md=d;mejor=w;}
+  }
+  return mejor;
+}
+function askNow(q,quitar){
   S.ask=q;buildIndex();if(AIC){AIC.abort();AIC=null;}
-  var N=IDX.n,cs=qconc(q),mass=0;AVAC=[];
+  var N=IDX.n,cs=qconc(q,quitar),mass=0;AVAC=[];ACORR=[];
   cs.forEach(function(c){
     c.ms=c.ms.filter(function(m){var d=IDX.df[m.t]||0;if(!d||d>N*.5)return false;m.i=Math.log(1+(N-d+.5)/(d+.5));return true;});
     /* si la palabra preguntada no existe en la bitácora, su variante es la única evidencia: vale casi igual */
     if(!IDX.df[c.p])c.ms.forEach(function(m){m.w=.9;});
+    if(!c.ms.length&&!IDX.df[c.p]){   /* ni la palabra ni sus variantes: ¿estará mal escrita? */
+      var alt=cercana(c.p),d=alt?IDX.df[alt]:0;
+      if(alt&&d<=N*.5){c.ms=[{t:alt,w:.85,i:Math.log(1+(N-d+.5)/(d+.5))}];ACORR.push([c.s||c.o,alt]);}
+    }
     c.i=0;c.ms.forEach(function(m){if(m.w*m.i>c.i)c.i=m.w*m.i;});
     if(!c.ms.length&&!IDX.df[c.p])AVAC.push(c.o);   /* palabras que no aparecen en ninguna consulta */
     mass+=c.i;
@@ -947,28 +997,40 @@ function superficie(r,t){
   }
   return null;
 }
+/* la misma palabra, pero en las conclusiones de la opinión */
+function superficieConcl(r,t){
+  var txt=RAWC[r.key];if(!txt)return null;
+  var re=/[A-Za-zÁÉÍÓÚÜÑáéíóúüñ0-9]+/g,m;
+  while((m=re.exec(txt)))if(st(norm(m[0]))===t)return m[0];
+  return null;
+}
 function porQue(r){
   if(!r.sc||!ASKC.length&&!ASKF.length)return "";
   var frases=[],partes=[],usadas={};
   ASKF.forEach(function(x){var i=r.txt.indexOf(x.f);if(i>=0&&i<r.nq){frases.push("«"+r.raw.substr(i,x.f.length)+"»");
     x.f.split(" ").forEach(function(w){usadas[st(w)]=1;});}});
-  var tema=false;
+  var tema=false,enConcl=[];
   ASKC.forEach(function(c){
     var hit=null;c.ms.forEach(function(m){if(!hit&&r.tf[m.t])hit=m;});
     if(!hit||usadas[hit.t]||usadas[c.p])return;
     var w=superficie(r,hit.t);
-    if(!w){tema=true;return;}   /* solo coincide en el tema o la categoría */
+    if(!w){
+      var wc=superficieConcl(r,hit.t);
+      if(wc&&enConcl.length<2)enConcl.push("«"+wc+"»");else tema=true;
+      return;
+    }
     var misma=hit.w===1||norm(w).slice(0,5)===c.o.slice(0,5);   /* ampliación ← ampliar: la misma palabra */
     partes.push(misma?"«"+w+"»":"«"+w+"» (por «"+c.s+"»)");
   });
   var out=[];
   if(frases.length)out.push("trata de "+frases.slice(0,2).join(" y "));
   if(partes.length)out.push((frases.length?"y menciona ":"menciona ")+partes.slice(0,3).join(", "));
+  if(enConcl.length)out.push((out.length?"y ":"")+"su conclusión habla de "+enConcl.join(" y "));
   if(!out.length||tema&&out.length<2)out.push((out.length?"; ":"")+"es del tema «"+TEMA[r.t]+"»");
   var t=out.join(" ").replace(" ; ","; ");
   return t.charAt(0).toUpperCase()+t.slice(1)+".";
 }
-function askOff(){S.ask="";AVAC=[];AHL=[];if(AIC){AIC.abort();AIC=null;}if(S.sort==="rel")S.sort="desc";ROWS.forEach(function(r){r.sc=0;});}
+function askOff(){S.ask="";AVAC=[];ACORR=[];AHL=[];if(AIC){AIC.abort();AIC=null;}if(S.sort==="rel")S.sort="desc";ROWS.forEach(function(r){r.sc=0;});}
 function syncSort(){
   var sel=document.getElementById("sort"),o=sel.querySelector('[value="rel"]');
   if(S.ask&&!o)sel.insertAdjacentHTML("afterbegin",'<option value="rel">Más pertinentes</option>');
@@ -1019,6 +1081,19 @@ function foot(r,full){
   if(r.src==="g")parts.push('<span class="auto" title="Etapa, categoría y tema asignados automáticamente a partir del texto de la opinión; son referenciales">clasificación automática</span>');
   return parts.length?'<p class="foot">'+parts.join("")+'</p>':"";
 }
+/* Lo que concluyó la DTN, literal. Si la fila indica sus conclusiones (columna de la bitácora), se
+   muestran esas; si no, todas las de la opinión. Nunca se reescriben ni se resumen. */
+function conclHTML(r){
+  var cs=CONCL[r.key];
+  if(!cs||!cs.length)return "";
+  var elegidas=r.k.length?r.k.filter(function(i){return cs[i-1];}):null;
+  var lista=(elegidas&&elegidas.length?elegidas:cs.map(function(_,i){return i+1;}));
+  var titulo=elegidas&&elegidas.length?(lista.length===1?"Conclusión "+lista[0]+" de la DTN":"Conclusiones "+lista.join(" y ")+" de la DTN")
+    :(cs.length===1?"Conclusión de la DTN":"Las "+cs.length+" conclusiones de la DTN");
+  return '<details class="concl-b"><summary>'+titulo+'</summary><div class="concl-t">'+
+    lista.map(function(i){return '<p>'+(cs.length>1?'<b>'+i+'</b>':'')+esc(cs[i-1])+'</p>';}).join("")+
+    '<small class="concl-n">Texto literal de la opinión. Para el análisis completo, abra el documento oficial.</small></div></details>';
+}
 function warnHTML(r){return r.lk?'<div class="warn">Este enlace abre la Opinión '+esc(r.lk)+'. <a href="'+esc(r.u)+'" target="_blank" rel="noopener">Revisar</a></div>':"";}
 var ARROW='<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>';
 /* el PDF y la página de gob.pe son los de la opinión que abre el enlace (r.lk si no coincide con la fila) */
@@ -1028,7 +1103,7 @@ function pageLink(r){return r.h?'<a class="plink" href="'+esc(r.h)+'" target="_b
 function whyHTML(r){var w=S.ask&&porQue(r);return w?'<p class="why"><span class="caps">Pertinencia</span>'+esc(w)+'</p>':"";}
 function itemHTML(r){
   return '<article class="item"><div class="num"><span class="caps">'+r.s+'</span><a href="'+esc(r.u)+'" target="_blank" rel="noopener" title="Opinión N.° '+esc(r.o)+'">'+esc(r.op)+'</a><time datetime="'+r.f+'">'+fdate(r.f)+'</time></div>'+
-    '<div>'+kicker(r)+'<p class="q">'+hl(r.q)+'</p>'+whyHTML(r)+foot(r,true)+warnHTML(r)+'</div>'+
+    '<div>'+kicker(r)+'<p class="q">'+hl(r.q)+'</p>'+whyHTML(r)+conclHTML(r)+foot(r,true)+warnHTML(r)+'</div>'+
     '<div class="acts">'+pdfBtn(r)+pageLink(r)+normsLinks(r.m)+'</div></article>';
 }
 function groupHTML(g){
@@ -1037,7 +1112,7 @@ function groupHTML(g){
     '<span class="ginfo"><span>'+main.s+'</span><time datetime="'+main.f+'">'+fdate(main.f)+'</time>'+regTag(main.m)+'<span>'+g.rows.length+(g.rows.length===1?" consulta":" consultas")+'</span></span>'+
     (a?'<p class="gasunto">'+hl(a)+'</p>':'')+regNota(main.m,true)+'</div>'+
     '<span class="acts">'+normsLinks(main.m)+pageLink(main)+pdfBtn(main)+'</span></div>'+
-    '<ol class="gitems">'+g.rows.map(function(r,i){return '<li><span class="ix">'+(i+1)+'</span><div><p class="q">'+hl(r.q)+'</p>'+whyHTML(r)+kicker(r)+foot(r,false)+warnHTML(r)+'</div></li>';}).join("")+'</ol></section>';
+    '<ol class="gitems">'+g.rows.map(function(r,i){return '<li><span class="ix">'+(i+1)+'</span><div><p class="q">'+hl(r.q)+'</p>'+whyHTML(r)+conclHTML(r)+kicker(r)+foot(r,false)+warnHTML(r)+'</div></li>';}).join("")+'</ol></section>';
 }
 
 var list=document.getElementById("list"),more=document.getElementById("more");
@@ -1178,7 +1253,7 @@ function chAbrir(on){
   if(on){
     tipFuera();
     if(!CH.length)chPush("w",'<img src="'+MASCOTA+'" alt="">'+
-      "<p><strong>¡Hola! Soy Criter<span class=\"ia\">IA</span>.</strong></p><p>Cuénteme su caso en una línea y le digo qué opiniones de la DTN hablan de eso: su número, fecha, marco normativo y por qué son pertinentes.</p>",
+      "<p><strong>¡Hola! Soy Criter<span class=\"ia\">IA</span>.</strong></p><p>Cuénteme su caso en una línea y le digo qué opiniones de la DTN hablan de eso: su número, fecha, marco normativo, por qué son pertinentes y lo que concluyó la DTN.</p>",
       '<p class="cej">Por ejemplo</p><div class="cacts">'+EJEMPLOS.map(function(q){return chip("ej",q,q);}).join("")+'</div>');
     chatQ.focus();
   }else chatBtn.focus();
@@ -1187,9 +1262,61 @@ function chVer(){chAbrir(false);document.querySelector(".rhead").scrollIntoView(
 function chip(d,v,txt){return '<button type="button" class="chip" data-'+d+'="'+esc(v)+'">'+esc(txt)+'</button>';}
 
 /* Con un número de opinión no hace falta pertinencia: se busca tal cual en la página. */
+/* ---------- comprensión: de qué habla la pregunta ---------- */
+/* CriterIA no razona como un modelo de lenguaje: reconoce de qué trata la pregunta (año, ley, obras o
+   bienes y servicios, número de opinión, preguntas sobre la propia base), entiende los seguimientos
+   ("¿y en obras?"), corrige palabras mal escritas y dice siempre qué entendió, para que se le pueda
+   corregir. Lo que no hace es inventar la respuesta de la DTN. */
+var RX_MARCO=[["32069",/32069|009[\s-]?2025|ley nueva|nueva ley|ley general de contrataciones|\blgcp\b/],
+              ["30225",/30225|344[\s-]?2018|082[\s-]?2019|\btuo\b|ley anterior|ley antigua|ley derogada|regimen anterior|norma anterior/],
+              ["1017",/\b1017\b|184[\s-]?2008|138[\s-]?2012/]];
+var RX_OBRA=/\bobra\b|\bobras\b|construccion|edificacion|valorizacion|valorizaciones|metrado|metrados|residente|cuaderno de obra|expediente tecnico|adicional de obra|supervision/;
+var RX_BYS=/\bbien\b|\bbienes\b|\bservicio\b|\bservicios\b|suministro|catalogo electronico|acuerdo marco|compra corporativa/;
+var RX_SALUDO=/^(hola|buenas|buenos dias|buenas tardes|buenas noches|que tal|hey|saludos)\b/;
+var RX_GRACIAS=/^(gracias|muchas gracias|mil gracias|ok|okey|listo|perfecto|excelente|genial|buenisimo)\b/;
+var RX_AYUDA=/que (puedes|sabes|podes) hacer|como funciona|quien eres|que eres|como te uso|como se usa|para que sirves|en que (me )?ayudas|^ayuda\b/;
+var RX_CUANTAS=/\bcuant[oa]s?\b/;
+var RX_ULTIMA=/(ultim[ao]s?|mas recientes?|recien publicad)/;
+var RX_VIGENCIA=/(desde cuando|cuando (entro|entra|rige|empieza|empezo)|vigencia|esta vigente|que ley (rige|aplica|se aplica|esta vigente)|que norma (rige|aplica))/;
+var RX_COBERTURA=/(desde que ano|que anos|hasta cuando|que periodo|cobertura|cuantos anos|estas actualizad|esta actualizad)/;
+var RX_SINO=/^¿?\s*(se puede|puede|se podria|podria|procede|es posible|corresponde|debe|debo|deberia|cabe|es valido|esta permitido|se permite|es legal|hay que|tiene que)\b/;
+var RX_SEGUIR=/^(y|pero|solo|unicamente|nada mas|ahora|entonces|tambien|ademas|ok|ya|mejor)\b/;
+var CTX=null;   /* la última consulta entendida, para los seguimientos */
+
+function entender(q){
+  var n=norm(q).replace(/[¿?¡!.,;:()]+/g," ").replace(/\s+/g," ").trim();
+  var e={q:q.trim(),n:n,anio:null,marco:null,grupo:null,meta:null,sino:RX_SINO.test(n),quitar:{}};
+  (n.match(/\b20\d\d\b/g)||[]).forEach(function(a){
+    if(!e.anio&&YRS.indexOf(a)>=0){e.anio=a;e.quitar[a]=1;}
+  });
+  for(var k=0;k<RX_MARCO.length;k++){
+    var m=n.match(RX_MARCO[k][1]);
+    if(m&&!e.marco){e.marco=RX_MARCO[k][0];m[0].split(/[^a-z0-9]+/).forEach(function(w){if(w)e.quitar[w]=1;});}
+  }
+  var ob=RX_OBRA.test(n),by=RX_BYS.test(n);
+  e.grupo=ob&&!by?"obras":by&&!ob?"seleccion":null;
+  e.nuevo={anio:!!e.anio,marco:!!e.marco,grupo:!!e.grupo};   /* lo que pidió en este mensaje, no lo heredado */
+  e.contenido=n.split(" ").filter(function(w){return w.length>2&&!STOP[w]&&!e.quitar[w];}).length;
+  if(RX_SALUDO.test(n)&&e.contenido<=1)e.meta="saludo";
+  else if(RX_GRACIAS.test(n)&&e.contenido<=1)e.meta="gracias";
+  else if(RX_AYUDA.test(n))e.meta="ayuda";
+  else if(RX_VIGENCIA.test(n))e.meta="vigencia";
+  else if(RX_COBERTURA.test(n))e.meta="cobertura";
+  else if(RX_ULTIMA.test(n)&&/opinion|pronunciamiento|publicad|incorporad/.test(n))e.meta="ultima";
+  else if(RX_CUANTAS.test(n))e.meta="cuantas";
+  return e;
+}
+/* "¿y en obras?", "solo 2026", "con la ley nueva": acota la consulta anterior en vez de empezar otra */
+function esSeguimiento(e){
+  if(!CTX||e.meta)return false;
+  var hayFiltro=e.anio||e.marco||e.grupo;
+  return hayFiltro&&(e.contenido===0||(RX_SEGUIR.test(e.n)&&e.contenido<=1));
+}
 function esCodigo(t){return norm(t).split(/\s+/).some(function(w){
   var c=w.replace(/^[(«"“']+|[)»"”'.,;:]+$/g,"");return CODE_D.test(c)||CODE_N.test(c);});}
 function chLimpio(){S.q="";qi.value="";S.anio=null;S.etapa="all";S.marco=null;S.mes=null;S.cats.clear();S.temas.clear();}
+function ejemplosHTML(){return '<p class="cej">Por ejemplo</p><div class="cacts">'+
+  EJEMPLOS.map(function(q){return chip("ej",q,q);}).join("")+'</div>';}
 
 function chPreguntar(t){
   t=(t||"").trim();if(!t)return;
@@ -1197,58 +1324,152 @@ function chPreguntar(t){
   setTimeout(function(){chPensar(false);chResolver(t);},420);
 }
 function chResolver(t){
+  var e=entender(t);
   if(esCodigo(t)){
-    askOff();chLimpio();S.q=t;qi.value=t;render();
+    askOff();chLimpio();S.q=t;qi.value=t;render();CTX=null;
     var n=new Set(ROWS.filter(function(r){return pass(r);}).map(function(r){return r.key;})).size;
     chPush("a",n?"<p>Ese es el número de una opinión: se lo dejé en el buscador de la página.</p>":"<p>No encontré ninguna opinión con ese número. Revise el año y la serie (OSCE u OECE).</p>",
       n?'<div class="cacts">'+chip("ver","1","Verla")+'</div>':"");
     return;
   }
-  if(norm(t).replace(/[^a-z0-9]+/g," ").trim().length<4){
-    chPush("a","<p>Cuénteme un poco más: un supuesto, un tema o unas palabras clave.</p>");return;}
-  chLimpio();askNow(t);render();chResponder("");
+  if(chMeta(e))return;
+  if(esSeguimiento(e)){   /* mantiene la pregunta anterior y le agrega el filtro nuevo */
+    e.base=CTX;e.q=CTX.q;e.quitar=CTX.quitar;
+    e.anio=e.anio||CTX.anio;e.marco=e.marco||CTX.marco;e.grupo=e.grupo||CTX.grupo;e.sino=CTX.sino;
+  }else if(e.contenido===0&&!e.anio&&!e.marco&&!e.grupo){
+    chPush("a","<p>Cuénteme un poco más: un supuesto, un tema o unas palabras clave.</p>",ejemplosHTML());return;
+  }
+  aplicar(e);
+  /* si el filtro que venía de antes deja la consulta sin nada, se suelta y se avisa */
+  if(e.base&&!ROWS.some(function(r){return pass(r);})){
+    var fuera=e.anio&&!e.nuevo.anio?["anio","el año "+e.anio]:
+              e.grupo&&!e.nuevo.grupo?["grupo",e.grupo==="obras"?"obras":"bienes y servicios"]:
+              e.marco&&!e.nuevo.marco?["marco",MARCO[e.marco].short]:null;
+    if(fuera){e[fuera[0]==="anio"?"anio":fuera[0]==="grupo"?"grupo":"marco"]=null;e.soltado=fuera[1];aplicar(e);}
+  }
+  CTX=e;
+  chResponder(e);
 }
-function chResponder(pref){
+function aplicar(e){
+  chLimpio();
+  if(e.anio)setAnio(e.anio);
+  if(e.marco)S.marco=e.marco;
+  if(e.grupo)S.etapa=e.grupo;
+  if(e.contenido||e.base)askNow(e.q,e.quitar);else askOff();
+  render();
+}
+/* Preguntas sobre la propia bitácora: se responden con sus datos, no con una lista de consultas. */
+function chMeta(e){
+  if(e.meta==="saludo"){chPush("a","<p>¡Hola! Cuénteme su caso o pregúnteme por un tema y le digo qué opiniones de la DTN lo tratan.</p>",ejemplosHTML());return true;}
+  if(e.meta==="gracias"){chPush("a","<p>Con gusto. Si quiere, pregúnteme por otro supuesto.</p>");return true;}
+  if(e.meta==="ayuda"){
+    chPush("a","<p>Busco entre las <strong>"+ROWS.length+"</strong> consultas absueltas por la DTN desde "+COB.desde+
+      ". Puede pedirme:</p><p>· Un supuesto: «ampliación de plazo por lluvias».<br>"+
+      "· Con filtros en la misma frase: «penalidades en obras del 2024», «garantías con la Ley 32069».<br>"+
+      "· Una opinión por su número: «D000092-2026-OECE-DTN» o «045-2024/DTN».<br>"+
+      "· Datos de la base: «¿cuántas opiniones hay de 2025?», «¿cuál es la última opinión?».</p>"+
+      "<p>Después puede acotar sin repetir todo: «¿y solo en obras?».</p>"+
+      "<p>De cada opinión le muestro la consulta, sus conclusiones en texto literal y el enlace al documento oficial. Lo que no hago es interpretarlas ni resumirlas por usted: la palabra que vale es la de la opinión.</p>",ejemplosHTML());
+    return true;}
+  if(e.meta==="vigencia"){
+    chPush("a","<p>Desde el <strong>22 de abril de 2025</strong> rige la <strong>Ley N.° 32069</strong>, Ley General de Contrataciones Públicas, con su Reglamento (D.S. N.° 009-2025-EF).</p>"+
+      "<p>Antes regía la Ley N.° 30225 (Reglamento, D.S. N.° 344-2018-EF), que sigue aplicándose a los contratos y procedimientos iniciados bajo ella. Por eso marco cada opinión como «vigente» o «régimen anterior».</p>",
+      '<div class="cacts">'+chip("ref","32069","Ver las de la Ley 32069")+chip("ref","30225","Ver las de la Ley 30225")+'</div>');
+    return true;}
+  if(e.meta==="cobertura"){
+    chPush("a","<p>Tengo las opiniones de la DTN desde <strong>"+COB.desde+"</strong>: "+nOps+" opiniones y "+ROWS.length+
+      " consultas. La última incorporada es la <a href=\""+esc(ULT.u)+"\" target=\"_blank\" rel=\"noopener\">Opinión N.° "+esc(ULT.o)+
+      "</a>, del "+fLarga(ULT.f)+", y la base se actualizó el "+fLarga(COB.upd)+".</p>");
+    return true;}
+  if(e.meta==="ultima"){
+    askOff();chLimpio();render();CTX=null;
+    chPush("a","<p>La última incorporada es del "+fLarga(ULT.f)+":</p>",
+      '<ul class="chits">'+chFicha(ULT)+'</ul><div class="cacts">'+chip("ver","1","Ver las más recientes en la página")+'</div>');
+    return true;}
+  return false;   /* "cuántas" se responde con la búsqueda, en chResponder */
+}
+function chFicha(r){
+  var w=porQue(r);
+  return '<li><article class="chit'+(r.m!=="32069"?" ant":"")+'">'+
+    '<div class="ch1"><a class="ccode" href="'+esc(r.u)+'" target="_blank" rel="noopener" title="Abrir el PDF oficial">N.° '+esc(r.o)+'</a>'+regTag(r.m)+'</div>'+
+    '<p class="cmeta">'+fdate(r.f)+" · "+esc(TEMA[r.t])+" · "+esc(MARCO[r.m].short)+'</p>'+
+    '<p class="cq">'+esc(r.q)+'</p>'+
+    (w?'<p class="cwhy"><b>Por qué es pertinente:</b> '+esc(w)+'</p>':"")+conclHTML(r)+
+    '<div class="clinks"><a href="'+esc(r.u)+'" target="_blank" rel="noopener">Documento oficial (PDF) ↗</a>'+
+    (r.h?'<a href="'+esc(r.h)+'" target="_blank" rel="noopener">Página en gob.pe ↗</a>':"")+'</div></article></li>';
+}
+function loEntendido(e){
+  var p=[];
+  if(e.grupo)p.push(e.grupo==="obras"?"obras":"bienes y servicios");
+  if(e.marco)p.push(MARCO[e.marco].short);
+  if(e.anio)p.push("año "+e.anio);
+  return p;
+}
+function chResponder(e,pref){
+  e=e||{};
   var res=sorted(ROWS.filter(function(r){return pass(r);}));
+  var ent=loEntendido(e),cab=[];
+  if(e.base)cab.push("<p class=\"cent\">Sigo con «"+esc(e.q)+"»"+(ent.length?", ahora en <b>"+ent.join(" · ")+"</b>":"")+".</p>");
+  else if(ent.length)cab.push("<p class=\"cent\">Entendí que busca en <b>"+ent.join(" · ")+"</b>.</p>");
+  if(e.soltado)cab.push("<p class=\"cent\">Con todo junto no había nada, así que dejé de lado <b>"+esc(e.soltado)+"</b>"+
+    (e.marco==="32069"&&/^el año 202[34]$/.test(e.soltado)?": la Ley N.° 32069 rige desde el 22.04.2025":"")+".</p>");
+  if(ACORR.length)cab.push("<p class=\"cent\">Busqué "+ACORR.map(function(c){return "«"+esc(c[1])+"» donde escribió «"+esc(c[0])+"»";}).join(", ")+".</p>");
   var falta=AVAC.length?"<p>Eso sí: la bitácora no registra "+AVAC.map(function(w){return "«"+esc(w)+"»";}).join(", ")+".</p>":"";
+  var quita=ent.length?chip("quitar","1","Quitar "+(ent.length>1?"los filtros":"el filtro")):"";
   if(!res.length){
-    chPush("a","<p>No encontré consultas sobre eso.</p>"+falta+"<p>Pruebe con otras palabras. ¿Le sirve alguno de estos temas?</p>",
-      '<div class="cacts">'+temasCercanos().map(function(k){return chip("tema",k,TEMA[k]);}).join("")+'</div>');
+    chPush("a",cab.join("")+"<p>No encontré consultas sobre eso.</p>"+falta+"<p>Pruebe con otras palabras"+(ent.length?" o quite el filtro":"")+". ¿Le sirve alguno de estos temas?</p>",
+      '<div class="cacts">'+temasCercanos().map(function(k){return chip("tema",k,TEMA[k]);}).join("")+quita+'</div>');
     return;
   }
   var nOp=new Set(res.map(function(r){return r.key;})).size,vis={},top=[];
-  res.slice().sort(function(a,b){return b.sc-a.sc;}).forEach(function(r){if(top.length<4&&!vis[r.key]){vis[r.key]=1;top.push(r);}});
+  var orden=S.ask?res.slice().sort(function(a,b){return b.sc-a.sc;}):res;
+  orden.forEach(function(r){if(top.length<4&&!vis[r.key]){vis[r.key]=1;top.push(r);}});
   var antOp={};res.forEach(function(r){if(r.m!=="32069")antOp[r.key]=1;});
   var nAnt=Object.keys(antOp).length;
-  var h="<p>"+(pref||"")+"Encontré <strong>"+nOp+"</strong> "+(nOp===1?"opinión":"opiniones")+" sobre eso"+
-    (nOp>top.length?". Estas son las que más se parecen a su caso:":(nOp===1?". Es esta:":". Son estas:"))+"</p>"+falta+
-    (nAnt&&!S.marco?"<p class=\"creg\">"+(nAnt===nOp?(nOp===1?"Es":"Todas son"):nAnt+" de ellas son")+
-      " del régimen anterior (Ley N.° 30225 o D.L. N.° 1017); desde el 22.04.2025 rige la Ley N.° 32069.</p>":"");
-  var tail='<ul class="chits">'+top.map(function(r){
-    var w=porQue(r);
-    return '<li><article class="chit'+(r.m!=="32069"?" ant":"")+'">'+
-      '<div class="ch1"><a class="ccode" href="'+esc(r.u)+'" target="_blank" rel="noopener" title="Abrir el PDF oficial">N.° '+esc(r.o)+'</a>'+regTag(r.m)+'</div>'+
-      '<p class="cmeta">'+fdate(r.f)+" · "+esc(TEMA[r.t])+" · "+esc(MARCO[r.m].short)+'</p>'+
-      '<p class="cq">'+esc(r.q)+'</p>'+
-      (w?'<p class="cwhy"><b>Por qué es pertinente:</b> '+esc(w)+'</p>':"")+
-      '<div class="clinks"><a href="'+esc(r.u)+'" target="_blank" rel="noopener">Documento oficial (PDF) ↗</a>'+
-      (r.h?'<a href="'+esc(r.h)+'" target="_blank" rel="noopener">Página en gob.pe ↗</a>':"")+'</div>'+
-      '</article></li>';}).join("")+'</ul>';
-  var i=CH.length,acc=[chip("ver","1",nOp>top.length?"Ver las "+nOp+" en la página":"Verla en la página")];
+  /* el tema que predomina: ayuda a confirmar que entendió bien */
+  var ct={};res.forEach(function(r){ct[r.t]=(ct[r.t]||0)+1;});
+  var tt=Object.keys(ct).sort(function(a,b){return ct[b]-ct[a];});
+  var dom=tt.length&&ct[tt[0]]/res.length>=.45?TEMA[tt[0]]:null;
+  var h=cab.join("");
+  if(e.sino)h+="<p>No opino por usted, pero estas opiniones tratan ese supuesto y cada una trae, literal, lo que concluyó la DTN.</p>";
+  if(e.meta==="cuantas"){
+    h+="<p>Hay <strong>"+nOp+"</strong> "+(nOp===1?"opinión":"opiniones")+" ("+res.length+" "+(res.length===1?"consulta":"consultas")+")"+
+      (ent.length?" en "+ent.join(" · "):"")+(S.ask?" sobre eso":"")+"."+(dom?" La mayoría trata de «"+esc(dom)+"».":"")+"</p>"+falta;
+  }else{
+    h+="<p>"+(pref||"")+"Encontré <strong>"+nOp+"</strong> "+(nOp===1?"opinión":"opiniones")+
+      (S.ask?" sobre eso":(ent.length?" en "+ent.join(" · "):""))+
+      (nOp>top.length?". Estas son las que más se parecen a su caso:":(nOp===1?". Es esta:":". Son estas:"))+"</p>"+falta+
+      (dom&&nOp>2?"<p class=\"cent\">La mayoría corresponde al tema <b>"+esc(dom)+"</b>.</p>":"");
+  }
+  if(nAnt&&!S.marco)h+="<p class=\"creg\">"+(nAnt===nOp?(nOp===1?"Es":"Todas son"):nAnt+" de ellas son")+
+      " del régimen anterior (Ley N.° 30225 o D.L. N.° 1017); desde el 22.04.2025 rige la Ley N.° 32069.</p>";
+  var tail=e.meta==="cuantas"?"":'<ul class="chits">'+top.map(chFicha).join("")+'</ul>';
+  var i=CH.length,acc=[chip("ver","1",nOp>top.length||e.meta==="cuantas"?"Ver las "+nOp+" en la página":"Verla en la página")];
   var g={},mk={};res.forEach(function(r){g[r.g]=1;mk[r.m]=1;});
   if(S.etapa==="all"&&g.obras&&g.seleccion){acc.push(chip("ref","obras","Solo obras"));acc.push(chip("ref","seleccion","Solo bienes y servicios"));}
   if(!S.marco&&Object.keys(mk).length>1)["32069","30225","1017"].forEach(function(k){if(mk[k])acc.push(chip("ref",k,"Solo "+MARCO[k].short));});
-  if(SAMPLE&&!AIOK)acc.unshift(chip("ia",String(i),"Explíquemelo"));
+  if(quita)acc.push(quita);
+  if(SAMPLE&&!AIOK&&tail)acc.unshift(chip("ia",String(i),"Explíquemelo"));
   chPush("a",h,tail+'<div class="cacts">'+acc.join("")+'</div>');
-  if(SAMPLE&&AIOK)explicar(i);
+  if(SAMPLE&&AIOK&&tail)explicar(i);
 }
 function chRefinar(v){
   chPensar(true);
   setTimeout(function(){
     chPensar(false);
-    if(v==="obras"||v==="seleccion")S.etapa=v;else S.marco=v;
-    render();
-    chResponder(v==="obras"?"Solo en obras: ":v==="seleccion"?"Solo en bienes y servicios: ":"Con la "+MARCO[v].short+": ");
+    var e=CTX?Object.create(CTX):{};
+    if(v==="obras"||v==="seleccion"){S.etapa=v;e.grupo=v;}else{S.marco=v;e.marco=v;}
+    e.base=null;render();CTX=e;
+    chResponder(e,v==="obras"?"Solo en obras: ":v==="seleccion"?"Solo en bienes y servicios: ":"Con la "+MARCO[v].short+": ");
+  },260);
+}
+function chQuitar(){
+  chPensar(true);
+  setTimeout(function(){
+    chPensar(false);
+    S.anio=null;S.marco=null;S.etapa="all";S.mes=null;
+    var e=CTX?Object.create(CTX):{};e.anio=null;e.marco=null;e.grupo=null;e.base=null;
+    render();CTX=e;chResponder(e,"Sin filtros: ");
   },260);
 }
 chatBtn.addEventListener("click",function(){chAbrir(true);});
@@ -1265,7 +1486,7 @@ document.getElementById("heroEj").addEventListener("click",function(e){
   var b=e.target.closest("[data-hej]");if(!b)return;chAbrir(true);chPreguntar(b.dataset.hej);
 });
 document.getElementById("chatN").textContent="CriterIA busca entre las "+ROWS.length+" consultas de las opiniones emitidas desde "+COB.desde+
-  " (la más reciente, del "+fdate(COB.ult.f)+") y las ordena por pertinencia. No sustituye la lectura de la opinión oficial.";
+  " (la más reciente, del "+fdate(COB.ult.f)+"), las ordena por pertinencia y muestra las conclusiones tal como están en la opinión. No sustituye su lectura.";
 document.getElementById("chatClose").addEventListener("click",function(){chAbrir(false);});
 document.getElementById("chatForm").addEventListener("submit",function(e){e.preventDefault();chPreguntar(chatQ.value);});
 chatLog.addEventListener("click",function(e){
@@ -1275,6 +1496,7 @@ chatLog.addEventListener("click",function(e){
     chPush("a","<p>Listo: le dejé filtrado el tema <strong>"+esc(TEMA[d.tema])+"</strong> en la página.</p>",
       '<div class="cacts">'+chip("ver","1","Ver en la página")+'</div>');}
   else if(d.ref!==undefined)chRefinar(d.ref);
+  else if(d.quitar!==undefined)chQuitar();
   else if(d.ver!==undefined)chVer();
   else if(d.ia!==undefined)explicar(+d.ia);
   else if(d.parar!==undefined){if(AIC){AIC.abort();AIC=null;}var m=CH[+d.parar];if(m){m.ai=null;chDraw();}}
