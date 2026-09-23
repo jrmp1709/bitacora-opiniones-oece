@@ -259,6 +259,11 @@ body.chat-on .chat-open{display:none}
 .cwhy b{color:var(--brass);font-weight:600}
 .chit .concl-b{margin-top:9px;font-size:13px}
 .chit .concl-t{font-size:13px;padding:2px 11px 10px}
+.chit h4{margin:5px 0 0;font:600 14.5px/1.35 var(--sans);letter-spacing:-.015em;color:var(--ink);text-wrap:pretty}
+.cq b{font-weight:600;color:var(--muted);font-size:11px;letter-spacing:.1em;text-transform:uppercase;margin-right:5px}
+.copia{border:0;background:none;padding:0;font:600 11.5px var(--sans);color:var(--primary);cursor:pointer;border-bottom:1px solid var(--line)}
+.copia:hover{border-bottom-color:currentColor}
+.copia.ok{color:var(--m32069);border-bottom-color:transparent}
 .creg{margin:6px 0 0!important;font-size:12px;line-height:1.45;color:var(--warn)}
 .cent{margin:0 0 6px!important;font-size:12.5px;line-height:1.5;color:var(--muted)}
 .cent b{color:var(--ink-2);font-weight:600}
@@ -929,7 +934,8 @@ function lev(a,b,max){
 }
 function cercana(t){   /* la palabra del vocabulario de la bitácora más parecida a una mal escrita */
   if(t.length<6)return null;
-  var mejor=null,md=2;
+  /* en palabras cortas, una sola letra de diferencia: "quitar" no puede volverse "quedar" */
+  var mejor=null,md=t.length>=8?2:1;
   for(var w in IDX.df){
     /* mismo arranque y largo parecido: así "penaliada" llega a "penalidad", pero "retener" no a "tener" */
     if(IDX.df[w]<3||w.length<6||Math.abs(w.length-t.length)>1||w.slice(0,2)!==t.slice(0,2))continue;
@@ -977,6 +983,7 @@ function askNow(q,quitar){
     });
     /* pesa cuánto de lo preguntado cubre la consulta, no cuántas palabras coinciden */
     if(sc)sc*=(.3+.7*cob/mass);
+    if(sc&&PREF&&r.g===PREF)sc*=1.45;   /* lo que pidió (obras o bienes y servicios) va primero */
     fr.forEach(function(x){if(r.txt.indexOf(x.f)>=0)sc+=1.8*x.i;});
     r.sc=sc;if(sc>max)max=sc;
   });
@@ -1084,16 +1091,28 @@ function foot(r,full){
 }
 /* Lo que concluyó la DTN, literal. Si la fila indica sus conclusiones (columna de la bitácora), se
    muestran esas; si no, todas las de la opinión. Nunca se reescriben ni se resumen. */
-function conclHTML(r){
+function conclSel(r){
   var cs=CONCL[r.key];
-  if(!cs||!cs.length)return "";
+  if(!cs||!cs.length)return null;
   var elegidas=r.k.length?r.k.filter(function(i){return cs[i-1];}):null;
-  var lista=(elegidas&&elegidas.length?elegidas:cs.map(function(_,i){return i+1;}));
-  var titulo=elegidas&&elegidas.length?(lista.length===1?"Conclusión "+lista[0]+" de la DTN":"Conclusiones "+lista.join(" y ")+" de la DTN")
-    :(cs.length===1?"Conclusión de la DTN":"Las "+cs.length+" conclusiones de la DTN");
-  return '<details class="concl-b"><summary>'+titulo+'</summary><div class="concl-t">'+
-    lista.map(function(i){return '<p>'+(cs.length>1?'<b>'+i+'</b>':'')+esc(cs[i-1])+'</p>';}).join("")+
+  var nums=elegidas&&elegidas.length?elegidas:cs.map(function(_,i){return i+1;});
+  return {cs:cs,nums:nums,propias:!!(elegidas&&elegidas.length),
+    titulo:elegidas&&elegidas.length?(nums.length===1?"Conclusión "+nums[0]+" de la DTN":"Conclusiones "+nums.join(" y ")+" de la DTN")
+      :(cs.length===1?"Conclusión de la DTN":"Las "+cs.length+" conclusiones de la DTN")};
+}
+function conclHTML(r,abierta){
+  var c=conclSel(r);
+  if(!c)return "";
+  return '<details class="concl-b"'+(abierta?" open":"")+'><summary>'+c.titulo+'</summary><div class="concl-t">'+
+    c.nums.map(function(i){return '<p>'+(c.cs.length>1?'<b>'+i+'</b>':'')+esc(c.cs[i-1])+'</p>';}).join("")+
     '<small class="concl-n">Texto literal de la opinión. Para el análisis completo, abra el documento oficial.</small></div></details>';
+}
+/* La cita lista para pegar en un escrito: número, fecha, asunto, conclusión literal y enlace. */
+function citaTexto(r){
+  var c=conclSel(r),a=ASUNTO[r.key];
+  return "Opinión N.° "+r.o+" ("+fdate(r.f)+")"+(a?" — "+a:"")+"\n"+
+    (c?c.nums.map(function(i){return "Conclusión "+i+": "+c.cs[i-1];}).join("\n")+"\n":"")+
+    "Fuente: "+r.u;
 }
 function warnHTML(r){return r.lk?'<div class="warn">Este enlace abre la Opinión '+esc(r.lk)+'. <a href="'+esc(r.u)+'" target="_blank" rel="noopener">Revisar</a></div>':"";}
 var ARROW='<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>';
@@ -1237,12 +1256,20 @@ function aiHTML(m,i){
 function chDraw(abajo){
   var cerca=chatLog.scrollHeight-chatLog.scrollTop-chatLog.clientHeight<90;
   chatLog.innerHTML=CH.map(function(m,i){
-    var c=m.h+(m.ai?aiHTML(m,i):"")+(m.tail||"");
+    var c=m.h+(m.ai?aiHTML(m,i):"")+(m.datos?fichas(m,i):"")+(m.tail||"");
     if(m.w==="a")c='<img class="cav" src="'+AVATAR+'" alt="CriterIA">'+"<div>"+c+"</div>";
     return '<div class="cb '+m.w+(m.ai?" has-ai":"")+'" data-i="'+i+'">'+c+'</div>';}).join("");
   if(abajo||cerca)chatLog.scrollTop=chatLog.scrollHeight;
 }
 function chPush(w,h,tail){CH.push({w:w,h:h,tail:tail||"",ai:null});chDraw(true);}
+/* Un mensaje con resultados guarda su lista: así "ver más" agrega fichas sin repetir la respuesta. */
+function chPushRes(h,datos,tail){CH.push({w:"a",h:h,datos:datos,tail:tail||"",ai:null});chDraw(true);}
+function fichas(m,i){
+  var d=m.datos,muestra=d.top.slice(0,d.n);
+  return '<ul class="chits">'+muestra.map(function(r,k){return chFicha(r,k===0&&d.n<=3);}).join("")+'</ul>'+
+    (d.top.length>d.n?'<div class="cacts"><button type="button" class="chip" data-mas="'+i+'">Ver '+
+      Math.min(3,d.top.length-d.n)+' más</button></div>':"");
+}
 /* Los puntitos: la búsqueda es instantánea, pero leer la respuesta de golpe se siente brusco. */
 function chPensar(on){
   if(on){if(pensando!==null)return;pensando=CH.length;
@@ -1283,6 +1310,7 @@ var RX_COBERTURA=/(desde que ano|que anos|hasta cuando|que periodo|cobertura|cua
 var RX_SINO=/^¿?\s*(se puede|puede|se podria|podria|procede|es posible|corresponde|debe|debo|deberia|cabe|es valido|esta permitido|se permite|es legal|hay que|tiene que)\b/;
 var RX_SEGUIR=/^(y|pero|solo|unicamente|nada mas|ahora|entonces|tambien|ademas|ok|ya|mejor)\b/;
 var CTX=null;   /* la última consulta entendida, para los seguimientos */
+var PREF=null;  /* "en obras" o "en bienes y servicios": ordena primero, sin esconder lo demás */
 
 function entender(q){
   var n=norm(q).replace(/[¿?¡!.,;:()]+/g," ").replace(/\s+/g," ").trim();
@@ -1296,6 +1324,9 @@ function entender(q){
   }
   var ob=RX_OBRA.test(n),by=RX_BYS.test(n);
   e.grupo=ob&&!by?"obras":by&&!ob?"seleccion":null;
+  /* "obra", "bienes", "servicios" dicen el tipo de contrato, no el tema: no cuentan como texto a buscar */
+  var gen=/(?:^| )(obra|obras|bien|bienes|servicio|servicios)(?= |$)/g,mg;
+  while((mg=gen.exec(n)))e.quitar[mg[1]]=1;
   e.nuevo={anio:!!e.anio,marco:!!e.marco,grupo:!!e.grupo};   /* lo que pidió en este mensaje, no lo heredado */
   e.contenido=n.split(" ").filter(function(w){return w.length>2&&!STOP[w]&&!e.quitar[w];}).length;
   if(RX_SALUDO.test(n)&&e.contenido<=1)e.meta="saludo";
@@ -1324,7 +1355,35 @@ function chPreguntar(t){
   chatQ.value="";chPush("u",esc(t));chPensar(true);
   setTimeout(function(){chPensar(false);chResolver(t);},420);
 }
+var RX_MAS=/^(mas|ver mas|muestrame mas|muestra mas|otras|otros|mas opiniones|siguientes?|continua|sigue)\b/;
+var RX_LIMPIAR=/^(quita|quitar|limpia|limpiar|borra|borrar|saca|sacar|sin)\b.*(filtro|todo|busqueda|consulta)|^(empezar de nuevo|empecemos de nuevo|reinicia|reiniciar|resetear|de nuevo|otra consulta|nueva consulta)\b/;
+var RX_NO=/^(no|nop|nada que ver|no es eso|no era eso|negativo)\b/;
+var RX_REFIERO=/(me refiero a|quiero decir|quise decir|mas bien|en realidad)\s+/;
+function chMas(){   /* "más": agrega tres fichas al último resultado */
+  for(var i=CH.length-1;i>=0;i--){
+    var d=CH[i].datos;
+    if(!d)continue;
+    if(d.n<d.top.length){d.n+=3;chDraw(true);chPush("a","<p>Ahí van "+Math.min(3,d.top.length-d.n+3)+" más.</p>");}
+    else chPush("a","<p>Ya le mostré todas las que encontré. En la página están con sus filtros.</p>",'<div class="cacts">'+chip("ver","1","Ver en la página")+'</div>');
+    return true;
+  }
+  return false;
+}
 function chResolver(t){
+  var nn=norm(t).replace(/[¿?¡!.,;:]+/g," ").replace(/\s+/g," ").trim();
+  if(RX_MAS.test(nn)&&nn.split(" ").length<=3&&chMas())return;
+  if(RX_LIMPIAR.test(nn)&&nn.split(" ").length<=4){   /* "quitar filtros", "empezar de nuevo" */
+    var habia=S.ask||S.anio||S.marco||S.etapa!=="all";
+    askOff();chLimpio();PREF=null;CTX=null;render();
+    chPush("a",habia?"<p>Listo: quité la consulta y los filtros. ¿Qué busca ahora?</p>":"<p>No había nada que quitar. ¿Qué busca?</p>",ejemplosHTML());
+    return;
+  }
+  var ref=nn.match(RX_REFIERO);
+  if(ref||RX_NO.test(nn)){   /* "no, me refiero a las garantías": se toma lo que sigue como la consulta */
+    var resto=(ref?nn.slice(ref.index+ref[0].length):nn.replace(RX_NO,"")).replace(/^[ ,.]+/,"").trim();
+    if(resto.split(" ").filter(function(w){return w.length>2&&!STOP[w];}).length){chResolver(resto);return;}
+    if(RX_NO.test(nn)){chPush("a","<p>Disculpe. Dígamelo con otras palabras: ¿qué parte de su caso es la importante?</p>",ejemplosHTML());return;}
+  }
   var e=entender(t);
   if(esCodigo(t)){
     askOff();chLimpio();S.q=t;qi.value=t;render();CTX=null;
@@ -1355,8 +1414,13 @@ function aplicar(e){
   chLimpio();
   if(e.anio)setAnio(e.anio);
   if(e.marco)S.marco=e.marco;
-  if(e.grupo)S.etapa=e.grupo;
-  if(e.contenido||e.base)askNow(e.q,e.quitar);else askOff();
+  var hayTexto=e.contenido||e.base;
+  /* Si lo pidió expresamente ("¿y en obras?") o no hay texto que buscar, filtra; dentro de una
+     pregunta más larga solo ordena, porque varios temas de obras se usan también en servicios. */
+  var duro=!hayTexto||(e.base&&e.nuevo&&e.nuevo.grupo);
+  if(e.grupo&&duro)S.etapa=e.grupo;
+  PREF=e.grupo&&!duro?e.grupo:null;
+  if(hayTexto)askNow(e.q,e.quitar);else askOff();
   render();
 }
 /* Preguntas sobre la propia bitácora: se responden con sus datos, no con una lista de consultas. */
@@ -1389,19 +1453,24 @@ function chMeta(e){
     return true;}
   return false;   /* "cuántas" se responde con la búsqueda, en chResponder */
 }
-function chFicha(r){
-  var w=porQue(r);
+function chFicha(r,abierta){
+  var w=porQue(r),a=ASUNTO[r.key],cc=conclSel(r);
+  /* la conclusión se abre sola solo si es corta: un texto largo tapa el resto de la respuesta */
+  if(abierta&&cc)abierta=cc.nums.reduce(function(n,i){return n+cc.cs[i-1].length;},0)<=700;
   return '<li><article class="chit'+(r.m!=="32069"?" ant":"")+'">'+
     '<div class="ch1"><a class="ccode" href="'+esc(r.u)+'" target="_blank" rel="noopener" title="Abrir el PDF oficial">N.° '+esc(r.o)+'</a>'+regTag(r.m)+'</div>'+
-    '<p class="cmeta">'+fdate(r.f)+" · "+esc(TEMA[r.t])+" · "+esc(MARCO[r.m].short)+'</p>'+
-    '<p class="cq">'+esc(r.q)+'</p>'+
-    (w?'<p class="cwhy"><b>Por qué es pertinente:</b> '+esc(w)+'</p>':"")+conclHTML(r)+
+    '<p class="cmeta">'+fdate(r.f)+" · "+esc(TEMA[r.t])+'</p>'+
+    (a?'<h4>'+esc(a)+'</h4>':"")+
+    '<p class="cq"><b>Consulta</b>'+esc(r.q)+'</p>'+
+    (w?'<p class="cwhy"><b>Por qué es pertinente:</b> '+esc(w)+'</p>':"")+conclHTML(r,abierta)+
     '<div class="clinks"><a href="'+esc(r.u)+'" target="_blank" rel="noopener">Documento oficial (PDF) ↗</a>'+
-    (r.h?'<a href="'+esc(r.h)+'" target="_blank" rel="noopener">Página en gob.pe ↗</a>':"")+'</div></article></li>';
+    (r.h?'<a href="'+esc(r.h)+'" target="_blank" rel="noopener">Página en gob.pe ↗</a>':"")+
+    '<button type="button" class="copia" data-cita="'+ROWS.indexOf(r)+'">Copiar cita</button></div></article></li>';
 }
 function loEntendido(e){
   var p=[];
   if(e.grupo)p.push(e.grupo==="obras"?"obras":"bienes y servicios");
+  if(e.grupo&&PREF)p.orden=true;   /* fue preferencia de orden, no filtro */
   if(e.marco)p.push(MARCO[e.marco].short);
   if(e.anio)p.push("año "+e.anio);
   return p;
@@ -1410,49 +1479,59 @@ function chResponder(e,pref){
   e=e||{};
   var res=sorted(ROWS.filter(function(r){return pass(r);}));
   var ent=loEntendido(e),cab=[];
-  if(e.base)cab.push("<p class=\"cent\">Sigo con «"+esc(e.q)+"»"+(ent.length?", ahora en <b>"+ent.join(" · ")+"</b>":"")+".</p>");
-  else if(ent.length)cab.push("<p class=\"cent\">Entendí que busca en <b>"+ent.join(" · ")+"</b>.</p>");
-  if(e.soltado)cab.push("<p class=\"cent\">Con todo junto no había nada, así que dejé de lado <b>"+esc(e.soltado)+"</b>"+
+  if(e.base)cab.push('<p class="cent">Sigo con «'+esc(e.q)+'»'+(ent.length?", ahora en <b>"+ent.join(" · ")+"</b>":"")+".</p>");
+  else if(ent.length)cab.push('<p class="cent">Entendí que busca en <b>'+ent.join(" · ")+"</b>"+(ent.orden?" (las pongo primero)":"")+".</p>");
+  if(e.soltado)cab.push('<p class="cent">Con todo junto no había nada, así que dejé de lado <b>'+esc(e.soltado)+"</b>"+
     (e.marco==="32069"&&/^el año 202[34]$/.test(e.soltado)?": la Ley N.° 32069 rige desde el 22.04.2025":"")+".</p>");
-  if(ACORR.length)cab.push("<p class=\"cent\">Busqué "+ACORR.map(function(c){return "«"+esc(c[1])+"» donde escribió «"+esc(c[0])+"»";}).join(", ")+".</p>");
-  var falta=AVAC.length?"<p>Eso sí: la bitácora no registra "+AVAC.map(function(w){return "«"+esc(w)+"»";}).join(", ")+".</p>":"";
+  if(ACORR.length)cab.push('<p class="cent">Busqué '+ACORR.map(function(c){return "«"+esc(c[1])+"» donde escribió «"+esc(c[0])+"»";}).join(", ")+".</p>");
+  if(AVAC.length)cab.push('<p class="cent">La bitácora no registra '+AVAC.map(function(w){return "«"+esc(w)+"»";}).join(", ")+".</p>");
   var quita=ent.length?chip("quitar","1","Quitar "+(ent.length>1?"los filtros":"el filtro")):"";
   if(!res.length){
-    chPush("a",cab.join("")+"<p>No encontré consultas sobre eso.</p>"+falta+"<p>Pruebe con otras palabras"+(ent.length?" o quite el filtro":"")+". ¿Le sirve alguno de estos temas?</p>",
+    chPush("a",cab.join("")+"<p>No encontré nada así. Pruebe con otras palabras"+(ent.length?" o quite el filtro":"")+"; quizá le sirva uno de estos temas:</p>",
       '<div class="cacts">'+temasCercanos().map(function(k){return chip("tema",k,TEMA[k]);}).join("")+quita+'</div>');
     return;
   }
   var nOp=new Set(res.map(function(r){return r.key;})).size,vis={},top=[];
   var orden=S.ask?res.slice().sort(function(a,b){return b.sc-a.sc;}):res;
-  orden.forEach(function(r){if(top.length<4&&!vis[r.key]){vis[r.key]=1;top.push(r);}});
-  var antOp={};res.forEach(function(r){if(r.m!=="32069")antOp[r.key]=1;});
-  var nAnt=Object.keys(antOp).length;
-  /* el tema que predomina: ayuda a confirmar que entendió bien */
+  orden.forEach(function(r){if(!vis[r.key]){vis[r.key]=1;top.push(r);}});
+  var nAnt=top.filter(function(r){return r.m!=="32069";}).length;
   var ct={};res.forEach(function(r){ct[r.t]=(ct[r.t]||0)+1;});
   var tt=Object.keys(ct).sort(function(a,b){return ct[b]-ct[a];});
   var dom=tt.length&&ct[tt[0]]/res.length>=.45?TEMA[tt[0]]:null;
+  /* una sola frase: cuántas, de qué tratan y cuántas son del régimen anterior */
   var h=cab.join("");
-  if(e.sino)h+="<p>No opino por usted, pero estas opiniones tratan ese supuesto y cada una trae, literal, lo que concluyó la DTN.</p>";
-  if(e.meta==="cuantas"){
-    h+="<p>Hay <strong>"+nOp+"</strong> "+(nOp===1?"opinión":"opiniones")+" ("+res.length+" "+(res.length===1?"consulta":"consultas")+")"+
-      (ent.length?" en "+ent.join(" · "):"")+(S.ask?" sobre eso":"")+"."+(dom?" La mayoría trata de «"+esc(dom)+"».":"")+"</p>"+falta;
-  }else{
-    h+="<p>"+(pref||"")+"Encontré <strong>"+nOp+"</strong> "+(nOp===1?"opinión":"opiniones")+
-      (S.ask?" sobre eso":(ent.length?" en "+ent.join(" · "):""))+
-      (nOp>top.length?". Estas son las que más se parecen a su caso:":(nOp===1?". Es esta:":". Son estas:"))+"</p>"+falta+
-      (dom&&nOp>2?"<p class=\"cent\">La mayoría corresponde al tema <b>"+esc(dom)+"</b>.</p>":"");
-  }
-  if(nAnt&&!S.marco)h+="<p class=\"creg\">"+(nAnt===nOp?(nOp===1?"Es":"Todas son"):nAnt+" de ellas son")+
-      " del régimen anterior (Ley N.° 30225 o D.L. N.° 1017); desde el 22.04.2025 rige la Ley N.° 32069.</p>";
-  var tail=e.meta==="cuantas"?"":'<ul class="chits">'+top.map(chFicha).join("")+'</ul>';
-  var i=CH.length,acc=[chip("ver","1",nOp>top.length||e.meta==="cuantas"?"Ver las "+nOp+" en la página":"Verla en la página")];
+  if(e.sino)h+="<p>No opino por usted; esto es lo que dijo la DTN sobre ese supuesto.</p>";
+  h+="<p>"+(pref||"")+"<strong>"+nOp+"</strong> "+(nOp===1?"opinión":"opiniones")+
+    (S.ask?(nOp===1?" trata":" tratan")+" eso":(ent.length?" en "+ent.join(" · "):" en la bitácora"))+
+    (dom?", sobre todo de «"+esc(dom)+"»":"")+"."+
+    (nAnt&&!S.marco?" "+(nAnt===nOp?(nOp===1?"Es del régimen anterior":"Todas son del régimen anterior"):nAnt+(nAnt===1?" es del régimen anterior":" son del régimen anterior"))+" (Ley N.° 30225 o D.L. N.° 1017).":"")+"</p>";
+  var i=CH.length,acc=[];
+  if(nOp>3)acc.push(chip("ver","1","Ver las "+nOp+" en la página"));
+  else acc.push(chip("ver","1",nOp===1?"Verla en la página":"Verlas en la página"));
   var g={},mk={};res.forEach(function(r){g[r.g]=1;mk[r.m]=1;});
   if(S.etapa==="all"&&g.obras&&g.seleccion){acc.push(chip("ref","obras","Solo obras"));acc.push(chip("ref","seleccion","Solo bienes y servicios"));}
-  if(!S.marco&&Object.keys(mk).length>1)["32069","30225","1017"].forEach(function(k){if(mk[k])acc.push(chip("ref",k,"Solo "+MARCO[k].short));});
+  if(!S.marco&&mk["32069"]&&(mk["30225"]||mk["1017"]))acc.push(chip("ref","32069","Solo la Ley 32069"));
   if(quita)acc.push(quita);
-  if(SAMPLE&&!AIOK&&tail)acc.unshift(chip("ia",String(i),"Explíquemelo"));
-  chPush("a",h,tail+'<div class="cacts">'+acc.join("")+'</div>');
-  if(SAMPLE&&AIOK&&tail)explicar(i);
+  if(SAMPLE&&!AIOK&&e.meta!=="cuantas")acc.unshift(chip("ia",String(i),"Explíquemelo"));
+  var pie='<div class="cacts">'+acc.join("")+"</div>";
+  if(e.meta==="cuantas"){chPush("a",h,pie);return;}
+  chPushRes(h,{top:top,n:Math.min(3,top.length)},pie);
+  if(SAMPLE&&AIOK)explicar(i);
+}
+/* Copiar la cita: número, fecha, asunto, conclusión literal y enlace, listo para pegar en un escrito. */
+function copiarCita(btn,r){
+  if(!r)return;
+  var txt=citaTexto(r),ok=function(){btn.textContent="Cita copiada";btn.classList.add("ok");
+    setTimeout(function(){btn.textContent="Copiar cita";btn.classList.remove("ok");},2200);};
+  if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(txt).then(ok,function(){aMano(txt,ok);});
+  else aMano(txt,ok);
+}
+function aMano(txt,ok){
+  var ta=document.createElement("textarea");
+  ta.value=txt;ta.setAttribute("readonly","");ta.style.position="fixed";ta.style.opacity="0";
+  document.body.appendChild(ta);ta.select();
+  try{document.execCommand("copy");ok();}catch(e){}
+  document.body.removeChild(ta);
 }
 function chRefinar(v){
   chPensar(true);
@@ -1468,8 +1547,9 @@ function chQuitar(){
   chPensar(true);
   setTimeout(function(){
     chPensar(false);
-    S.anio=null;S.marco=null;S.etapa="all";S.mes=null;
+    S.anio=null;S.marco=null;S.etapa="all";S.mes=null;PREF=null;
     var e=CTX?Object.create(CTX):{};e.anio=null;e.marco=null;e.grupo=null;e.base=null;
+    if(e.q&&(e.contenido||e.base))askNow(e.q,e.quitar);
     render();CTX=e;chResponder(e,"Sin filtros: ");
   },260);
 }
@@ -1496,6 +1576,8 @@ chatLog.addEventListener("click",function(e){
   else if(d.tema!==undefined){askOff();chLimpio();S.temas=new Set([d.tema]);render();
     chPush("a","<p>Listo: le dejé filtrado el tema <strong>"+esc(TEMA[d.tema])+"</strong> en la página.</p>",
       '<div class="cacts">'+chip("ver","1","Ver en la página")+'</div>');}
+  else if(d.mas!==undefined){var m=CH[+d.mas];if(m&&m.datos){m.datos.n+=3;chDraw();}}
+  else if(d.cita!==undefined)copiarCita(b,ROWS[+d.cita]);
   else if(d.ref!==undefined)chRefinar(d.ref);
   else if(d.quitar!==undefined)chQuitar();
   else if(d.ver!==undefined)chVer();
